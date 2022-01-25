@@ -29,7 +29,7 @@
 
             <div class="px-5 py-4" style="float:right;">
             <button type="button" class="btn btn-link"><a href="{{route('city.show')}}">Cancel</a> </button>
-              <button type="submit" class="btn btn-primary btn-lg" >Update customer</button>
+              <button type="submit" class="btn btn-primary btn-lg" >Update City</button>
               
             </div>
 

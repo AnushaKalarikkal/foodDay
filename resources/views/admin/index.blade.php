@@ -20,6 +20,7 @@
                       <th>Mobile</th>
                       <th>Email</th>
                       <th></th>
+                      
                      
                     </tr>
                   </thead>
@@ -33,8 +34,10 @@
                       <td>{{$user->first_name}}</td>
                       <td>{{$user->mobile}}</td>
                       <td>{{$user->email}}</td>
-                      <td ><button style="float:right" class="btn btn-success "><a style="color:white"  href="{{route('admin.edit',$user->id)}}">edit</a></button>
-                      <button style="float:right" class="btn btn-danger"><a style="color:white"  href="{{route('admin.view',$user->id)}}">view</a></button>
+
+                      <td><a href="{{route('admin.edit',$user->id)}}"><img src="{{asset('image/edit.jpeg')}}" width="20px" alt=""></a>
+                      <a href="{{route('admin.view',$user->id)}}"><img src="{{asset('image/eye.jpeg')}}" width="20px" alt=""></a></td>
+
                     </td>
                       
                   </tr>

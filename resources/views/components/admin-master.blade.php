@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
   <!-- Custom styles for this template-->
   <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
+  
 
 </head>
 
@@ -87,19 +88,19 @@
         </a>
       </div>
       <div class="nav-item">
-       <a class="nav-link collapsed" href="#"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+       <a class="nav-link collapsed" href="{{route('discount.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-bullhorn"></i>
           <span>Discount Codes</span>
         </a>
       </div>
       <div class="nav-item">
-       <a class="nav-link collapsed" href="#"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+       <a class="nav-link collapsed" href="{{route('order.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-shopping-cart"></i>
           <span>Orders</span>
         </a>
       </div>
       <div class="nav-item">
-       <a class="nav-link collapsed" href="#"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+       <a class="nav-link collapsed" href="{{route('restaurant.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-university"></i>
           <span>Restaurants</span>
         </a>
@@ -371,7 +372,17 @@
   <!-- Custom scripts for all pages-->
   <script src="{{asset('js/sb-admin-2.js')}}"></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
   @yield('scripts')
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>   -->
 
 </body>
 

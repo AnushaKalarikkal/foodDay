@@ -12,7 +12,7 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Name</th>
@@ -35,8 +35,11 @@
                       <td>{{$customer->first_name}}</td>
                       <td>{{$customer->mobile}}</td>
                       <td>{{$customer->email}}</td>  
-                       <td ><button style="float:right" class="btn btn-success "><a style="color:white"  href="{{route('customer.edit',$customer->id)}}">edit</a></button>
-                            <button style="float:right" class="btn btn-danger"><a style="color:white"  href="{{route('customer.view',$customer->id)}}">view</a></button>
+                      <td><a href="{{route('customer.edit',$customer->id)}}"><img src="{{asset('image/edit.jpeg')}}" width="20px" alt=""></a>
+                      <a href="{{route('customer.view',$customer->id)}}"><img src="{{asset('image/eye.jpeg')}}" width="20px" alt=""></a></td>
+
+                       <!-- <td ><button style="float:right" class="btn btn-success "><a style="color:white"  href="{{route('customer.edit',$customer->id)}}">edit</a></button>
+                            <button style="float:right" class="btn btn-danger"><a style="color:white"  href="{{route('customer.view',$customer->id)}}">view</a></button> -->
                   </tr>
                   @endforeach
                   </tbody>

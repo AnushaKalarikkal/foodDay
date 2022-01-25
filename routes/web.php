@@ -57,8 +57,21 @@ Route::get('/cuisine/{cuisine}/details', [App\Http\Controllers\AdminController::
 Route::get('/restaurant/create',[App\Http\Controllers\AdminController::class, 'restaurant_create'])->name('restaurant.create');
 Route::post('/restaurant/store',[App\Http\Controllers\AdminController::class, 'restaurant_store'])->name('restaurant.store');
 Route::get('/restaurant/show', [App\Http\Controllers\AdminController::class, 'restaurant_show'])->name('restaurant.show');
+Route::get('/restaurant/{restaurant}/edit', [App\Http\Controllers\AdminController::class, 'restaurant_edit'])->name('restaurant.edit');
+Route::get('/restaurant/{restaurant}/details', [App\Http\Controllers\AdminController::class, 'restaurant_details'])->name('restaurant.view');
+Route::patch('/restaurant/{restaurant}/update', [App\Http\Controllers\AdminController::class, 'restaurant_update'])->name('restaurant.update');
 
 
+Route::get('/discount/create',[App\Http\Controllers\AdminController::class, 'discount_create'])->name('discount.create');
+Route::get('/discount/show', [App\Http\Controllers\AdminController::class, 'discount_show'])->name('discount.show');
+Route::get('/discount/{discount}/edit', [App\Http\Controllers\AdminController::class, 'discount_edit'])->name('discount.edit');
+Route::get('/discount/{discount}/details', [App\Http\Controllers\AdminController::class, 'discount_details'])->name('discount.view');
+Route::post('/discount/store',[App\Http\Controllers\AdminController::class, 'discount_store'])->name('discount.store');
+Route::get('/discountDel/{id}',[App\Http\Controllers\AdminController::class, 'discountDelete'])->name('discount.delete');
+
+
+Route::get('/order/show', [App\Http\Controllers\AdminController::class, 'order_show'])->name('order.show');
+Route::get('/order/{order}/details', [App\Http\Controllers\AdminController::class, 'order_details'])->name('order.view');
 
 // Route::group(['prefix'=>'admin','namespace'=>] , function(){
 

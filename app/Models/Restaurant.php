@@ -11,7 +11,7 @@ class Restaurant extends Model
 
     protected $fillable =[
         'name','about','address','mobile','location','logo','banner','min_order_value','cost_for_two_people',
-        'default_preparation_time','is_open','allow_pickup'
+        'default_preparation_time','is_open','allow_pickup','status'
 
     ];
 
@@ -24,11 +24,33 @@ class Restaurant extends Model
         return $this->belongsTo(Cuisine::class);
     }
 
-   public function getPostImageAttribute($value) {
-        if (strpos($value, 'https://') !== FALSE || strpos($value, 'http://') !== FALSE) {
-            return $value;
-        }
-        return asset('storage/' . $value);
-        }
+ 
+
+        public function getLogoAttribute($value) {
+                if (strpos($value, 'https://') !== FALSE || strpos($value, 'http://') !== FALSE) {
+                    return $value;
+                }
+                return asset('storage/' . $value);
+                }
+
+        public function getBannerAttribute($value) {
+                if (strpos($value, 'https://') !== FALSE || strpos($value, 'http://') !== FALSE) {
+                    return $value;
+                }
+                return asset('storage/' . $value);
+                }
+
+
+       public function discounts()
+    {
+        return $this->belongsToMany(Discount::class, 'restaurants');
+    }
+
+
+        public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+            
 }
 
