@@ -3,7 +3,7 @@
 <form method="post" action="{{route('admin.update',$users->id)}}" enctype="multipart/form-data" >
 @csrf
 @method('PATCH')
-<section class="vh-100">
+<section>
   <div class="container_fluid">
     <div class="row d-flex justify-content-center align-items-center ">
       <div class="col-xl-11">
@@ -102,7 +102,7 @@
 
             <div class="px-5 py-4" style="float:right;">
             <button type="button" class="btn btn-link"><a href="{{route('admin.index')}}">Cancel</a> </button>
-              <button type="submit" class="btn btn-primary btn-lg">Create</button>
+              <button type="submit" class="btn btn-primary btn-lg">Update</button>
               
             </div>
 

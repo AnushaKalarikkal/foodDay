@@ -2,16 +2,23 @@
 
     @section('content')
 
-    <h2>Discount Codes</h2>
-
+    <h2>Orders </h2>
+<form >
+  <div class="input-group" style="margin-bottom:25px;">
+    <input type="text" name="id" placeholder="Search" value="{{ old('name') }}">
+    <span>
+       <button type="submit" class="btn btn-outline-primary"> <i class="fas fa-search"></i></button>
+    </span>
+  </div>
+</form>
 
     <div class="card shadow mb-4">
         
             <div class="card-header py-3">
             </div>
             <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
+              <div class="">
+                <table class="table " id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Id</th>
@@ -23,6 +30,9 @@
                       <th>Payment Status</th>
                       <th>Grand Total</th>
                       <th>Order Date</th>
+                      <th></th>
+                      <th></th>
+                      
                     
                     </tr>
                   </thead>
@@ -40,7 +50,7 @@
                       <td>{{$order->grand_total}}</td> 
                       <td>{{$order->order_date}}</td>  
 
-                      <td><a href=""><img src="{{asset('image/edit.jpeg')}}" width="20px" alt=""></a>
+                      <td><a href="{{route('order.edit',$order->id)}}"><img src="{{asset('image/edit.jpeg')}}" width="20px" alt=""></a>
                       <a href="{{route('order.view',$order->id)}}"><img src="{{asset('image/eye.jpeg')}}" width="20px" alt=""></a></td>
 
                   </tr>

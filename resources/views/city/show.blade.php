@@ -11,11 +11,12 @@
             <div class="card-header py-3">
             </div>
             <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
+              <div class="">
+                <table class="table" id="dataTable" width="100%" cellspacing="0">
+                  <thead class="thead-light">
                     <tr>
                       <th>Name</th>
+                      
                       
                     
                     </tr>
@@ -25,8 +26,8 @@
                   @foreach($cities as $city)
                   <tr>
                       <td>{{$city->city}}
-                       <a style="float:right" href="{{route('city.edit',$city->id)}}"><img src="{{asset('image/edit.jpeg')}}" width="20px" alt=""></a>
-                      <a style="float:right" href="{{route('city.view',$city->id)}}"><img src="{{asset('image/eye.jpeg')}}" width="20px" alt=""></a></td>
+                       <a style="float:right ; margin-left:10px;" href="{{route('city.edit',$city->id)}}"><img src="{{asset('image/edit.jpeg')}}" width="20px" alt=""></a>
+                      <a style="float:right;" href="{{route('city.view',$city->id)}}"><img src="{{asset('image/eye.jpeg')}}" width="20px" alt=""></a></td>
 </td>
                   </tr>
                   @endforeach

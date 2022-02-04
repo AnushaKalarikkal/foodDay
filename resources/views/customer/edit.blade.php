@@ -3,7 +3,7 @@
 <form method="post" action="{{route('customer.update',$customer->id)}}" enctype="multipart/form-data" >
 @csrf
 @method('PATCH')
-<section class="vh-100">
+<section>
   <div class="container_fluid">
     <div class="row d-flex justify-content-center align-items-center ">
       <div class="col-xl-11">

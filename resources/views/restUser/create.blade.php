@@ -1,13 +1,13 @@
 <x-admin-master>
     @section('content')
-<form method="post" action="{{route('admin.store')}}" enctype="multipart/form-data" >
+<form method="post" action="" enctype="multipart/form-data" >
 @csrf
-<section >
+<section class="vh-100">
   <div class="container_fluid">
     <div class="row d-flex justify-content-center align-items-center ">
       <div class="col-xl-11">
 
-        <h1 class="text-black mb-4" >Create Admin User</h1>
+        <h1 class="text-black mb-4" >Add Restaurant User</h1>
 
         <div class="card" style="border-radius: 15px;">
           <div class="card-body">
@@ -96,13 +96,30 @@
 
                 </div>
                 </div>
+                 <hr class="mx-n3">
+
+                    <div class="row align-items-center pt-3 pb-2">
+
+                    <div class="col-md-3 ps-5">
+                      <h6 class="mb-0"> Restaurant</h6>
+                      </div>
+                      <div class="col-md-9 pe-5">
+                      <select name="cuisine" id="select" class="form-control form-control-sm">
+                      
+                      <option selected="selected" disabled="disabled" value="">Cuisine</option>
+
+                      @foreach($restaurants as $restaurant)
+                      <option value="{{$restaurant->id}}">{{$restaurant->name}}</option>
+                      @endforeach
+                    </select>
+                    </div> 
+
+                    </div>
 
             <hr class="mx-n3">
 
             <div class="px-5 py-4">
-
-            <button type="button" class="btn btn-link"><a href="{{route('admin.index')}}">Cancel</a> </button>
-              <button type="submit" class="btn btn-primary btn-lg">Create Admin User</button>
+              <button type="submit" class="btn btn-primary btn-lg">Create</button>
             </div>
 
             

@@ -65,7 +65,19 @@
                       </tr>
                       <tr>
                           <td>Restaurants</td>
-                          <td>{{$discount->restaurant}}</td>
+                          <td>
+                               @foreach($restaurants as $rest)
+
+                           @if($discount->restaurants->contains($rest->id))
+
+                           <b> <a href="{{route('restaurant.view',$rest->id)}}">{{$rest->name}} ,</a></b>
+                                   
+                          
+                           @endif
+                           
+
+                        @endforeach  
+                            </td>
                       </tr>
                       
                   </tbody>

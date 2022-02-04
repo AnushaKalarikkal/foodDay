@@ -10,12 +10,19 @@ use App\Models\Cuisine;
 use App\Models\Restaurant;
 use App\Models\Discount;
 use App\Models\Order;
+use App\Models\Restaurantuser;
+use App\Models\Permission;
+use App\Models\Role;
+
 
 
 use Illuminate\Http\Request;
 
+
 class AdminController extends Controller
 {
+
+    
     //Admin user
     public function index() 
     {
@@ -109,7 +116,7 @@ class AdminController extends Controller
     }
 
 
-   //Customer user 
+   //Customer user .............................................................
     public function show() {
 
     $customers=Customer::all();
@@ -206,6 +213,24 @@ class AdminController extends Controller
     {
         return view('customer.view',['customer'=>$customer]);
     }
+
+    //Restaurant User
+
+     public function restUser_show()
+      {
+
+            $restuser=Restaurantuser::all();
+            return view('restUser.show', ['restaurantusers'=>$restuser]);
+    
+      }
+
+    public function restUser_create(Restaurantuser $restaurantuser)
+    {
+        $restaurants= Restaurant::all();
+
+        return view('restUser.create',compact('restaurants', $restaurantuser));
+    }
+
 
 
     //Driver
@@ -392,7 +417,7 @@ class AdminController extends Controller
         return view('restaurant.create',compact('cities','cuisines'));
     }
 
-    public function restaurant_store()
+    public function restaurant_store(Request $request)
     {
         $inputs=request()->validate([
 
@@ -402,9 +427,8 @@ class AdminController extends Controller
             'mobile'=>'required',
             'location'=>'required',
             'city'=>'required',
-            'cuisine'=>'required',
-            'status'=>'required',
-
+            'cuisine_id'=>'required',
+        
             'logo'=>'required',
             'banner'=>'required',
             'min_order_value'=>'required',
@@ -415,11 +439,9 @@ class AdminController extends Controller
 
         ]);
 
-       
         if(request('logo')){
             $inputs['logo'] = request('logo')->store('images', 'public');
             }
-        
 
          if(request('banner')){
                 $inputs['banner'] = request('banner')->store('images', 'public');
@@ -438,42 +460,15 @@ class AdminController extends Controller
             $inputs['allow_pickup'] = 0;
         }
 
-        $restaurant = new Restaurant;
+         $restaurants=Restaurant:: create($inputs);
 
-        $restaurant->name=$inputs['name'];
-        
-        $restaurant->address=$inputs['address'];
+        if ($request->has('cuisine_id'))
 
-        $restaurant->about=$inputs['about'];
+        {
+        $restaurants->cuisines()->attach($request->input('cuisine_id'));
 
-        $restaurant->mobile=$inputs['mobile'];
-
-        $restaurant->city_id=$inputs['city'];
-
-        $restaurant->logo=$inputs['logo'];
-
-        $restaurant->banner=$inputs['banner'];
-
-        $restaurant->location=$inputs['location'];
-
-        $restaurant->min_order_value=$inputs['min_order_value'];
-
-        $restaurant->cost_for_two_people=$inputs['cost_for_two_people'];
-
-        $restaurant->default_preparation_time=$inputs['default_preparation_time'];
-
-        $restaurant->cuisine_id=$inputs['cuisine'];
-
-        $restaurant->is_open=$inputs['is_open'];
-
-        $restaurant->allow_pickup=$inputs['allow_pickup'];
-        
-        $restaurant->status=$inputs['status'];
-
+        }
   
-        
-        $restaurant->save();
-
         return redirect()->route('restaurant.show');  
 
     }
@@ -500,11 +495,12 @@ class AdminController extends Controller
 
     public function restaurant_details(Restaurant $restaurant)
     {
-             return view('restaurant.view',['restaurant'=>$restaurant]);
+        $cuisines=Cuisine::all();
+             return view('restaurant.view',['restaurant'=>$restaurant],compact('cuisines'));
     }
 
 
-    public function restaurant_update(Restaurant $restaurant)
+    public function restaurant_update(Restaurant $restaurant, Request $request)
     {
         $inputs=request()->validate([
 
@@ -514,7 +510,6 @@ class AdminController extends Controller
             'mobile'=>'required',
             'location'=>'required',
             'city'=>'required',
-            'cuisine'=>'required',
             'status'=>'required',
 
             'logo'=>['image', 'mimes:jpeg,png,jpg', 'max:2048'],
@@ -560,9 +555,6 @@ class AdminController extends Controller
 
         $restaurant->city_id=$inputs['city'];
 
-        $restaurant->logo=$inputs['logo'];
-
-        $restaurant->banner=$inputs['banner'];
 
         $restaurant->location=$inputs['location'];
 
@@ -572,7 +564,6 @@ class AdminController extends Controller
 
         $restaurant->default_preparation_time=$inputs['default_preparation_time'];
 
-        $restaurant->cuisine_id=$inputs['cuisine'];
 
         $restaurant->is_open=$inputs['is_open'];
 
@@ -584,6 +575,21 @@ class AdminController extends Controller
         
         $restaurant->save();
 
+         if ($request->has('cuisine_id'))
+            {
+               $restaurant->cuisines()->attach($request->input('cuisine_id'));
+            }
+            else{
+
+            $restaurant->cuisines()->dettach($request->input('cuisine_id'));
+
+            }
+
+        session()->flash('cuisine-created-message', 'cuisine was created ');
+  
+
+
+
         return redirect()->route('restaurant.show');  
 
     }
@@ -593,11 +599,12 @@ class AdminController extends Controller
 
 public function discount_create()
 {
-    $restaurant=Restaurant::all();
-    return view('discount.create',['restaurants'=>$restaurant]);
+    $restaurants=Restaurant::all();
+    return view('discount.create', compact('restaurants'));
+
 }
 
-public function discount_store(Discount $discount){
+public function discount_store(Request $request){
 
             $inputs=request()->validate([
 
@@ -610,8 +617,55 @@ public function discount_store(Discount $discount){
             'end'=>'required',
             'max_uses'=>'required',
             'max_uses_per_cus'=>'required',
-            'restaurant'=>'required'
+            
 
+        ]);
+
+
+        $discounts=Discount:: create($inputs);
+
+        if ($request->has('restaurant_id'))
+
+        {
+
+        $discounts->restaurants()->attach($request->input('restaurant_id'));
+
+        }
+  
+        return redirect()->route('discount.show');  
+
+}
+
+
+public function discount_show()
+{
+    
+    
+    $discount= Discount::all();
+    return view('discount.show', ['discounts'=>$discount]);
+}
+
+public function discount_edit(Discount $discount)
+{
+     $restaurant=Restaurant::all();
+    return view('discount.edit',['discounts'=>$discount], compact('restaurant'));
+}
+
+
+public function discount_update(Discount $discount,Request $request){
+
+            $inputs=request()->validate([
+
+            'name'=>'required',
+            'code'=>'required',
+            'discount_type'=>'required',
+            'amount'=>'required',
+            'min_amount'=>'required',
+            'start'=>'required',
+            'end'=>'required',
+            'max_uses'=>'required',
+            'max_uses_per_cus'=>'required',
+          
         ]);
 
          $discount->name=$inputs['name'];
@@ -632,59 +686,283 @@ public function discount_store(Discount $discount){
 
         $discount->max_uses_per_cus=$inputs['max_uses_per_cus'];
 
-        $discount->restaurant=$inputs['restaurant'];
-
           $discount->save();
 
+        if ($request->has('restaurant_id'))
+
+        {
+
+        $discount->restaurants()->attach($request->input('restaurant_id'));
+
+        }
+
+
+
         return redirect()->route('discount.show');  
-
-
-}
-
-
-public function discount_show()
-{
-    
-    
-    $discounts= Discount::all();
-    return view('discount.show', ['discounts'=>$discounts]);
-}
-
-public function discount_edit(Discount $discount)
-{
-    // $restaurant=Restaurant::all();
-    return view('discount.edit',['discounts'=>$discount]);
 }
 
 
 public function discount_details(Discount $discount)
     {
-    return view('discount.view',['discount'=>$discount]);
+        $restaurants=Restaurant::all();
+    return view('discount.view',['discount'=>$discount],compact('restaurants'));
     }
 
     public function discountDelete($id)
     {
         $discount=Discount::find($id);
         $discount->delete();
-         return redirect('/discount_show');
+         return back();
     }
 
 
     //Orders
 
-    public function order_show()
+    public function order_show(Request $request)
     {
-        $orders= Order::all();
-        $restaurant=Restaurant::all();
-        $customer=Customer::all();
-
-        return view('order.show', ['orders'=>$orders]);
+        $order=Order::all();
+        $order = Order::when(
+            $request->input('id'),
+            function ($query) use ($request) {
+                $query->where('id', 'like', '%'.$request->input('id').'%');
+            }
+        ) ->orderBy('created_at', 'desc')->paginate(5);
+        
+        $request->flash();
+        return view('order.show', ['orders'=>$order]);
     }
 
     public function order_details(Order $order)
     {
          return view('order.view',['order'=>$order]);
     }
+
+    public function order_edit(Order $order)
+    {
+    
+        return view('order.edit',['orders'=>$order]);
+    }
+
+
+        public function order_update(Order $order)
+    {
+        $inputs=request()->validate([
+
+            'payment_status'=>'required',
+            'order_status'=>'required'
+
+        ]);
+
+        $order->payment_status=$inputs['payment_status'];
+
+        $order->order_status=$inputs['order_status'];
+
+
+        $order->save();
+
+        return redirect()->route('order.show');  
+
+    }
+
+    //roles............................................................................
+
+     public function role_show()
+    {
+        $roles=Role::all();
+
+        return view('role.show', ['roles'=>$roles]);
+    }
+
+    public function role_create()
+ {
+    $permissions=Permission::all();
+
+    return view('role.create', compact('permissions'));
+
+ }
+
+
+public function role_store(Request $request)
+{
+
+      $inputs = request()->validate([
+
+            'name'=>['required']
+            ]);
+
+
+
+
+        $roles=Role:: create($inputs);
+            if ($request->has('permission_id'))
+            {
+               $roles->permissions()->attach($request->input('permission_id'));
+            }
+
+        session()->flash('role-created-message', 'Role was created ');
+  
+        return redirect()->route('role.show');  
+
+
+    }
+
+    public function role_details(Role $role)
+    {
+                $permissions=Permission::all();
+
+         return view('role.view',['role'=>$role],compact('permissions'));
+    }
+
+     public function role_edit(Role $role)
+    {
+        $permissions=Permission::all();
+        return view('role.edit',['roles'=>$role],compact('permissions'));
+    }
+
+
+
+public function role_update(Request $request)
+{
+
+      $input = request()->validate([
+
+            'name'=>['required'],
+            'guard_name'=>['required']
+
+            ]);
+
+            $role=Role::all();
+
+            $role->name=$input['name'];
+            $role->guard_name=$input['guard_name'];
+
+           
+            $role->save();
+             if ($request->has('permission_id'))
+            {
+               $role->permissions()->attach($request->input('permission_id'));
+            }
+
+            session()->flash('role-created-message', 'Role was created ');
+    
+            return redirect()->route('role.show');  
+
+
+    }
+       public function roleDelete($id)
+    {
+        $role=Role::find($id);
+
+        $role->delete();
+
+         return back();
+    }
+
+
+
+//permission...........................................................................
+
+  public function permission_show()
+    {
+        $permission=Permission::all();
+        $role=Role::all();
+
+        return view('permission.show', ['permissions'=>$permission],compact('role'));
+    }
+
+    public function permission_create()
+    {
+        $roles=Role::all();
+        
+         return view('permission.create', compact('roles'));
+
+    }
+
+
+
+public function permission_store(Request $request)
+{
+
+           $inputs=request()->validate([
+
+            'name'=>'required|min:3',
+
+        ],[
+
+            'name.required' => 'Name is required'
+
+          
+
+        ]);
+
+        $permissions=Permission:: create($inputs);
+
+        if ($request->has('role_id'))
+
+        {
+
+        $permissions->roles()->attach($request->input('role_id'));
+
+        }
+  
+        return redirect()->route('permission.show');  
+
+
+    }
+
+     public function permission_edit(Permission $permission)
+    {
+        $roles=Role::all();
+
+        return view('permission.edit',['permissions'=>$permission],compact('roles'));
+    }
+
+
+
+
+
+
+public function permission_update(Request $request)
+{
+    $inputs=request()->validate([
+
+            'name'=>'required|min:3',
+
+        ], [
+
+            'name.required' => 'Name is required'
+
+          
+
+        ]);
+
+   
+
+    if ($request->has('role_id')) {
+
+        $permissions->roles()->attach($request->input('role_id'));
+    }
+  
+    return redirect()->route('permission.show');
+    
+   }
+
+    public function permission_details(Permission $permission)
+    {
+        $roles=Role::all();
+
+         return view('permission.view',['permission'=>$permission],compact('roles'));
+    }
+
+      public function permissionDelete($id)
+    {
+        $permission=Permission::find($id);
+
+        $permission->delete();
+
+         return back();
+    }
+
 
 }
 

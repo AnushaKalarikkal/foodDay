@@ -12,12 +12,13 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
-                  <thead>
+                <table class="table  " id="dataTable" width="100%" cellspacing="0">
+                  <thead class="thead-light">
                     <tr>
                       <th>Name</th>
                       <th>Mobile</th>
                       <th>Email</th>
+                      <th></th>
                     
                     </tr>
                   </thead>

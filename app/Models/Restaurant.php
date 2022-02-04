@@ -19,10 +19,8 @@ class Restaurant extends Model
     {
         return $this->belongsTo(City::class);
     }
-    public function cuisine()
-    {
-        return $this->belongsTo(Cuisine::class);
-    }
+    
+  
 
  
 
@@ -41,16 +39,27 @@ class Restaurant extends Model
                 }
 
 
-       public function discounts()
-    {
-        return $this->belongsToMany(Discount::class, 'restaurants');
-    }
 
 
         public function orders()
     {
         return $this->hasMany(Order::class);
     }
+
+     public function restaurantusers()
+    {
+        return $this->hasMany(Restaurantuser::class);
+    }
+
+    public function cuisines()
+        {
+            return $this->belongsToMany('App\Models\Cuisine','cuisine_restaurants');
+        }
+
+
+
+     
+
             
 }
 

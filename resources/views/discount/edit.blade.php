@@ -1,8 +1,15 @@
 <x-admin-master>
+   @section('styles')
+    @parent
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+@stop
+
     @section('content')
-<form method="post" action="" enctype="multipart/form-data" >
+<form method="post" action="{{route('discount.update',$discounts->id)}}" enctype="multipart/form-data" >
 @csrf
-<section class="vh-100">
+@method('PATCH')
+<section class="">
   <div class="container_fluid">
     <div class="row d-flex justify-content-center align-items-center ">
       <div class="col-xl-11">
@@ -48,7 +55,7 @@
               </div>
               <div class="col-md-9 pe-5">
 
-              <select name="status" class="form-control form-control-sm" id="status" aria-describedby="">
+              <select name="discount_type" class="form-control form-control-sm" id="status" aria-describedby="">
                           <option value="{{$discounts->status}}" disabled>Choose an Option</option>
                           <option>Fixed</option>
                           <option>Percentage</option>
@@ -119,7 +126,7 @@
               </div>
               <div class="col-md-9 pe-5">
 
-                <input type="number" name="max_users" id="max_users" value="{{$discounts->max_uses}}" class="form-control form-control-sm" placeholder="" />
+                <input type="number" name="max_uses" id="max_uses" value="{{$discounts->max_uses}}" class="form-control form-control-sm" placeholder="" />
 
               </div>
             </div>
@@ -133,7 +140,7 @@
               </div>
               <div class="col-md-9 pe-5">
 
-              <input type="number" name="max_user_per_cus" value="{{$discounts->max_uses_per_cus}}" id="max_user_per_cus" class="form-control form-control-sm" />
+              <input type="number" name="max_uses_per_cus" value="{{$discounts->max_uses_per_cus}}" id="max_user_per_cus" class="form-control form-control-sm" />
 
               </div>
             </div>
@@ -146,26 +153,42 @@
                       <h6 class="mb-0"> Restaurants</h6>
                       </div>
                       <div class="col-md-9 pe-5">
-                      <select  name="restaurant[]" id="restaurant" class="form-control form-control-sm" multiple>
-                      
-                      <option selected="selected" disabled="disabled" value="">Restaurants</option>
+                       
 
-                    </select>
+                      <select id="selectall-tag" class=" form-control categories" name="restaurant_id[]" data-role="tagsinput" multiple="multiple">
+                       @foreach($restaurant as $rest)
+
+                      @if($discounts->restaurants->contains($rest->id))
+
+                      <option value="{{$rest->id}}"  selected='selected '>{{$rest->name}}</option>
+
+                      @endif
+
+                      @if($discounts->restaurants->contains($rest->id)!=$rest->id)
+
+                      <option value="{{$rest->id}}">{{$rest->name}}</option>
+
+                      @endif
+
+                      @endforeach
+                      </select>
                     </div> 
 
                     </div>
 
 
-            <div class="px-5 py-4">
-              <button type="submit" class="btn btn-primary btn-lg">Create</button>
-            </div>
+          
 
             
 
           </div>
         </div>
 
+  <div class="px-5 py-4">
+              <button type="submit" class="btn btn-primary btn-lg" style="float:right;margin-right:15px;text-decoration: none;">Update</button>
+                      <a href="{{route('discount.show')}}"style="float:right;margin-top:8px;font-size: 18px;margin-right:15px;text-decoration: none;"><b>Cancel </b></a>
 
+            </div>
       </div>
     </div>
   </div>
@@ -183,4 +206,14 @@
 
 
     @endsection
+    @section('javascript')
+    @parent
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+    $('.categories').select2();
+});
+  </script>
+@stop
 </x-admin-master>

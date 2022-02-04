@@ -12,7 +12,7 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                <table class="table  table-hover" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Name</th>
@@ -37,9 +37,23 @@
                       <td>${{$restaurant->min_order_value}}</td>
                       <td>${{$restaurant->cost_for_two_people}}</td>
                       <td>{{$restaurant->default_preparation_time}}</td>
-                      <td>{{$restaurant->is_open}}</td>
-                      <td>{{$restaurant->allow_pickup}}</td>
-                      <td>{{$restaurant->status}}</td>
+
+                      <td>
+                        @if($restaurant->allow_pickup=="1"? 'checked':'' )
+                        <i class="fas fa-check-circle" style="color:green;"></i>
+                        @else
+                        <i class="far fa-times-circle" style="color:red;"></i>
+                        @endif
+                      </td>
+
+
+                      <td>
+                        @if($restaurant->is_open=="1"? 'checked':'' )
+                        <i class="fas fa-check-circle" style="color:green;"></i>
+                        @else
+                        <i class="far fa-times-circle " style="color:red;"></i>
+                        @endif
+                      </td>                      <td>{{$restaurant->status}}</td>
                       <td><a href="{{route('restaurant.edit',$restaurant->id)}}"><img src="{{asset('image/edit.jpeg')}}" width="20px" alt=""></a>
                        <a href="{{route('restaurant.view',$restaurant->id)}}"><img src="{{asset('image/eye.jpeg')}}" width="20px" alt=""></a></td>
 

@@ -2,7 +2,7 @@
     @section('content')
 <form method="post" action="{{route('customer.store')}}" enctype="multipart/form-data" >
 @csrf
-<section class="vh-100">
+<section >
   <div class="container_fluid">
     <div class="row d-flex justify-content-center align-items-center ">
       <div class="col-xl-11">

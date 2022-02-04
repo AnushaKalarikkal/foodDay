@@ -1,8 +1,14 @@
 <x-admin-master>
+   @section('styles')
+    @parent
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+@stop
+
   @section('content')
-  <form method="post" action="{{route('discount.store')}}" enctype="multipart/form-data">
+  <form method="POST" action="{{route('discount.store')}}" enctype="multipart/form-data">
     @csrf
-    <section class="vh-100">
+    <section class="">
       <div class="container_fluid">
         <div class="row d-flex justify-content-center align-items-center ">
           <div class="col-xl-11">
@@ -147,27 +153,26 @@
                     <h6 class="mb-0"> Restaurants</h6>
                   </div>
                   <div class="col-md-9 pe-5">
-                    <select  multiple data-role="tagsinput" name="restaurant" id="restaurant" class="form-control form-control-sm"  >
-
-                      <option selected="selected" disabled="disabled" value="">Restaurants</option>
-
+                   <select id="selectall-tag" class=" form-control categories" name="restaurant_id[]" multiple="multiple">
                       @foreach($restaurants as $restaurant)
-                       <option value="{{$restaurant->id}}">{{$restaurant->name}}</option>
+                      <option value="{{$restaurant->id}}">{{$restaurant->name}}</option>
                       @endforeach
-                    </select>
+                      </select>
                   </div>
 
                 </div>
 
 
-                <div class="px-5 py-4">
-                  <button type="submit" class="btn btn-primary btn-lg">Create</button>
-                </div>
-
+                
 
 
               </div>
          </div>
+<div class="px-5 py-4">
+                  <button type="submit" class="btn btn-primary btn-lg" style="float:right;">Create</button>
+                                     <a href="{{route('discount.show')}}"style="float:right;margin-top:10px;margin-right:20px;"><b>Cancel </b></a>
+
+                </div>
 
 
           </div>
@@ -187,4 +192,16 @@
 
 
   @endsection
+
+ 
+@section('javascript')
+    @parent
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+    $('.categories').select2();
+});
+  </script>
+@stop
 </x-admin-master>

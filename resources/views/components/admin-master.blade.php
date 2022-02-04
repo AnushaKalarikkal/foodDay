@@ -9,7 +9,9 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Blank</title>
+  <title> Admin User</title>
+
+
 
   <!-- Custom fonts for this template-->
   <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -18,9 +20,10 @@
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
   <!-- Custom styles for this template-->
   <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
-  
+  @yield('styles')
 
 </head>
+
 
 <body id="page-top">
 
@@ -43,7 +46,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{route('home')}}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -56,6 +59,7 @@
         Interface
       </div>
 
+      
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -68,7 +72,7 @@
             <a class="collapse-item" href="{{route('admin.index')}}">Admin User</a>
             <a class="collapse-item" href="{{route('customer.show')}}">Customers</a>
             <a class="collapse-item" href="{{route('driver.show')}}">Drivers</a>
-            <a class="collapse-item" href="{{route('customer.show')}}">	Restaurant Users</a>
+            <a class="collapse-item" href="">	Restaurant Users</a>
 
           </div>
         </div>
@@ -105,6 +109,41 @@
           <span>Restaurants</span>
         </a>
       </div>
+ <!-- roles and permissions -->
+  <div class="nav-item">
+       <a class="nav-link collapsed" href=""  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fas fa-fw fa-th-large"></i>
+          <span><b>Roles & Permissions</b></span>
+        </a>
+      </div>
+       <div class="nav-item" style="margin-left:15px;">
+       <a class="nav-link collapsed" href="{{route('role.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fa fa  "></i>
+          <span>Roles </span>
+        </a>
+      </div>
+       <div class="nav-item"  style="margin-left:15px;">
+       <a class="nav-link collapsed" href="{{route('permission.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fa fa"></i>
+          <span>Permission</span>
+        </a>
+      </div>
+      <!-- <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-user"></i>
+          <span>Roles & Permissions</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="">
+          <div class="bg-white py-2 collapse-inner rounded">
+            
+            <a class="collapse-item" href="{{route('role.show')}}">Roles</a>
+            <a class="collapse-item" href="{{route('permission.show')}}">Permissions</a>
+           
+
+          </div>
+        </div>
+      </li> -->
+
       
    
 
@@ -298,7 +337,7 @@
                   Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="{{route('logout.perform')}}" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
@@ -356,7 +395,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <a class="btn btn-primary" href="{{route('logout.perform')}}">Logout</a>
         </div>
       </div>
     </div>
@@ -375,6 +414,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   @yield('scripts')
+  @yield('javascript')
+
+   
 
   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 

@@ -12,9 +12,9 @@
            
             </div>
             <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
+              <div class="table">
+                <table class="table " id="dataTable" width="100%" cellspacing="0">
+                  <thead class="thead-light">
                     <tr>
                       <th>Name</th>
                       <th>Mobile</th>
@@ -24,9 +24,7 @@
                      
                     </tr>
                   </thead>
-                  <tfoot>
-                    
-                  </tfoot>
+                
                
                   <tbody>
                   @foreach($users as $user)
@@ -38,7 +36,7 @@
                       <td><a href="{{route('admin.edit',$user->id)}}"><img src="{{asset('image/edit.jpeg')}}" width="20px" alt=""></a>
                       <a href="{{route('admin.view',$user->id)}}"><img src="{{asset('image/eye.jpeg')}}" width="20px" alt=""></a></td>
 
-                    </td>
+                   
                       
                   </tr>
                   @endforeach

@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Auth::routes();
+Route::group(['middleware' => ['auth']], function() {
+   /**
+   * Logout Route
+   */
+   Route::get('/logout', [App\Http\Controllers\HomeController::class, 'perform'])->name('logout.perform');
+});
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
 Route::get('/admin/view', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
@@ -30,6 +37,9 @@ Route::get('/customer/{customer}/edit',[App\Http\Controllers\AdminController::cl
 Route::patch('/customer/{customer}/update',[App\Http\Controllers\AdminController::class, 'customer_update'])->name('customer.update');
 Route::get('/customer/{customer}/details', [App\Http\Controllers\AdminController::class, 'customer_details'])->name('customer.view');
 
+Route::get('/restUser/show', [App\Http\Controllers\AdminController::class, 'restUser_show'])->name('restUser.show');
+Route::get('/restUser/create',[App\Http\Controllers\AdminController::class, 'restUser_Create'])->name('restUser.create');
+
 
 Route::get('/driver/show', [App\Http\Controllers\AdminController::class, 'driver_show'])->name('driver.show');
 Route::get('/driver/{driver}/edit',[App\Http\Controllers\AdminController::class, 'driver_edit'])->name('driver.edit');
@@ -43,7 +53,6 @@ Route::get('/city/create',[App\Http\Controllers\AdminController::class, 'city_cr
 Route::post('/city/store',[App\Http\Controllers\AdminController::class, 'city_store'])->name('city.store');
 Route::get('/city/{cities}/details', [App\Http\Controllers\AdminController::class, 'city_details'])->name('city.view');
 Route::patch('/city/{cities}/update', [App\Http\Controllers\AdminController::class, 'city_update'])->name('city.update');
-
 
 
 Route::get('/cuisine/show', [App\Http\Controllers\AdminController::class, 'cuisine_show'])->name('cuisine.show');
@@ -68,10 +77,32 @@ Route::get('/discount/{discount}/edit', [App\Http\Controllers\AdminController::c
 Route::get('/discount/{discount}/details', [App\Http\Controllers\AdminController::class, 'discount_details'])->name('discount.view');
 Route::post('/discount/store',[App\Http\Controllers\AdminController::class, 'discount_store'])->name('discount.store');
 Route::get('/discountDel/{id}',[App\Http\Controllers\AdminController::class, 'discountDelete'])->name('discount.delete');
+Route::patch('/discount/{discount}/update', [App\Http\Controllers\AdminController::class, 'discount_update'])->name('discount.update');
 
 
 Route::get('/order/show', [App\Http\Controllers\AdminController::class, 'order_show'])->name('order.show');
 Route::get('/order/{order}/details', [App\Http\Controllers\AdminController::class, 'order_details'])->name('order.view');
+Route::get('/order/{order}/edit', [App\Http\Controllers\AdminController::class, 'order_edit'])->name('order.edit');
+Route::patch('/order/{order}/update', [App\Http\Controllers\AdminController::class, 'order_update'])->name('order.update');
+
+
+Route::get('/role/show', [App\Http\Controllers\AdminController::class, 'role_show'])->name('role.show');
+Route::get('/role/create',[App\Http\Controllers\AdminController::class, 'role_create'])->name('role.create');
+Route::post('/role/store',[App\Http\Controllers\AdminController::class, 'role_store'])->name('role.store');
+Route::get('/role/{role}/details', [App\Http\Controllers\AdminController::class, 'role_details'])->name('role.view');
+Route::get('/role/{role}/edit', [App\Http\Controllers\AdminController::class, 'role_edit'])->name('role.edit');
+Route::patch('/role/{role}/update', [App\Http\Controllers\AdminController::class, 'role_update'])->name('role.update');
+Route::get('/roleDel/{id}',[App\Http\Controllers\AdminController::class, 'roleDelete'])->name('role.delete');
+
+
+
+Route::get('/permission/show', [App\Http\Controllers\AdminController::class, 'permission_show'])->name('permission.show');
+Route::get('/permission/create',[App\Http\Controllers\AdminController::class, 'permission_create'])->name('permission.create');
+Route::post('/permission/store',[App\Http\Controllers\AdminController::class, 'permission_store'])->name('permission.store');
+Route::get('/permission/{permission}/edit', [App\Http\Controllers\AdminController::class, 'permission_edit'])->name('permission.edit');
+Route::patch('/permission/{permission}/update', [App\Http\Controllers\AdminController::class, 'permission_update'])->name('permission.update');
+Route::get('/permission/{permission}/details', [App\Http\Controllers\AdminController::class, 'permission_details'])->name('permission.view');
+Route::get('/permissionDel/{id}',[App\Http\Controllers\AdminController::class, 'permissionDelete'])->name('permission.delete');
 
 // Route::group(['prefix'=>'admin','namespace'=>] , function(){
 
