@@ -120,13 +120,13 @@ class AdminController extends Controller
     public function show() {
 
     $customers=Customer::all();
-    return view('customer.show', ['customers'=>$customers]);
+    return view('admin.customer.show', ['customers'=>$customers]);
     
     }
 
     public function customer_Create(){
 
-        return view('customer.create');
+        return view('admin.customer.create');
     }
 
     public function customer_store(Customer $customer) {
@@ -161,14 +161,14 @@ class AdminController extends Controller
 
         $customer->save();
 
-        return redirect()->route('customer.show');  
+        return redirect()->route('admin.customer.show');  
 
 
     }
 
     public function customer_edit(Customer $customer)
     {
-        return view('customer.edit',['customer'=>$customer]);
+        return view('admin.customer.edit',['customer'=>$customer]);
     }
 
     public function customer_update(Customer $customer)
@@ -204,14 +204,14 @@ class AdminController extends Controller
 
         $customer->save();
 
-        return redirect()->route('customer.show');  
+        return redirect()->route('admin.customer.show');  
 
 
     }
 
     public function customer_details(Customer $customer)
     {
-        return view('customer.view',['customer'=>$customer]);
+        return view('admin.customer.view',['customer'=>$customer]);
     }
 
     //Restaurant User
@@ -238,12 +238,12 @@ class AdminController extends Controller
     public function driver_show()
     {
         $drivers=Driver::all();
-        return view('driver.show', ['drivers'=>$drivers]);
+        return view('admin.driver.show', ['drivers'=>$drivers]);
     }
 
     public function driver_edit(Driver $driver)
     {
-        return view('driver.edit',['driver'=>$driver]);
+        return view('admin.driver.edit',['driver'=>$driver]);
     }
     
     public function driver_update(Driver $driver)
@@ -278,14 +278,14 @@ class AdminController extends Controller
 
         $driver->save();
 
-        return redirect()->route('driver.show');  
+        return redirect()->route('admin.driver.show');  
 
 
     }
 
     public function driver_details(Driver $driver)
     {
-        return view('driver.view',['driver'=>$driver]);
+        return view('admin.driver.view',['driver'=>$driver]);
     }
 
     //cities
@@ -293,18 +293,18 @@ class AdminController extends Controller
     public function city_show()
     {
         $cities=City::all();
-        return view('city.show', ['cities'=>$cities]);
+        return view('admin.city.show', ['cities'=>$cities]);
     }
 
     public function city_edit(City $cities)
     {
-        return view('city.edit',['cities'=>$cities]);
+        return view('admin.city.edit',['cities'=>$cities]);
     }
 
 
     public function city_create()
     {
-        return view('city.create');
+        return view('admin.city.create');
     }
 
     public function city_store(City $cities)
@@ -321,13 +321,13 @@ class AdminController extends Controller
 
         $cities->save();
 
-        return redirect()->route('city.show');  
+        return redirect()->route('admin.city.show');  
 
     }
 
     public function city_details(City $cities)
     {
-        return view('city.view',['cities'=>$cities]);
+        return view('admin.city.view',['cities'=>$cities]);
     }
 
     public function city_update(City $cities)
@@ -342,7 +342,7 @@ class AdminController extends Controller
 
         $cities->save();
 
-        return redirect()->route('city.show');  
+        return redirect()->route('admin.city.show');  
 
     }
 
@@ -352,12 +352,12 @@ class AdminController extends Controller
     public function cuisine_show()
     {
         $cuisines= Cuisine::all();
-        return view('cuisine.show', ['cuisines'=>$cuisines]);
+        return view('admin.cuisine.show', ['cuisines'=>$cuisines]);
     }
 
     public function cuisine_edit(Cuisine $cuisine)
      {
-        return view('cuisine.edit', ['cuisines'=>$cuisine]);
+        return view('admin.cuisine.edit', ['cuisines'=>$cuisine]);
     }
 
 
@@ -373,19 +373,19 @@ class AdminController extends Controller
 
         $cuisine->save();
 
-        return redirect()->route('cuisine.show');  
+        return redirect()->route('admin.cuisine.show');  
 
     }
 
 
     public function cuisine_details(Cuisine $cuisine)
     {
-        return view('cuisine.view',['cuisine'=>$cuisine]);
+        return view('admin.cuisine.view',['cuisine'=>$cuisine]);
     }
 
     public function cuisine_create()
     {
-        return view('cuisine.create');
+        return view('admin.cuisine.create');
     }
 
 
@@ -403,7 +403,7 @@ class AdminController extends Controller
 
         $cuisine->save();
 
-        return redirect()->route('cuisine.show');  
+        return redirect()->route('admin.cuisine.show');  
 
     }
 
@@ -414,7 +414,7 @@ class AdminController extends Controller
         $cities=City::all();
         $cuisines=Cuisine::all();
 
-        return view('restaurant.create',compact('cities','cuisines'));
+        return view('admin.restaurant.create',compact('cities','cuisines'));
     }
 
     public function restaurant_store(Request $request)
@@ -426,7 +426,7 @@ class AdminController extends Controller
             'about'=>'required',
             'mobile'=>'required',
             'location'=>'required',
-            'city'=>'required',
+            'city_id'=>'required',
             'cuisine_id'=>'required',
         
             'logo'=>'required',
@@ -469,7 +469,7 @@ class AdminController extends Controller
 
         }
   
-        return redirect()->route('restaurant.show');  
+        return redirect()->route('admin.restaurant.show');  
 
     }
 
@@ -479,7 +479,7 @@ class AdminController extends Controller
         $cities=City::all();
         
         $restaurants= Restaurant::all();
-        return view('restaurant.show', ['restaurants'=>$restaurants]);
+        return view('admin.restaurant.show', ['restaurants'=>$restaurants]);
     }
     
     public function restaurant_edit(Restaurant $restaurant)
@@ -490,13 +490,13 @@ class AdminController extends Controller
             $cuisines=Cuisine::all();
             
             
-            return view('restaurant.edit',['restaurants'=>$restaurant],compact('cities','cuisines'));   
+            return view('admin.restaurant.edit',['restaurants'=>$restaurant],compact('cities','cuisines'));   
     }
 
     public function restaurant_details(Restaurant $restaurant)
     {
         $cuisines=Cuisine::all();
-             return view('restaurant.view',['restaurant'=>$restaurant],compact('cuisines'));
+             return view('admin.restaurant.view',['restaurant'=>$restaurant],compact('cuisines'));
     }
 
 
@@ -509,7 +509,7 @@ class AdminController extends Controller
             'about'=>'required',
             'mobile'=>'required',
             'location'=>'required',
-            'city'=>'required',
+            'city_id'=>'required',
             'status'=>'required',
 
             'logo'=>['image', 'mimes:jpeg,png,jpg', 'max:2048'],
@@ -553,7 +553,7 @@ class AdminController extends Controller
 
         $restaurant->mobile=$inputs['mobile'];
 
-        $restaurant->city_id=$inputs['city'];
+        $restaurant->city_id=$inputs['city_id'];
 
 
         $restaurant->location=$inputs['location'];
@@ -577,20 +577,16 @@ class AdminController extends Controller
 
          if ($request->has('cuisine_id'))
             {
-               $restaurant->cuisines()->attach($request->input('cuisine_id'));
+               $restaurant->cuisines()->sync($request->input('cuisine_id'));
             }
-            else{
-
-            $restaurant->cuisines()->dettach($request->input('cuisine_id'));
-
-            }
+          
 
         session()->flash('cuisine-created-message', 'cuisine was created ');
   
 
 
 
-        return redirect()->route('restaurant.show');  
+        return redirect()->route('admin.restaurant.show');  
 
     }
 
@@ -600,7 +596,7 @@ class AdminController extends Controller
 public function discount_create()
 {
     $restaurants=Restaurant::all();
-    return view('discount.create', compact('restaurants'));
+    return view('admin.discount.create', compact('restaurants'));
 
 }
 
@@ -632,7 +628,7 @@ public function discount_store(Request $request){
 
         }
   
-        return redirect()->route('discount.show');  
+        return redirect()->route('admin.discount.show');  
 
 }
 
@@ -642,13 +638,13 @@ public function discount_show()
     
     
     $discount= Discount::all();
-    return view('discount.show', ['discounts'=>$discount]);
+    return view('admin.discount.show', ['discounts'=>$discount]);
 }
 
 public function discount_edit(Discount $discount)
 {
      $restaurant=Restaurant::all();
-    return view('discount.edit',['discounts'=>$discount], compact('restaurant'));
+    return view('admin.discount.edit',['discounts'=>$discount], compact('restaurant'));
 }
 
 
@@ -692,20 +688,20 @@ public function discount_update(Discount $discount,Request $request){
 
         {
 
-        $discount->restaurants()->attach($request->input('restaurant_id'));
+        $discount->restaurants()->sync($request->input('restaurant_id'));
 
         }
 
 
 
-        return redirect()->route('discount.show');  
+        return redirect()->route('admin.discount.show');  
 }
 
 
 public function discount_details(Discount $discount)
     {
         $restaurants=Restaurant::all();
-    return view('discount.view',['discount'=>$discount],compact('restaurants'));
+    return view('admin.discount.view',['discount'=>$discount],compact('restaurants'));
     }
 
     public function discountDelete($id)
@@ -729,18 +725,18 @@ public function discount_details(Discount $discount)
         ) ->orderBy('created_at', 'desc')->paginate(5);
         
         $request->flash();
-        return view('order.show', ['orders'=>$order]);
+        return view('admin.order.show', ['orders'=>$order]);
     }
 
     public function order_details(Order $order)
     {
-         return view('order.view',['order'=>$order]);
+         return view('admin.order.view',['order'=>$order]);
     }
 
     public function order_edit(Order $order)
     {
     
-        return view('order.edit',['orders'=>$order]);
+        return view('admin.order.edit',['orders'=>$order]);
     }
 
 
@@ -760,7 +756,7 @@ public function discount_details(Discount $discount)
 
         $order->save();
 
-        return redirect()->route('order.show');  
+        return redirect()->route('admin.order.show');  
 
     }
 
@@ -770,14 +766,14 @@ public function discount_details(Discount $discount)
     {
         $roles=Role::all();
 
-        return view('role.show', ['roles'=>$roles]);
+        return view('admin.role.show', ['roles'=>$roles]);
     }
 
     public function role_create()
  {
     $permissions=Permission::all();
 
-    return view('role.create', compact('permissions'));
+    return view('admin.role.create', compact('permissions'));
 
  }
 
@@ -801,7 +797,7 @@ public function role_store(Request $request)
 
         session()->flash('role-created-message', 'Role was created ');
   
-        return redirect()->route('role.show');  
+        return redirect()->route('admin.role.show');  
 
 
     }
@@ -810,18 +806,18 @@ public function role_store(Request $request)
     {
                 $permissions=Permission::all();
 
-         return view('role.view',['role'=>$role],compact('permissions'));
+         return view('admin.role.view',['role'=>$role],compact('permissions'));
     }
 
      public function role_edit(Role $role)
     {
         $permissions=Permission::all();
-        return view('role.edit',['roles'=>$role],compact('permissions'));
+        return view('admin.role.edit',['roles'=>$role],compact('permissions'));
     }
 
 
 
-public function role_update(Request $request)
+public function role_update(Request $request,Role $role)
 {
 
       $input = request()->validate([
@@ -831,21 +827,20 @@ public function role_update(Request $request)
 
             ]);
 
-            $role=Role::all();
-
             $role->name=$input['name'];
             $role->guard_name=$input['guard_name'];
 
-           
             $role->save();
+
+
              if ($request->has('permission_id'))
             {
-               $role->permissions()->attach($request->input('permission_id'));
+               $role->permissions()->sync($request->input('permission_id'));
             }
 
             session()->flash('role-created-message', 'Role was created ');
     
-            return redirect()->route('role.show');  
+            return redirect()->route('admin.role.show');  
 
 
     }
@@ -867,14 +862,14 @@ public function role_update(Request $request)
         $permission=Permission::all();
         $role=Role::all();
 
-        return view('permission.show', ['permissions'=>$permission],compact('role'));
+        return view('admin.permission.show', ['permissions'=>$permission],compact('role'));
     }
 
     public function permission_create()
     {
         $roles=Role::all();
         
-         return view('permission.create', compact('roles'));
+         return view('admin.permission.create', compact('roles'));
 
     }
 
@@ -905,7 +900,7 @@ public function permission_store(Request $request)
 
         }
   
-        return redirect()->route('permission.show');  
+        return redirect()->route('admin.permission.show');  
 
 
     }
@@ -914,7 +909,7 @@ public function permission_store(Request $request)
     {
         $roles=Role::all();
 
-        return view('permission.edit',['permissions'=>$permission],compact('roles'));
+        return view('admin.permission.edit',['permissions'=>$permission],compact('roles'));
     }
 
 
@@ -922,28 +917,31 @@ public function permission_store(Request $request)
 
 
 
-public function permission_update(Request $request)
+public function permission_update(Request $request, Permission $permission)
 {
     $inputs=request()->validate([
-
-            'name'=>'required|min:3',
-
-        ], [
-
-            'name.required' => 'Name is required'
+             'name'=>['required'],
+             'guard_name'=>['required']
 
           
 
         ]);
 
+
+            $permission->name=$inputs['name'];
+            $permission->guard_name=$inputs['guard_name'];
+
+            $permission->save();
+
+
    
 
     if ($request->has('role_id')) {
 
-        $permissions->roles()->attach($request->input('role_id'));
+        $permission->roles()->sync($request->input('role_id'));
     }
   
-    return redirect()->route('permission.show');
+    return redirect()->route('admin.permission.show');
     
    }
 
@@ -951,7 +949,7 @@ public function permission_update(Request $request)
     {
         $roles=Role::all();
 
-         return view('permission.view',['permission'=>$permission],compact('roles'));
+         return view('admin.permission.view',['permission'=>$permission],compact('roles'));
     }
 
       public function permissionDelete($id)

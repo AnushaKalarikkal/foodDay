@@ -70,8 +70,8 @@
           <div class="bg-white py-2 collapse-inner rounded">
             
             <a class="collapse-item" href="{{route('admin.index')}}">Admin User</a>
-            <a class="collapse-item" href="{{route('customer.show')}}">Customers</a>
-            <a class="collapse-item" href="{{route('driver.show')}}">Drivers</a>
+            <a class="collapse-item" href="{{route('admin.customer.show')}}">Customers</a>
+            <a class="collapse-item" href="{{route('admin.driver.show')}}">Drivers</a>
             <a class="collapse-item" href="">	Restaurant Users</a>
 
           </div>
@@ -80,31 +80,31 @@
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <div class="nav-item">
-       <a class="nav-link collapsed" href="{{route('city.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+       <a class="nav-link collapsed" href="{{route('admin.city.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-map"></i>
           <span>Cities</span>
         </a>
       </div>
       <div class="nav-item">
-       <a class="nav-link collapsed" href="{{route('cuisine.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+       <a class="nav-link collapsed" href="{{route('admin.cuisine.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-clone"></i>
           <span>Cuisines</span>
         </a>
       </div>
       <div class="nav-item">
-       <a class="nav-link collapsed" href="{{route('discount.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+       <a class="nav-link collapsed" href="{{route('admin.discount.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-bullhorn"></i>
           <span>Discount Codes</span>
         </a>
       </div>
       <div class="nav-item">
-       <a class="nav-link collapsed" href="{{route('order.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+       <a class="nav-link collapsed" href="{{route('admin.order.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-shopping-cart"></i>
           <span>Orders</span>
         </a>
       </div>
       <div class="nav-item">
-       <a class="nav-link collapsed" href="{{route('restaurant.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+       <a class="nav-link collapsed" href="{{route('admin.restaurant.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-university"></i>
           <span>Restaurants</span>
         </a>
@@ -117,33 +117,18 @@
         </a>
       </div>
        <div class="nav-item" style="margin-left:15px;">
-       <a class="nav-link collapsed" href="{{route('role.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+       <a class="nav-link collapsed" href="{{route('admin.role.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fa fa  "></i>
           <span>Roles </span>
         </a>
       </div>
        <div class="nav-item"  style="margin-left:15px;">
-       <a class="nav-link collapsed" href="{{route('permission.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+       <a class="nav-link collapsed" href="{{route('admin.permission.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fa fa"></i>
           <span>Permission</span>
         </a>
       </div>
-      <!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-user"></i>
-          <span>Roles & Permissions</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="">
-          <div class="bg-white py-2 collapse-inner rounded">
-            
-            <a class="collapse-item" href="{{route('role.show')}}">Roles</a>
-            <a class="collapse-item" href="{{route('permission.show')}}">Permissions</a>
-           
-
-          </div>
-        </div>
-      </li> -->
-
+    
       
    
 
