@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 
-use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\MyAccountController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -120,15 +122,15 @@ Route::name('admin.')->middleware('auth')->prefix('admin')->group(function (){
 
 //FRONT END///
 
-   Route::get('/front', [HomePageController::class, 'index'])->name('index');
-   Route::get('/sign_in', [HomePageController::class, 'login']);
-   Route::get('/sign_up', [HomePageController::class, 'register']);
-   Route::post('/sign_up_store', [HomePageController::class, 'store']);
-   Route::post('/sign_in_fun', [HomePageController::class, 'sign_in_fun']);
-   Route::get('/my_home', [HomePageController::class, 'my_home']);
+   Route::get('/front', [HomeController::class, 'index'])->name('index');
+   Route::get('/sign_in', [HomeController::class, 'login']);
+   Route::get('/sign_up', [HomeController::class, 'register']);
+   Route::post('/sign_up_store', [HomeController::class, 'store']);
+   Route::post('/sign_in_fun', [HomeController::class, 'sign_in_fun']);
+   Route::get('/my_home', [HomeController::class, 'my_home']);
    // Route::get('/my_account', [HomePageController::class, 'my_account']);
-   Route::get('/forget', [HomePageController::class, 'forget_password']);
-   Route::get('/Account', [HomePageController::class, 'account_details'])->name('account');
+   Route::get('/forget', [HomeController::class, 'forget_password']);
+   Route::get('/Account', [MyAccountController::class, 'account_details'])->name('account');
 
 
       

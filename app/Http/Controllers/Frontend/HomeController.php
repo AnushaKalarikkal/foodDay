@@ -1,16 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
 use App\Models\Customer;
 
 use Auth;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class HomePageController extends Controller
+class HomeController extends Controller
 {
-    public function index()
+    //
+     public function index()
     {
         return view('front.index');
     }
@@ -93,24 +97,9 @@ class HomePageController extends Controller
 
     }
 
-    public function my_home()
+     public function my_home()
     {
         return view('front.my_home');
     }
-
-    // public function my_account()
-    // {
-    //     return view('front.components.myaccount-master');
-    // }
-
-   
-
-    public function account_details()
-    {
-        $data=['LoggedUserInfo'=>Customer::where('id','=',session('LoggedUser'))->first()];
-        return view('front.mydetails',$data);
-    }
-  
-    
 
 }

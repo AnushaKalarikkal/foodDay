@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/png" href="{{asset('images/favicon.png')}}">
+    <link rel="stylesheet" href="{{asset('css/styles.css')}}">
     <title>FoodDay - My Account</title>
 </head>
 
@@ -39,7 +39,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/Account">
+                            <a class="nav-link" href="/my_account">
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
@@ -75,25 +75,29 @@
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                             aria-orientation="vertical">
                             <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill"
-                                href="#v-pills-orders" role="tab" aria-controls="v-pills-profile"
+                                href="" role="tab" aria-controls="v-pills-profile"
                                 aria-selected="false"><i class='bx bxs-cart'></i> Orders</a>
+
                             <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href=""
                                 role="tab" aria-controls="v-pills-messages" aria-selected="false"><i
                                     class='bx bxs-heart'></i> Wishlist</a>
+
                             <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-address"
                                 role="tab" aria-controls="v-pills-messages" aria-selected="false"><i
                                     class='bx bxs-home-smile'></i> Addresses</a>
 
-                            <a class="nav-link" href="{{route('account')}}"
-                                 aria-controls="v-pills-settings" aria-selected="false"><i
+                            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="{{route('account')}}"
+                                role="tab" aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-user-rectangle'></i> Account Details</a>
 
                             <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-password"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-wallet-alt'></i> Change Password</a>
+
                             <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="/My_logout"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-log-out'></i> Logout</a>
+                                    
                             <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-no-orders"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-log-out'></i> No Orders</a>
@@ -920,7 +924,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
         </script>
-    <script src="assets/js/custom.js"></script>
+    <script src="{{asset('js/custom.js')}}"></script>
 </body>
 
 </html>
