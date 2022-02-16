@@ -5,6 +5,8 @@ use App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\MyAccountController;
+use App\Http\Controllers\Frontend\AddressController;
+
 
 
 /*
@@ -19,20 +21,24 @@ use App\Http\Controllers\Frontend\MyAccountController;
 */
 Auth::routes();
 
+Route::get('/', function() {
+   return redirect('login');
+});
 
 Route::group(['middleware' => ['auth']], function() {
    /**
    * Logout Route
    */
+   Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
    Route::get('/logout', [App\Http\Controllers\HomeController::class, 'perform'])->name('logout.perform');
 });
 
-       Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 Route::name('admin.')->middleware('auth')->prefix('admin')->group(function (){
 
-
+    
          Route::get('/show', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
          
          Route::get('user/view', [App\Http\Controllers\AdminController::class, 'index'])->name('index');
@@ -127,10 +133,26 @@ Route::name('admin.')->middleware('auth')->prefix('admin')->group(function (){
    Route::get('/sign_up', [HomeController::class, 'register']);
    Route::post('/sign_up_store', [HomeController::class, 'store']);
    Route::post('/sign_in_fun', [HomeController::class, 'sign_in_fun']);
-   Route::get('/my_home', [HomeController::class, 'my_home']);
-   // Route::get('/my_account', [HomePageController::class, 'my_account']);
    Route::get('/forget', [HomeController::class, 'forget_password']);
+
+
+
+   Route::get('/my_home', [HomeController::class, 'my_home']);
+   Route::get('/Logout',[MyAccountController::class, 'logout'])->name('logout');
+
+//account details
+
    Route::get('/Account', [MyAccountController::class, 'account_details'])->name('account');
+   Route::patch('/save-changes/{id}', [MyAccountController::class, 'save_changes'])->name('save-changes');
+
+//change-password
+   Route::get('/change-password', [MyAccountController::class, 'change_password'])->name('change');
+   Route::patch('/password-post/{id}', [MyAccountController::class, 'change_password_post'])->name('update');
+
+//address
+   Route::get('/addresses', [AddressController::class, 'address'])->name('address');
+   Route::post('/addresses-store', [AddressController::class, 'address_store'])->name('address.store');
+
 
 
       
