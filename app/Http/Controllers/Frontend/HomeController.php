@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Customer;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Hash;
 
@@ -91,11 +91,7 @@ class HomeController extends Controller
         }
 
     }
-     public function forget_password()
-    {
-         return view('front.forget_password');
-
-    }
+    
 
      public function my_home()
     {

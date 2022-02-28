@@ -65,17 +65,26 @@
             <div class="form-content">
                 <img src="assets/images/logo-round.png" alt="" class="form-logo">
                 <h1 class="text-center">Forgot Password?</h1>
-                <form>
+                 @if (Session::has('message'))
+                         <div class="alert alert-success" role="alert">
+                            {{ Session::get('message') }}
+                        </div>
+                    @endif
+                <form action="{{ route('forgot.password.link') }}" method="POST" >
+                    @csrf
 
                     <span class="email-text">Enter your email below to receive your password reset
                         instructions.</span>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Email">
+                        <input type="text" class="form-control" name="email" placeholder="Email">
+                         @if ($errors->has('email'))
+                                      <span class="text-danger">{{ $errors->first('email') }}</span>
+                                  @endif
                     </div>
 
                     <div class="form-group">
-                        <button class="btn btn-primary w-100">Reset Password</button>
+                        <button type="submit" class="btn btn-primary w-100">Reset Password</button>
                     </div>
                     <div class="form-group text-center mb-0">
                         <span>Don't have an account?</span>

@@ -1,53 +1,9 @@
 <x-myaccount-master>
-    @section('address')
+    @section(edit')
 
-    <script type="text/javascript">
-@if (count($errors) > 0)
-    $('# address-model').modal('show');
-@endif
-</script>
+     <!-- Address Edit Modal -->
 
-  <div class="tab-pane fade show active" id="v-pills-address"  role="tabpanel"
-                                aria-labelledby="v-pills-messages-tab">
-
-                               
-
-                                <div class="my-account-content food-item-cards-wrap">
-
-                                    <h4>Manage Addresses</h4>
-
-                                    <div class="row">
-                                    @foreach($address as $value)
-                                        <div class="col-md-6">
-                                            <div class="card address-card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">{{$value->home}}</h5>
-                                                    <h6> {{$value->house_name}} ,  {{$value->area}}, {{$value->city}}, {{$value->pincode}}</h6>
-                                                    <p class="card-text">
-                                                       {{$value->landmark}}
-                                                    </p>
-                                                    <button type="button" class="btn-link" value="{{$value->id}}" data-toggle="modal" id="edit-item"
-                                                        >
-                                                        <i class='bx bx-edit'></i>Edit</button>
-                                                    <button class="btn-link"><i class='bx bx-trash'></i>Delete</button>
-                                                    <button class="btn-link"><i class='bx bx-location-plus'></i>Set as
-                                                        default</button>
-
-                                                    <!-- <a href="#" class=""><i class='bx bx-trash' ></i>Delete</a> -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @endforeach
-
-                                    </div>
-
-                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#exampleModal">Add Address</button>
-                                </div>
-
-                            </div>
-
-                             <!-- Address Modal -->
+                             @foreach($address as $value)
                 <div class="modal fade  " id="edit-modal" tabindex="-1" role="dialog"
                     aria-labelledby="edit-modal-label" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -56,27 +12,28 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <i class="bx bx-x btn-close"></i>
                                 </button>
-                                <h5 class="mb-4">Change Delivery Address</h5>
+                                <h5 class="mb-4">Add Delivery Address</h5>
 
 
-                                <form method="post" action="" enctype="multipart/form-data">
+                                <form method="post" action="" enctype="multipart/form-data" id="edit-form">
                                     <div class="form-row">
                                         @csrf 
+                                        @method('PATCH')
                                        @if(Session::get('success'))
                                           <div class="alert alert-success"> 
                                              {{ Session::get('success') }} 
                                            </div>
                                         @endif
-                                        <input type="hidden" name="addrId" id="addrId" value="">
 
                                         <div class="form-group col-lg-12">
-                                            <input type="text" name="location" id="location" class="form-control" id="location" placeholder="Location">
+                                            
+                                            <input type="text" name="location" class="form-control" id="location" placeholder="Location">
                                                @error("location")
                                                     <p style="color:red">{{$errors->first("location")}}
                                                 @enderror
                                         </div>
                                          <div class="form-group col-lg-12">
-                                            <input type="text" name="house_name" id="house_name" class="form-control" placeholder="House Name / Flat / Building"> 
+                                            <input type="text" name="house_name"  id="house_name" class="form-control" placeholder="House Name / Flat / Building"> 
                                             @error("house_name")
                                                     <p style="color:red">{{$errors->first("house_name")}}
                                                 @enderror
@@ -125,7 +82,7 @@
                                                 data-dismiss="modal" aria-label="Close">Close</button>
                                         </div>
                                         <div class="form-group col-md-6 mb-0">
-                                            <button class="btn btn-secondary w-100">Save Changes</button>
+                                            <button class="btn btn-secondary w-100">Save</button>
                                         </div>
 
                                     </div>
@@ -135,27 +92,67 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
         <!-- Address Modal End -->
-                         
     @endsection
-
       @section('editJs')
     @parent
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.8.2/dist/alpine.min.js"></script>
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 
      <script>
        $(document).ready(function() {
-           $(document).on('click','#edit-item', function(){
-               var addrId=$(this).val();
-            //    alert (addrId);
-               $('#editModal').modal('show');
-           });
+  /**
+   * for showing edit item popup
+   */
+
+  $(document).on('click', "#edit-item", function() {
+    $(this).addClass('edit-item-trigger-clicked'); //useful for identifying which trigger was clicked and consequently grab data from the correct row and not the wrong one.
+
+    var options = {
+      'backdrop': 'static'
+    };
+    $('#edit-modal').modal(options)
+  })
+
+  // on modal show
+  $('#edit-modal').on('show.bs.modal', function() {
+    var el = $(".edit-item-trigger-clicked"); // See how its usefull right here? 
+    var row = el.closest(".data-row");
+
+    // // get the data
+    // var id = el.data('id');
+    // var location = row.children(".location").text();
+    // var house_name = row.children(".house_name").text();
+    // var area = row.children(".area").text();
+    // var city = row.children(".city").text();
+    // var landmark = row.children(".landmark").text();
+    // var pincode = row.children(".pincode").text();
+    // var home = row.children(".home").text();
+    // var note = row.children(".note").text();
 
 
- 
-});
+
+    // // fill the data in the input fields
+    // $("#location").val(location);
+    // $("#house_name").val(house_name);
+    // $("#area").val(area);
+    // $("#city").val(city);
+    // $("#landmark").val(landmark);
+    // $("#pincode").val(pincode);
+    // $("#home").val(home);
+    // $("#note").val(note);
+
+  })
+
+  // on modal hide
+  $('#edit-modal').on('hide.bs.modal', function() {
+    $('.edit-item-trigger-clicked').removeClass('edit-item-trigger-clicked')
+    $("#edit-form").trigger("reset");
+  })
+})
     </script>
 @stop
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.8.2/dist/alpine.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" 
+integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 </x-myaccount-master>

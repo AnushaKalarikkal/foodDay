@@ -71,7 +71,6 @@
 
                            <b> <a href="{{route('admin.cuisine.view',$cuisine->id)}}">{{$cuisine->cuisine}} ,</a></b>
                                    
-                          
                            @endif
 
                         @endforeach  

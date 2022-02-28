@@ -5,23 +5,23 @@
                                 <div class="my-account-content">
                                     <h4>Change Password</h4>
                                     
-                                    <form action="{{route('update',[$users->id,$users->slug])}}" method="post"  enctype="multipart/form-data">
+                                    <form action="{{route('update')}}" method="post"  enctype="multipart/form-data">
                                          @csrf
                                            @method('PATCH')
                                         <div class="form-row">
                                             <div class="col-lg-12">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="current_password"
+                                                    <input type="text" class="form-control" name="password"
                                                         placeholder="Current Password">
-                                                                 @if($errors->any('current_password'))
-                                                                     <span class="text-danger">{{$errors->first('current_password')}}</span>
+                                                                 @if($errors->any('password'))
+                                                                     <span class="text-danger">{{$errors->first('password')}}</span>
                                                                  @endif
                                                                             
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="password" placeholder="New Password">
-                                                               @if($errors->any('password'))
-                                                                     <span class="text-danger">{{$errors->first('password')}}</span>
+                                                    <input type="text" class="form-control" name="new_password" placeholder="New Password">
+                                                               @if($errors->any('new_password'))
+                                                                     <span class="text-danger">{{$errors->first('new_password')}}</span>
                                                                 @endif
                                                     
                                                 </div>

@@ -9,9 +9,10 @@ use App\Models\Address;
 
 class AddressController extends Controller
 {
-    public function address()
+    public function address(Address $address)
     {
-        return view('front.address.manage_address');
+        $address=Address::all();
+        return view('front.address.manage_address',['address'=>$address]);
     }
 
     public function address_store(Request $request)
@@ -48,6 +49,22 @@ class AddressController extends Controller
             return back()->with('fail', 'something went wrong');
         }
     }
+
+     public function AddressDelete($id)
+    {
+        $address=Address::find($id);
+        $address->delete();
+         return back();
+    }
+//   public function edit_address($id)
+//   {
+//       $address=Address::find($id);
+//       return response()->json([
+//           'status'=>200,
+//           'address'=>$address,
+//       ]);
+
+//   }
     
 
 }

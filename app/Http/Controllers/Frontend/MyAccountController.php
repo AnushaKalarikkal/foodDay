@@ -5,21 +5,26 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\Restaurant;
+use App\Models\Cuisine;
 
-use Auth;
+
+use DB;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Hash;
 class MyAccountController extends Controller
 {
-      public function account_details()
+
+//account details    
+    public function account_details()
     {
-        $data=['LoggedUserInfo'=>Customer::where('id','=',session('LoggedUser'))->first()];
-        return view('front.mydetails',$data);
+        $data=['LoggedUserInfo'=>Customer::where('id', '=', session('LoggedUser'))->first()];
+        return view('front.mydetails', $data);
     }
 
     public function save_changes(Request $request, $id)
     {
-       
         $customer=Customer::find($id);
         $customer->first_name = $request->first_name;
         $customer->last_name = $request->last_name;
@@ -28,56 +33,88 @@ class MyAccountController extends Controller
        
         $save= $customer->save();
 
-        if($save){
-            return back()->with('success','save changes successfully');
-        }else{
-            return back()->with('fail','something went wrong');
+        if ($save) {
+            return back()->with('success', 'save changes successfully');
+        } else {
+            return back()->with('fail', 'something went wrong');
+        }
+    }
+//logout
 
+    public function logout()
+    {
+        if (session()->has('LoggedUser')) {
+            session()->pull('LoggedUser');
+            return redirect('/sign_in');
         }
     }
 
-      function logout()
-      {
-          if (session()->has('LoggedUser')) {
-              session()->pull('LoggedUser');
-              return redirect('/sign_in');
-          }
-      }
-
-      public function change_password()
-      {
-          return view('front.change_password');
-      }
-
-      public function change_password_post(Request $request, $id)
-      {
-          
-     
-        $this->validate($request, [ 
-                        'current_password'=>'required|min:6|max:100',
-                        'password'=>'required|min:6|max:100',
-                        'confirm_password'=>'required|same:password'
-        ]);
- 
-        $hashedPassword = Auth::users()->password;
-        if (\Hash::check($request->current_password , $hashedPassword)) {
-            if (\Hash::check($request->password , $hashedPassword)) {
- 
-                $users = Customer::find(Auth::users()->id);
-                $users->password = bcrypt($request->password);
-                $users->save();
-                session()->flash('message','password updated successfully');
-                return redirect()->back();
-            }
-            else{
-                session()->flash('message','new password can not be the old password!');
-                return redirect()->back();
-            } 
-        }
-        else{
-            session()->flash('message','old password doesnt matched');
-            return redirect()->back();
-        }
-    }
+ //change password
     
-}
+    public function change_password()
+    {
+        return view('front.change_password');
+    }
+
+    public function change_password_post(Request $request)
+    {
+        $request->validate([
+
+                'password'=>'required|min:6|max:100',
+
+                'new_password'=>'required|min:6|max:100',
+
+                'confirm_password'=>'required|same:new_password'
+
+                ]);
+
+        $current_user= Auth::customers();
+        dd($current_user);
+
+
+        if (Hash::check($request->current_password, $current_user->password)) {
+            $current_user->update([
+
+                'password'=>bcrypt($request->new_password)
+
+                ]);
+
+
+
+            return redirect()->back()->with('success', 'Password successfully updated.');
+        } else {
+            return redirect()->back()->with('error', 'Old password does not matched.');
+        }
+    }
+
+    //restaurant_listing
+
+    public function restaurant_list(Restaurant $restaurant)
+    {
+        $restaurant=Restaurant::all();
+        $cuisines=Cuisine::all();
+
+        return view('front.restaurant', ['restaurant'=>$restaurant], compact('cuisines'));
+    }
+
+    public function search(Request $request)
+    {
+        $name=$request->name;
+
+        $data=Restaurant::where('location', 'like', '%' .$name. '%')
+        ->get();
+        $cuisines=Cuisine::all();
+
+
+        return view('front.restaurant', ['restaurant'=>$data], compact('cuisines'));
+    }
+
+    //restaurant_details
+
+    public function restaurant_details(Restaurant $restaurant )
+    {
+        $cuisines=Cuisine::all();
+        return view('front.restaurant_details', ['restaurant'=>$restaurant], compact('cuisines'));
+    }
+}  
+

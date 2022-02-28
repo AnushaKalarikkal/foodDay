@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" type="image/png" href="{{asset('images/favicon.png')}}">
+ <link rel="icon" type="image/png" href="{{asset('images/favicon.png')}}">
     <link rel="stylesheet" href="{{asset('css/styles.css')}}">
-    <title>FoodDay - Login</title>
+    <title>FoodDay - Reset password</title>
 </head>
 
 <body>
@@ -30,16 +30,22 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/front">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                       
-
                         <li class="nav-item active">
-                            <a class="nav-link" href="/sign_in">Sign In</a>
+                            <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="restaurant-listing.html">Restaurants</a>
                         </li>
 
-                       
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">Sign In</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="my-account.html">
+                                <i class='bx bx-user mr-1'></i>
+                                My Account</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="cart.html">
                                 <span class="cart-badge-wrap">
@@ -57,44 +63,54 @@
 
     <!-- <div class="search-nav">
         <div class="container">
-            <h3 class="mb-0">Sign in</h3>
+            <h3 class="mb-0">Reset Your Password</h3>
         </div>
     </div> -->
 
     <section class="log-reg-sec">
+
         <div class="content">
             <div class="form-content">
                 <img src="assets/images/logo-round.png" alt="" class="form-logo">
-                <h1 class="text-center">Sign in to FoodDay</h1>
+                <h1 class="text-center">Reset Password?</h1>
+                <form action="{{route('reset.password')}}" method="POST"  enctype="multipart/form-data" >
+                     @if (Session::get('fail'))
+                        <div class="alert alert-danger">
+                            {{ Session::get('fail') }}
+                        </div>
+                    @endif
 
+                    @if (Session::get('success'))
+                        <div class="alert alert-success">
+                            {{ Session::get('success') }}
+                        </div>
+                    @endif
 
-                <form method="post" action="/sign_in_fun" enctype="multipart/form-data">
-                   @csrf
-                   @if(Session::get('fail'))
-                    <div class="alert alert-danger" role="alert"> 
-                     {{ Session::get('fail') }} 
+                    @csrf
+                    <input type="hidden" name="token" value="{{ $token }}">
+
+                    <span class="email-text">Enter a new password for your account</span>
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="email" placeholder="Enter Email Address" value="{{ $email ?? old('email') }}">
+                         @if ($errors->has('email'))
+                                      <span class="text-danger">{{ $errors->first('email') }}</span>
+                                  @endif
                     </div>
-                      @endif
-                  
                     <div class="form-group">
-                        <input type="text" name="email" class="form-control" placeholder="Email">
-                         @error("email")
-                            <p style="color:red">{{$errors->first("email")}}
-                         @enderror
+                        <input type="password" class="form-control" name="password" placeholder="New Password">
+                         @if ($errors->has('password'))
+                                      <span class="text-danger">{{ $errors->first('password') }}</span>
+                                  @endif
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                         @error("password")
-                            <p style="color:red">{{$errors->first("password")}}
-                         @enderror
-                    </div>  
-
-                    <div class="form-group">
-                        <a href="{{route('forget.password.form')}}">Forgot password?</a>
+                        <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm New Password">
+                        @if ($errors->has('password_confirmation'))
+                                      <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
+                                  @endif
                     </div>
 
                     <div class="form-group">
-                        <button class="btn btn-primary w-100">Sign in</button>
+                        <button type="submit" class="btn btn-primary w-100">Reset Password</button>
                     </div>
                     <div class="form-group text-center mb-0">
                         <span>Don't have an account?</span>
@@ -104,6 +120,7 @@
                 </form>
             </div>
         </div>
+
     </section>
 
 
@@ -206,6 +223,7 @@
     </footer>
 
     <!-- footer end -->
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

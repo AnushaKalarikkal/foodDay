@@ -74,9 +74,9 @@ window.addEventListener("popstate", function (e) {
 
 $("html, body").on(
   "scroll mousedown wheel DOMMouseScroll mousewheel keyup touchmove",
-  function () {
-    $("html, body").stop();
-  }
+  // function () {
+  //   $("html, body").stop();
+  // }
 );
 
 // scroll top for category and sub category  end
