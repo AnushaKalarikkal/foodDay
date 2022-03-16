@@ -40,9 +40,9 @@
 
                         
                         <li class="nav-item">
-                            <a class="nav-link" href="cart.html">
+                            <a class="nav-link" href="/empty_cart">
                                 <span class="cart-badge-wrap">
-                                    <span class="cart-badge">9</span>
+                                    <span class="cart-badge">0</span>
                                     <i class='bx bx-shopping-bag mr-1'></i>
                                 </span>
                                 Cart</a>
@@ -88,7 +88,7 @@
                 <div class="col-lg-4">
                     <div class="item">
                         <div class="item-image">
-                            <img src="assets/images/meal.svg" alt="">
+                            <img src="{{asset('images//meal.svg')}}" alt="">
                         </div>
                         <div class="item-desc">
                             <h4>Choose Your Dish</h4>
@@ -101,7 +101,7 @@
                 <div class="col-lg-4">
                     <div class="item">
                         <div class="item-image">
-                            <img src="assets/images/delivery.svg" alt="">
+                            <img src="{{asset('images//delivery.svg')}}" alt="">
                         </div>
                         <div class="item-desc">
                             <h4>We Deliver Your Meals</h4>
@@ -113,7 +113,7 @@
                 <div class="col-lg-4">
                     <div class="item">
                         <div class="item-image">
-                            <img src="assets/images/eat-enjoy.svg" alt="">
+                            <img src=" {{asset('images//eat-enjoy.svg')}}" alt="">
                         </div>
                         <div class="item-desc">
                             <h4>Eat And Enjoy</h4>
@@ -126,143 +126,7 @@
         </div>
     </section>
 
-    <section class="pt-5 pb-4">
-        <div class="container">
-            <h4 class="mb-4">Popular Restaurants</h4>
-            <div class="row rest-listing-row">
-
-                <div class="col-md-4 col-sm-6">
-                    <a href="restaurant-details.html" class="card restaurant-card">
-                        <span class="restaurant-status"><em class="ribbon"></em>Open</span>
-                        <div class="restaurant-image" style="
-                                    background-image: url('assets/images/banner1.jpg');
-                                  ">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Golden Dragon</h5>
-                            <div class="cuisines">
-                                <span>South Indian</span><span>Beverages</span>
-                            </div>
-                            <p class="location"><i class="bx bx-location-plus"></i> 302 Potrero Ave, San Francisco, CA
-                                94110</p>
-                            <div class="details">
-                                <span class="badge"><i class='bx bxs-star'></i> 4.2</span>
-                                <span class="badge">30 Mins</span>
-                                <span class="badge">$200 for two</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="restaurant-details.html" class="card restaurant-card">
-                        <span class="restaurant-status"><em class="ribbon"></em>Open</span>
-                        <div class="restaurant-image" style="
-                                    background-image: url('assets/images/test1.jpg');
-                                  ">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Golden Dragon</h5>
-                            <div class="cuisines">
-                                <span>South Indian</span><span>Beverages</span>
-                            </div>
-                            <p class="location"><i class="bx bx-location-plus"></i> 302 Potrero Ave, San Francisco, CA
-                                94110</p>
-                            <div class="details">
-                                <span class="badge"><i class='bx bxs-star'></i> 4.2</span>
-                                <span class="badge">30 Mins</span>
-                                <span class="badge">$200 for two</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="restaurant-details.html" class="card restaurant-card">
-                        <span class="restaurant-status"><em class="ribbon"></em>Open</span>
-                        <div class="restaurant-image" style="
-                                    background-image: url('assets/images/test2.jpg');
-                                  "></div>
-                        <div class="card-body">
-                            <h5 class="card-title">Golden Dragon</h5>
-                            <div class="cuisines">
-                                <span>South Indian</span><span>Beverages</span>
-                            </div>
-                            <p class="location"><i class="bx bx-location-plus"></i> 302 Potrero Ave, San Francisco, CA
-                                94110</p>
-                            <div class="details">
-                                <span class="badge"><i class='bx bxs-star'></i> 4.2</span>
-                                <span class="badge">30 Mins</span>
-                                <span class="badge">$200 for two</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="restaurant-details.html" class="card restaurant-card unavailable">
-                        <span class="restaurant-status closed"><em class="ribbon"></em>Closed</span>
-                        <div class="restaurant-image" style="
-                                    background-image: url('assets/images/test3.jpg');
-                                  "></div>
-                        <div class="card-body">
-                            <h5 class="card-title">Golden Dragon</h5>
-                            <div class="cuisines">
-                                <span>South Indian</span><span>Beverages</span>
-                            </div>
-                            <p class="location"><i class="bx bx-location-plus"></i> 302 Potrero Ave, San Francisco, CA
-                                94110</p>
-                            <div class="details">
-                                <span class="badge"><i class='bx bxs-star'></i> 4.2</span>
-                                <span class="badge">30 Mins</span>
-                                <span class="badge">$200 for two</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="restaurant-details.html" class="card restaurant-card unavailable">
-                        <span class="restaurant-status closed"><em class="ribbon"></em>Closed</span>
-                        <div class="restaurant-image" style="
-                                    background-image: url('assets/images/test4.jpg');
-                                  "></div>
-                        <div class="card-body">
-                            <h5 class="card-title">Golden Dragon</h5>
-                            <div class="cuisines">
-                                <span>South Indian</span><span>Beverages</span>
-                            </div>
-                            <p class="location"><i class="bx bx-location-plus"></i> 302 Potrero Ave, San Francisco, CA
-                                94110</p>
-                            <div class="details">
-                                <span class="badge"><i class='bx bxs-star'></i> 4.2</span>
-                                <span class="badge">30 Mins</span>
-                                <span class="badge">$200 for two</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="restaurant-details.html" class="card restaurant-card unavailable">
-                        <span class="restaurant-status closed"><em class="ribbon"></em>Closed</span>
-                        <div class="restaurant-image" style="
-                                    background-image: url('assets/images/test5.jpg');
-                                  "></div>
-                        <div class="card-body">
-                            <h5 class="card-title">Golden Dragon</h5>
-                            <div class="cuisines">
-                                <span>South Indian</span><span>Beverages</span>
-                            </div>
-                            <p class="location"><i class="bx bx-location-plus"></i> 302 Potrero Ave, San Francisco, CA
-                                94110</p>
-                            <div class="details">
-                                <span class="badge"><i class='bx bxs-star'></i> 4.2</span>
-                                <span class="badge">30 Mins</span>
-                                <span class="badge">$200 for two</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-            </div>
-        </div>
-    </section>
+    
 
 
     <!-- location listing section -->
@@ -324,12 +188,12 @@
     </div>
     <!-- download app section -->
 
-    <section class="download-app-section">
+   <section class="download-app-section">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="app-image">
-                        <img src="assets/images/mobile-app.png" alt="">
+                        <img src="{{asset('images//mobile-app.png')}}" alt="">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -338,8 +202,8 @@
                         <p>Now you can make food happen pretty much wherever you are. Get our app, it's the fastest way
                             to order food on the go.</p>
                         <div>
-                            <a href=""><img src="assets/images/play.png" alt=""></a>
-                            <a href=""><img src="assets/images/app-store.png" alt=""></a>
+                            <a href=""><img src="{{asset('images//play.png')}}" alt=""></a>
+                            <a href=""><img src="{{asset('images//app-store.png')}}" alt=""></a>
                         </div>
                     </div>
                 </div>
@@ -349,101 +213,7 @@
 
     <!-- footer -->
 
-    <footer>
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6">
-                        <h3>Quick links</h3>
-                        <ul>
-                            <li><a href="home.html">Home</a></li>
-                            <li><a href="restaurant-listing.html">Restaurants</a></li>
-                            <li><a href="about-us.html">About us</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
-                            <li><a href="my-account.html">My Account</a></li>
-                            <li><a href="cart.html">Cart</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h3>Quick links</h3>
-                        <ul>
-                            <li><a href="enrol-your-restaurant.html">Enroll as Restaurant</a></li>
-                            <li><a href="enrol-delivery-boy.html">Enroll as Delivery Boy</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="terms-and-conditions.html">Terms and Conditions</a></li>
-                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6">
-                        <h3>Subscribe to newsletter</h3>
-                        <p>Join our newsletter to keep be informed about offers and news.</p>
-                        <form action="">
-                            <div class="input-group newsletter-group">
-                                <input type="text" class="form-control" placeholder="Enter your email" aria-label=""
-                                    aria-describedby="button-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-danger" type="button" id="find-food-btn"><i
-                                            class='bx bx-send'></i></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h3>Contact us</h3>
-                        <ul class="contact">
-                            <li><i class='bx bx-location-plus'></i><span>Down Town Building, MG Road, Toronto, Canada,
-                                    784578</span></li>
-                            <li><i class='bx bx-mail-send'></i><span>hello@cedextech.com</span></li>
-                            <li><i class='bx bx-phone'></i><span>+91-8129881750</span></li>
-                        </ul>
-                        <div class="social">
-                            <i class='bx bxl-facebook-circle'></i>
-                            <i class='bx bxl-twitter'></i>
-                            <i class='bx bxl-youtube'></i>
-                            <i class='bx bxl-instagram-alt'></i>
-                        </div>
-                    </div>
-                </div><!-- End row -->
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="container">
-
-                <div class="text-center">
-                    <p class="mb-0 copy-right">© 2021 FoodDay All Rights Reserved</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- mobile footer -->
-
-        <div class="mobile-footer">
-            <div class="row">
-                <div class="col-4 item">
-                    <a href="home.html">
-                        <i class='bx bx-search'></i>
-                        <span>Search</span>
-                    </a>
-                </div>
-                <div class="col-4 item">
-                    <a href="cart.html">
-                        <i class='bx bx-cart'><span class="badge badge-light">22</span></i>
-                        <span>Cart</span>
-                    </a>
-                </div>
-                <div class="col-4 item">
-                    <a href="my-account.html">
-                        <i class='bx bx-user'></i>
-                        <span>Account</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- mobile footer end -->
-
-    </footer>
+   @include('partials.footer')
 
     <!-- footer end -->
 

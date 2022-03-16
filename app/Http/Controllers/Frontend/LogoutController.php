@@ -15,6 +15,6 @@ class LogoutController extends Controller
         
         Auth::logout();
 
-        return redirect('sign_in');
+        return redirect('/front');
     }
 }

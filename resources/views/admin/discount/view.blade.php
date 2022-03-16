@@ -5,7 +5,7 @@
     <h1 class="h3 mb-4 text-gray-800">Discount Code Details: {{$discount->name}} </h1>
 
     <button type="button" class="btn btn-link"><a href="{{route('admin.discount.show')}}">Cancel</a> </button>
-    <button class="btn btn-primary  " style="float:right;"><a href="{{route('discount.edit',$discount->id)}}" style="color:white"> Edit</a></button><br>
+    <button class="btn btn-primary  " style="float:right;"><a href="{{route('admin.discount.edit',$discount->id)}}" style="color:white"> Edit</a></button><br>
 
     </div>
 

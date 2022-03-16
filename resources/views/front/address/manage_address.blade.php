@@ -26,10 +26,13 @@
                                                     <p class="card-text">
                                                        {{$value->landmark}}
                                                     </p>
-                                                    <button type="button" class="btn-link" value="{{$value->id}}" data-toggle="modal" id="edit-item"
+                                                    <button type="button" class="btn-link" data-toggle="modal" id="edit-item"
                                                         >
                                                         <i class='bx bx-edit'></i>Edit</button>
-                                                    <button class="btn-link"><i class='bx bx-trash'></i>Delete</button>
+                                                    <button class="btn-link"><i class='bx bx-trash'></i>
+                                                    
+                                                    <a href="/AddressDel/{{$value->id}}">
+                                                    Delete</a></button>
                                                     <button class="btn-link"><i class='bx bx-location-plus'></i>Set as
                                                         default</button>
 
@@ -56,7 +59,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <i class="bx bx-x btn-close"></i>
                                 </button>
-                                <h5 class="mb-4">Change Delivery Address</h5>
+                                <h5 class="mb-4">Add Delivery Address</h5>
 
 
                                 <form method="post" action="" enctype="multipart/form-data">
@@ -67,38 +70,37 @@
                                              {{ Session::get('success') }} 
                                            </div>
                                         @endif
-                                        <input type="hidden" name="addrId" id="addrId" value="">
 
                                         <div class="form-group col-lg-12">
-                                            <input type="text" name="location" id="location" class="form-control" id="location" placeholder="Location">
+                                            <input type="text" name="location" class="form-control" id="location" placeholder="Location">
                                                @error("location")
                                                     <p style="color:red">{{$errors->first("location")}}
                                                 @enderror
                                         </div>
                                          <div class="form-group col-lg-12">
-                                            <input type="text" name="house_name" id="house_name" class="form-control" placeholder="House Name / Flat / Building"> 
+                                            <input type="text" name="house_name" class="form-control" placeholder="House Name / Flat / Building"> 
                                             @error("house_name")
                                                     <p style="color:red">{{$errors->first("house_name")}}
                                                 @enderror
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <input type="text" name="area" id="area" class="form-control" placeholder="Area / Street">
+                                            <input type="text" name="area" class="form-control" placeholder="Area / Street">
                                             @error("area")
                                                     <p style="color:red">{{$errors->first("area")}}
                                                 @enderror
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <input type="text" name="city" id="city" class="form-control" placeholder="City">
+                                            <input type="text" name="city" class="form-control" placeholder="City">
                                             @error("city")
                                                     <p style="color:red">{{$errors->first("city")}}
                                                 @enderror
                                         </div>
                                           <div class="form-group col-lg-12">
-                                            <input type="text" name="landmark" id="landmark" class="form-control" placeholder="Landmark">
+                                            <input type="text" name="landmark" class="form-control" placeholder="Landmark">
                                         </div>
                                        
                                         <div class="form-group col-lg-6">
-                                            <input type="text" name="pincode" id="pincode" class="form-control" placeholder="Pincode">
+                                            <input type="text" name="pincode" class="form-control" placeholder="Pincode">
                                             @error("pincode")
                                                     <p style="color:red">{{$errors->first("pincode")}}
                                                 @enderror
@@ -116,7 +118,7 @@
 
                                             </select>                                        </div>
                                         <div class="form-group col-lg-12">
-                                            <textarea class="form-control" name="note" id="note" rows="3"
+                                            <textarea class="form-control" name="note" id="exampleFormControlTextarea1" rows="3"
                                                 placeholder="Note for Driver"></textarea>
                                         </div>
 
@@ -125,7 +127,7 @@
                                                 data-dismiss="modal" aria-label="Close">Close</button>
                                         </div>
                                         <div class="form-group col-md-6 mb-0">
-                                            <button class="btn btn-secondary w-100">Save Changes</button>
+                                            <button class="btn btn-secondary w-100">Save</button>
                                         </div>
 
                                     </div>
@@ -142,20 +144,45 @@
       @section('editJs')
     @parent
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.8.2/dist/alpine.min.js"></script>
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 
      <script>
        $(document).ready(function() {
-           $(document).on('click','#edit-item', function(){
-               var addrId=$(this).val();
-            //    alert (addrId);
-               $('#editModal').modal('show');
-           });
+  /**
+   * for showing edit item popup
+   */
 
+  $(document).on('click', "#edit-item", function() {
+    $(this).addClass('edit-item-trigger-clicked'); //useful for identifying which trigger was clicked and consequently grab data from the correct row and not the wrong one.
 
- 
-});
+    var options = {
+      'backdrop': 'static'
+    };
+    $('#edit-modal').modal(options)
+  })
+
+  // on modal show
+  $('#edit-modal').on('show.bs.modal', function() {
+    var el = $(".edit-item-trigger-clicked"); // See how its usefull right here? 
+    var row = el.closest(".data-row");
+
+    // get the data
+    // var id = el.data('item-id');
+    var house_name = row.children(".house_name").text();
+    var location = row.children(".location").text();
+
+    // fill the data in the input fields
+    // $("#id").val(id);
+    $("#house_name").val(house_name);
+    $("#location").val(location);
+
+  })
+
+  // on modal hide
+  $('#edit-modal').on('hide.bs.modal', function() {
+    $('.edit-item-trigger-clicked').removeClass('edit-item-trigger-clicked')
+    $("#edit-form").trigger("reset");
+  })
+})
     </script>
 @stop
 </x-myaccount-master>

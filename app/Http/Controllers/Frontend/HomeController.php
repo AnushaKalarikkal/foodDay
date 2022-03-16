@@ -98,4 +98,15 @@ class HomeController extends Controller
         return view('front.my_home');
     }
 
+    
+//     protected function redirectTo()
+// {
+//         if (Auth::customer())
+//         {
+//             return 'my_home';  // admin dashboard path
+//         } else {
+//             return 'sign_in';  // member dashboard path
+//         }
+// }
+
 }

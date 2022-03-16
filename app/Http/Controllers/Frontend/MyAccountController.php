@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Restaurant;
 use App\Models\Cuisine;
+use App\Models\Fooditem;
 
 
 use DB;
@@ -113,8 +114,9 @@ class MyAccountController extends Controller
 
     public function restaurant_details(Restaurant $restaurant )
     {
+        $fooditems=Fooditem::all();
         $cuisines=Cuisine::all();
-        return view('front.restaurant_details', ['restaurant'=>$restaurant], compact('cuisines'));
+        return view('front.restaurant_details', ['restaurant'=>$restaurant], compact('cuisines','fooditems'));
     }
 }  
 

@@ -38,10 +38,10 @@
                             <a class="nav-link" href="/sign_in">Sign In</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="cart.html">
+                         <li class="nav-item">
+                            <a class="nav-link" href="/empty_cart">
                                 <span class="cart-badge-wrap">
-                                    <span class="cart-badge">9</span>
+                                    <span class="cart-badge">0</span>
                                     <i class='bx bx-shopping-bag mr-1'></i>
                                 </span>
                                 Cart</a>

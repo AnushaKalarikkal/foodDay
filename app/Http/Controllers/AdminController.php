@@ -13,6 +13,8 @@ use App\Models\Order;
 use App\Models\Restaurantuser;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Models\Fooditem;
+
 
 
 
@@ -413,8 +415,9 @@ class AdminController extends Controller
     {
         $cities=City::all();
         $cuisines=Cuisine::all();
+        $fooditems=Fooditem::all();
 
-        return view('admin.restaurant.create',compact('cities','cuisines'));
+        return view('admin.restaurant.create',compact('cities','cuisines','fooditems'));
     }
 
     public function restaurant_store(Request $request)
@@ -466,6 +469,12 @@ class AdminController extends Controller
 
         {
         $restaurants->cuisines()->attach($request->input('cuisine_id'));
+
+        }
+         if ($request->has('food_item_id'))
+
+        {
+        $restaurants->fooditems()->attach($request->input('food_item_id'));
 
         }
   

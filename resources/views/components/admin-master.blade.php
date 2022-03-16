@@ -91,6 +91,7 @@
           <span>Cuisines</span>
         </a>
       </div>
+      
       <div class="nav-item">
        <a class="nav-link collapsed" href="{{route('admin.discount.show')}}"  data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-bullhorn"></i>

@@ -180,11 +180,31 @@
                     <div class="row align-items-center pt-3 pb-2">
 
                     <div class="col-md-3 ps-5">
+                      <h6 class="mb-0"> Food items</h6>
+                      </div>
+                      <div class="col-md-9 pe-5">
+
+                     <select id="selectall-tag1" class=" form-control foods" name="food_item_id[]" multiple="multiple">
+
+                      @foreach($fooditems as $food)
+                      <option value="{{$food->id}}">{{$food->food_item}}</option>
+                      @endforeach
+
+                      </select>
+
+                    </div> 
+
+                    </div>
+                     <hr class="mx-n3">
+
+                    <div class="row align-items-center pt-3 pb-2">
+
+                    <div class="col-md-3 ps-5">
                       <h6 class="mb-0"> Cuisine</h6>
                       </div>
                       <div class="col-md-9 pe-5">
 
-                     <select id="selectall-tag" class=" form-control categories" name="cuisine_id[]" multiple="multiple">
+                     <select id="selectall-tag2" class=" form-control categories" name="cuisine_id[]" multiple="multiple">
 
                       @foreach($cuisines as $cuisine)
                       <option value="{{$cuisine->id}}">{{$cuisine->cuisine}}</option>
@@ -266,6 +286,8 @@
   <script>
     $(document).ready(function() {
     $('.categories').select2();
+        $('.foods').select2();
+
 });
   </script>
 @stop

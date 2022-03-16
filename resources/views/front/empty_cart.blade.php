@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" type="image/png" href="{{asset('images/favicon.png')}}">
+  <link rel="icon" type="image/png" href="{{asset('images/favicon.png')}}">
     <link rel="stylesheet" href="{{asset('css/styles.css')}}">
-    <title>FoodDay - Login</title>
+    <title>FoodDay - Empty Cart</title>
 </head>
 
 <body>
@@ -30,20 +30,20 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/front">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                       
-
                         <li class="nav-item active">
+                            <a class="nav-link" href="/my_home">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                      
+
+                        <li class="nav-item">
                             <a class="nav-link" href="/sign_in">Sign In</a>
                         </li>
 
-                       
-                      <li class="nav-item">
+                        
+                        <li class="nav-item">
                             <a class="nav-link" href="/empty_cart">
                                 <span class="cart-badge-wrap">
-                                    <span class="cart-badge">0</span>
+                                    <span class="cart-badge">{{ count((array) session('cart')) }}</span>
                                     <i class='bx bx-shopping-bag mr-1'></i>
                                 </span>
                                 Cart</a>
@@ -57,61 +57,33 @@
 
     <!-- <div class="search-nav">
         <div class="container">
-            <h3 class="mb-0">Sign in</h3>
+            <h3 class="mb-0">Status or info page</h3>
         </div>
     </div> -->
 
-    <section class="log-reg-sec">
-        <div class="content">
-            <div class="form-content">
-                <img src="assets/images/logo-round.png" alt="" class="form-logo">
-                <h1 class="text-center">Sign in to FoodDay</h1>
+    <div class="search-nav">
+        <div class="container">
+            <h3 class="mb-0">Cart</h3>
+        </div>
+    </div>
 
+    <section class="py-60 min-window-height">
+        <div class="container">
 
-                <form method="post" action="/sign_in_fun" enctype="multipart/form-data">
-                   @csrf
-                   @if(Session::get('fail'))
-                    <div class="alert alert-danger" role="alert"> 
-                     {{ Session::get('fail') }} 
-                    </div>
-                      @endif
-                  
-                    <div class="form-group">
-                        <input type="text" name="email" class="form-control" placeholder="Email">
-                         @error("email")
-                            <p style="color:red">{{$errors->first("email")}}
-                         @enderror
-                    </div>
-                    <div class="form-group">
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                         @error("password")
-                            <p style="color:red">{{$errors->first("password")}}
-                         @enderror
-                    </div>  
-
-                    <div class="form-group">
-                        <a href="{{route('forget.password.form')}}">Forgot password?</a>
-                    </div>
-
-                    <div class="form-group">
-                        <button class="btn btn-primary w-100">Sign in</button>
-                    </div>
-                    <div class="form-group text-center mb-0">
-                        <span>Don't have an account?</span>
-                        <a href="/sign_up">Sign up</a>
-                    </div>
-
-                </form>
+            <div class="empty-orders-div">
+                <!-- <img src="assets/images/cart.svg" alt="" class="mt-0"> -->
+                <i class="bx bx-shopping-bag"></i>
+                <h4 class="mb-3">Your Cart is Empty</h4>
+                <p class="mb-2">Looks like you haven't added anything to your cart yet.</p>
+                <a href="/restaurant_list" class="btn btn-primary mt-3">See Restaurants Near You</a>
             </div>
+
         </div>
     </section>
 
 
-
     <!-- footer -->
-
-      @include('partials.footer')
-
+@include('partials.footer')
 
     <!-- footer end -->
 

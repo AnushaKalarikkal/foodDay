@@ -33,23 +33,17 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="restaurant-listing.html">Restaurants</a>
-                        </li>
+                       
 
                         <li class="nav-item">
                             <a class="nav-link" href="login.html">Sign In</a>
                         </li>
 
+                       
                         <li class="nav-item">
-                            <a class="nav-link" href="my-account.html">
-                                <i class='bx bx-user mr-1'></i>
-                                My Account</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="cart.html">
+                            <a class="nav-link" href="/empty_cart">
                                 <span class="cart-badge-wrap">
-                                    <span class="cart-badge">9</span>
+                                    <!-- <span class="cart-badge"></span> -->
                                     <i class='bx bx-shopping-bag mr-1'></i>
                                 </span>
                                 Cart</a>
