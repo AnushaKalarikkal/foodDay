@@ -35,7 +35,7 @@
                         </li>
                      
                         <li class="nav-item">
-                            <a class="nav-link" href="/sign_in">Sign In</a>
+                            <a class="nav-link" href="{{route('customer.signIn')}}">Sign In</a>
                         </li>
 
                          <li class="nav-item">
@@ -64,7 +64,7 @@
             <div class="form-content">
                 <img src="assets/images/logo-round.png" alt="" class="form-logo">
                 <h1 class="text-center">Sign up to FoodDay</h1>
-                <form method="post" action="/sign_up_store" enctype="multipart/form-data">
+                <form method="post" action="{{route('customer.register.store')}}" enctype="multipart/form-data">
                    @csrf
 
                     @if(Session::get('success'))

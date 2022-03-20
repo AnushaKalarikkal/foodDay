@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\Models\Restaurant;
 use App\Models\Cuisine;
 use App\Models\Fooditem;
+use App\Rules\MatchOldPassword;
 
 
 use DB;
@@ -18,15 +19,16 @@ class MyAccountController extends Controller
 {
 
 //account details    
-    public function account_details()
+    public function account_details(Customer $customer)
     {
-        $data=['LoggedUserInfo'=>Customer::where('id', '=', session('LoggedUser'))->first()];
-        return view('front.mydetails', $data);
+        $customer=Auth::user();
+        // echo $data;
+        return view('front.mydetails',['customer'=>$customer] );
     }
 
     public function save_changes(Request $request, $id)
     {
-        $customer=Customer::find($id);
+       $customer = Customer::findOrFail($id);
         $customer->first_name = $request->first_name;
         $customer->last_name = $request->last_name;
         $customer->mobile = $request->mobile;
@@ -44,10 +46,8 @@ class MyAccountController extends Controller
 
     public function logout()
     {
-        if (session()->has('LoggedUser')) {
-            session()->pull('LoggedUser');
-            return redirect('/sign_in');
-        }
+       Auth::guard('customer')->logout();
+       return redirect('/front');
     }
 
  //change password
@@ -61,7 +61,7 @@ class MyAccountController extends Controller
     {
         $request->validate([
 
-                'password'=>'required|min:6|max:100',
+                'password'=>['required', new MatchOldPassword()],
 
                 'new_password'=>'required|min:6|max:100',
 
@@ -69,23 +69,11 @@ class MyAccountController extends Controller
 
                 ]);
 
-        $current_user= Auth::customers();
-        dd($current_user);
+      
+         Customer::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+       
 
-
-        if (Hash::check($request->current_password, $current_user->password)) {
-            $current_user->update([
-
-                'password'=>bcrypt($request->new_password)
-
-                ]);
-
-
-
-            return redirect()->back()->with('success', 'Password successfully updated.');
-        } else {
-            return redirect()->back()->with('error', 'Old password does not matched.');
-        }
+        return back()->with('success', 'save changes successfully');
     }
 
     //restaurant_listing

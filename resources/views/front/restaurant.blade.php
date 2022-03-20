@@ -30,7 +30,7 @@
             <p>Change location</p>
             <div class="row">
                 <div class="col-lg-8 col-xl-6">
-                    <form action="{{route('search')}}" method="get" enctype="multipart/form-data">
+                    <form action="{{route('customer.search')}}" method="get" enctype="multipart/form-data">
                     @csrf
                         <div class="input-group search-location-group">
                             <input type="text" name="name" class="form-control" placeholder="Enter your delivery location"
@@ -57,7 +57,7 @@
               @foreach($restaurant as $value)
               @if($value->is_open==1)
                 <div class="col-md-4 col-sm-6">
-                    <a href="{{route('restaurant_details',$value->id)}}" class="card restaurant-card available">
+                    <a href="{{route('customer.restaurant_details',$value->id)}}" class="card restaurant-card available">
 
                        
                             @if($value->is_open==1)
@@ -103,7 +103,7 @@
                 </div>
               @else
               <div class="col-md-4 col-sm-6">
-                    <a href="{{route('restaurant_details',$value->id)}}" class="card restaurant-card unavailable">
+                    <a href="{{route('customer.restaurant_details',$value->id)}}" class="card restaurant-card unavailable">
 
                        
                             @if($value->is_open==1)

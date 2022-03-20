@@ -73,22 +73,14 @@ class HomeController extends Controller
 
         ]);
 
-
-
-   $userInfo = Customer::where('email','=', $request->email)->first();
-
-        if(!$userInfo){
-            return back()->with('fail','We do not recognize your email address');
+        $creds = $request->only('email','password');
+    
+        if( Auth::guard('customer')->attempt($creds) ){
+            return redirect()->route('customer.my_home');
         }else{
-            //check password
-            if(Hash::check($request->password, $userInfo->password)){
-                $request->session()->put('LoggedUser', $userInfo->id);
-                return redirect('/my_home');
-
-            }else{
-                return back()->with('fail','Incorrect password');
-            }
+           return redirect()->route('customer.signIn')->with('fail','Incorrect credentials'); 
         }
+
 
     }
     

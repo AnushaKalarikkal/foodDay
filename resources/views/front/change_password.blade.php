@@ -5,9 +5,21 @@
                                 <div class="my-account-content">
                                     <h4>Change Password</h4>
                                     
-                                    <form action="{{route('update')}}" method="post"  enctype="multipart/form-data">
+                                    <form action="{{route('customer.update')}}" method="post"  enctype="multipart/form-data">
                                          @csrf
                                            @method('PATCH')
+                                              @if(Session::get('success'))
+                                            <div class="alert alert-success"> 
+                                            {{ Session::get('success') }} 
+                                            </div>
+                                            @endif
+                                               @if(Session::get('error'))
+                                            <div class="alert alert-danger"> 
+                                            {{ Session::get('error') }} 
+                                            </div>
+                                            @endif
+
+
                                         <div class="form-row">
                                             <div class="col-lg-12">
                                                 <div class="form-group">

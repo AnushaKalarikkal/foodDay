@@ -70,7 +70,7 @@
                             {{ Session::get('message') }}
                         </div>
                     @endif
-                <form action="{{ route('forgot.password.link') }}" method="POST" >
+                <form action="{{ route('customer.forgot.password.link') }}" method="POST" >
                     @csrf
 
                     <span class="email-text">Enter your email below to receive your password reset

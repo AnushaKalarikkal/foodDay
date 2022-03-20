@@ -5,7 +5,7 @@
                                >
                                 <div class="my-account-content">
                                     <h4>Account Details</h4>
-                                    <form action="{{route('save-changes',$LoggedUserInfo->id)}}" method="post"  enctype="multipart/form-data">
+                                    <form action="{{route('customer.save-changes',$customer->id)}}" method="post"  enctype="multipart/form-data">
                                           @csrf
                                             @method('PATCH')
 
@@ -19,19 +19,19 @@
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" name="first_name" placeholder="First Name"
-                                                    value="{{$LoggedUserInfo['first_name']}}">
+                                                    value="{{ Auth::guard('customer')->user()->first_name }}">
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" name="last_name" placeholder="Last Name"
-                                                    value="{{$LoggedUserInfo['last_name']}}">
+                                                    value="{{ Auth::guard('customer')->user()->last_name }}">
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" name="email" placeholder="Email"
-                                                    value="{{$LoggedUserInfo['email']}}">
+                                                    value="{{ Auth::guard('customer')->user()->email }}">
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" name="mobile" placeholder="Mobile"
-                                                    value="{{$LoggedUserInfo['mobile']}}">
+                                                    value="{{ Auth::guard('customer')->user()->mobile }}">
                                                 </div>
                                                 <div class="form-group  mb-0">
                                                     <button class="btn btn-primary">Save Changes</button>

@@ -27,7 +27,7 @@
         <div class="container">
             <div class="banner-content">
                 <h2>Delivering your favorite food to your door step.</h2>
-                <form action="{{route('search')}}" method="get" enctype="multipart/form-data">
+                <form action="{{route('customer.search')}}" method="get" enctype="multipart/form-data">
                     @csrf
                     <div class="input-group search-location-group">
                         <input type="text" name="name" class="form-control" placeholder="Enter your delivery location"

@@ -36,12 +36,12 @@
                        
 
                         <li class="nav-item active">
-                            <a class="nav-link" href="/sign_in">Sign In</a>
+                            <a class="nav-link" href="{{route('customer.signIn')}}">Sign In</a>
                         </li>
 
                        
                       <li class="nav-item">
-                            <a class="nav-link" href="/empty_cart">
+                            <a class="nav-link" href="">
                                 <span class="cart-badge-wrap">
                                     <span class="cart-badge">0</span>
                                     <i class='bx bx-shopping-bag mr-1'></i>
@@ -68,7 +68,7 @@
                 <h1 class="text-center">Sign in to FoodDay</h1>
 
 
-                <form method="post" action="/sign_in_fun" enctype="multipart/form-data">
+                <form method="post" action="{{route('customer.sign_in_fun')}}" enctype="multipart/form-data">
                    @csrf
                    @if(Session::get('fail'))
                     <div class="alert alert-danger" role="alert"> 
@@ -90,7 +90,7 @@
                     </div>  
 
                     <div class="form-group">
-                        <a href="{{route('forget.password.form')}}">Forgot password?</a>
+                        <a href="{{route('customer.forget.password.form')}}">Forgot password?</a>
                     </div>
 
                     <div class="form-group">
@@ -98,7 +98,7 @@
                     </div>
                     <div class="form-group text-center mb-0">
                         <span>Don't have an account?</span>
-                        <a href="/sign_up">Sign up</a>
+                        <a href="{{route('customer.register')}}">Sign up</a>
                     </div>
 
                 </form>

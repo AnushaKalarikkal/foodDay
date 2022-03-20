@@ -31,17 +31,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/my_home">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('customer.my_home')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
                       
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/sign_in">Sign In</a>
+                            <a class="nav-link" href="{{route('customer.signIn')}}">Sign In</a>
                         </li>
 
                         
                         <li class="nav-item">
-                            <a class="nav-link" href="/empty_cart">
+                            <a class="nav-link" href="{{route('customer.empty.cart')}}">
                                 <span class="cart-badge-wrap">
                                     <span class="cart-badge">{{ count((array) session('cart')) }}</span>
                                     <i class='bx bx-shopping-bag mr-1'></i>
@@ -75,7 +75,7 @@
                 <i class="bx bx-shopping-bag"></i>
                 <h4 class="mb-3">Your Cart is Empty</h4>
                 <p class="mb-2">Looks like you haven't added anything to your cart yet.</p>
-                <a href="/restaurant_list" class="btn btn-primary mt-3">See Restaurants Near You</a>
+                <a href="{{route('customer.restaurant_list')}}" class="btn btn-primary mt-3">See Restaurants Near You</a>
             </div>
 
         </div>

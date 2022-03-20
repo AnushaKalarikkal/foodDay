@@ -30,13 +30,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item ">
-                            <a class="nav-link" href="/my_home">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('customer.my_home')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
 
 
 
                         <li class="nav-item active">
-                            <a class="nav-link" href="/Account">
+                            <a class="nav-link" href="{{route('customer.account')}}">
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
@@ -82,23 +82,24 @@
                             aria-orientation="vertical">
                            
 
-                            <a class="nav-link {{Request::is('addresses') ? 'active' :'' ;}}" href="{{route('address')}}"
+                            <a class="nav-link {{Request::is('addresses') ? 'active' :'' ;}}" href="{{route('customer.address')}}"
 
                                 role="tab" aria-controls="v-pills-messages" aria-selected="false"><i
 
                                     class='bx bxs-home-smile'></i> Addresses</a>
 
-                           <a class="nav-link {{Request::is('Account') ? 'active' :'' ;}}" href="{{route('account')}}"
+                           <a class="nav-link {{Request::is('Account') ? 'active' :'' ;}}" href="{{route('customer.account')}}"
                                  aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-user-rectangle'></i> Account Details</a>
 
-                            <a class="nav-link {{Request::is('change-password') ? 'active' :'' ;}}"  href="{{route('change')}}"
+                            <a class="nav-link {{Request::is('change-password') ? 'active' :'' ;}}"  href="{{route('customer.change')}}"
                                  aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-wallet-alt'></i> Change Password</a>
 
-                            <a class="nav-link" href="/Logout"
+                            <a class="nav-link" href="{{ route('customer.logout') }}"  onclick="event.preventDefault();document.getElementById('logout-form').submit();"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-log-out'></i> Logout</a>
+                                    <form action="{{ route('customer.logout') }}" id="logout-form" method="post">@csrf</form>
 
                         </div>
                     </div>
@@ -128,7 +129,7 @@
                                 <h5 class="mb-4">Add Delivery Address</h5>
 
 
-                                <form method="post" action="{{route('address.store')}}" enctype="multipart/form-data">
+                                <form method="post" action="{{route('customer.address.store')}}" enctype="multipart/form-data">
                                     <div class="form-row">
                                         @csrf 
                                        @if(Session::get('success'))

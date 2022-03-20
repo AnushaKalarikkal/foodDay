@@ -15,8 +15,13 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'customer',
+        'passwords' => 'users',
     ],
+     'customers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Customer::class,
+        ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -43,7 +48,7 @@ return [
          'customer'=>[
           'driver' => 'session',
           'provider'=> 'customers',
-        ]
+         ],
     ],
 
     /*
@@ -102,6 +107,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+         'customers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Customer::class,
+        ],
+
+
     ],
 
     /*

@@ -67,7 +67,7 @@
             <div class="form-content">
                 <img src="assets/images/logo-round.png" alt="" class="form-logo">
                 <h1 class="text-center">Reset Password?</h1>
-                <form action="{{route('reset.password')}}" method="POST"  enctype="multipart/form-data" >
+                <form action="{{route('customer.reset.password')}}" method="POST"  enctype="multipart/form-data" >
                      @if (Session::get('fail'))
                         <div class="alert alert-danger">
                             {{ Session::get('fail') }}

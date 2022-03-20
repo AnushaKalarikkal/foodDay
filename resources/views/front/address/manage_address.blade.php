@@ -31,7 +31,7 @@
                                                         <i class='bx bx-edit'></i>Edit</button>
                                                     <button class="btn-link"><i class='bx bx-trash'></i>
                                                     
-                                                    <a href="/AddressDel/{{$value->id}}">
+                                                    <a href="{{route('customer.address.delete', $value->id)}}">
                                                     Delete</a></button>
                                                     <button class="btn-link"><i class='bx bx-location-plus'></i>Set as
                                                         default</button>
