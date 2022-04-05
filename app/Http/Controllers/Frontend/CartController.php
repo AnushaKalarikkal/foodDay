@@ -67,12 +67,12 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Product removed to cart successfully!');
     }
 
-    public function empty_cart()
-    {
-              $cart = session()->get('cart', []);
+    // public function empty_cart()
+    // {
+    //           $cart = session()->get('cart', []);
 
-        return view('front.empty_cart');
-    }
+    //     return view('front.empty_cart');
+    // }
 
     public function cart_items()
     {
@@ -82,23 +82,10 @@ class CartController extends Controller
     }
 
 
-    public function update(Request $request)
-    {
-        if($request->id && $request->quantity){
-            $cart = session()->get('cart');
-            $cart[$request->id]["quantity"] = $request->quantity;
-            session()->put('cart', $cart);
-            session()->flash('success', 'Cart updated successfully');
-        }
-    }
+   
 
 
         //checkout page
 
-    public function checkout()
-     {
-            
-         $address=Address::all();
-         return view('front.checkout',['address'=>$address]);
-     }
+   
 }

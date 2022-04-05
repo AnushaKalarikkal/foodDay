@@ -36,5 +36,7 @@ class FooditemRestaurants extends Migration
     public function down()
     {
         //
+      Schema::drop('fooditem_restaurant');
+        
     }
 }

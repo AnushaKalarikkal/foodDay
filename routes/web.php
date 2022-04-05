@@ -8,6 +8,8 @@ use App\Http\Controllers\Frontend\MyAccountController;
 use App\Http\Controllers\Frontend\AddressController;
 use App\Http\Controllers\Frontend\ForgetPasswordController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
+
 
 
 
@@ -128,60 +130,10 @@ Route::name('admin.')->middleware('auth')->prefix('admin')->group(function (){
 
    });
 
+
+
+
 //FRONT END///
-
-//    Route::get('/front', [HomeController::class, 'index'])->name('index');
-//    Route::get('/sign_in', [HomeController::class, 'login'])->name('signIn');
-//    Route::get('/sign_up', [HomeController::class, 'register']);
-//    Route::post('/sign_up_store', [HomeController::class, 'store']);
-//    Route::post('/sign_in_fun', [HomeController::class, 'sign_in_fun']);
-
-// //forget password   
-   Route::get('/forget', [ForgetPasswordController::class, 'forget_password'])->name('forget.password.form');
-//    Route::post('/password/forgot',[ForgetPasswordController::class,'sendResetLink'])->name('forgot.password.link');
-//    Route::get('/password/reset/{token}',[ForgetPasswordController::class,'showResetForm'])->name('reset.password.form');
-//    Route::post('/password/reset',[ForgetPasswordController::class,'resetPassword'])->name('reset.password');
-
-
-
-
-//     Route::get('/my_home', [HomeController::class, 'my_home'])->name('my_home');
-
-
-//     Route::get('/Logout', [MyAccountController::class, 'logout'])->name('logout');
-
-// //restaurant listing
-//     Route::get('/restaurant_list', [MyAccountController::class, 'restaurant_list']);
-//     Route::get('/search', [MyAccountController::class, 'search'])->name('search');
-//     Route::get('/restaurant_details/{restaurant}', [MyAccountController::class, 'restaurant_details'])->name('restaurant_details');
-
-
-// //account details
-
-//     Route::get('/Account', [MyAccountController::class, 'account_details'])->name('account');
-//     Route::patch('/save-changes/{id}', [MyAccountController::class, 'save_changes'])->name('save-changes');
-
-// //change-password
-//     Route::get('/change-password', [MyAccountController::class, 'change_password'])->name('change');
-//     Route::patch('/password-post', [MyAccountController::class, 'change_password_post'])->name('update');
-
-//     //address
-//     Route::get('/addresses', [AddressController::class, 'address'])->name('address');
-//     Route::post('/addresses-store', [AddressController::class, 'address_store'])->name('address.store');
-//     Route::get('AddressDel/{id}', [AddressController::class, 'AddressDelete'])->name('address.delete');
-//     Route::get('edit-address/{id}', [AddressController::class, 'edit_address'])->name('address.edit');
-
-// //cart
-//    Route::get('/cart', [CartController::class, 'cart'])->name('cart');
-
-//    Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add.to.cart');
-//    Route::get('cartDel/{id}', [CartController::class, 'cartDelete'])->name('cart.delete');
-//    Route::get('remove-from-cart/{id}', [CartController::class, 'remove'])->name('remove.from.cart');
-//    Route::get('/empty_cart', [CartController::class, 'empty_cart'])->name('empty.cart');
-//    Route::get('/cart_items', [CartController::class, 'cart_items']);
-//    Route::patch('/update-cart', [CartController::class, 'update'])->name('update.cart');
-
-//    Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
 
 Route::get('/front', [HomeController::class, 'index'])->name('index');
 Route::prefix('customer')->name('customer.')->group(function (){
@@ -217,28 +169,41 @@ Route::prefix('customer')->name('customer.')->group(function (){
          Route::patch('/password-post', [MyAccountController::class, 'change_password_post'])->name('update');
 
 //address
-     Route::get('/addresses', [AddressController::class, 'address'])->name('address');
-     Route::post('/addresses-store', [AddressController::class, 'address_store'])->name('address.store');
-     Route::get('AddressDel/{id}', [AddressController::class, 'AddressDelete'])->name('address.delete');
-     Route::get('edit-address/{id}', [AddressController::class, 'edit_address'])->name('address.edit');
-     Route::post('/Logout', [MyAccountController::class, 'logout'])->name('logout');  
+         Route::get('/addresses', [AddressController::class, 'address'])->name('address');
+         Route::post('/addresses-store', [AddressController::class, 'address_store'])->name('address.store');
+         Route::get('AddressDel/{id}', [AddressController::class, 'AddressDelete'])->name('address.delete');
+         Route::get('edit-address/{id}', [AddressController::class, 'edit_address'])->name('address.edit');
+         Route::post('/Logout', [MyAccountController::class, 'logout'])->name('logout');  
+         Route::patch('/addresses-update/{id}', [AddressController::class, 'address_update'])->name('address.update');
 
 //restaurant listing
-     Route::get('/restaurant_list', [MyAccountController::class, 'restaurant_list'])->name('restaurant_list');
-     Route::get('/search', [MyAccountController::class, 'search'])->name('search');
-     Route::get('/restaurant_details/{restaurant}', [MyAccountController::class, 'restaurant_details'])->name('restaurant_details');
+         Route::get('/restaurant_list', [MyAccountController::class, 'restaurant_list'])->name('restaurant_list');
+         Route::get('/search', [MyAccountController::class, 'search'])->name('search');
+         Route::get('/restaurant_details/{id}', [MyAccountController::class, 'restaurant_details'])->name('restaurant_details');
 
  //cart
-    Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+         Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 
-    Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add.to.cart');
-    Route::get('cartDel/{id}', [CartController::class, 'cartDelete'])->name('cart.delete');
-    Route::get('remove-from-cart/{id}', [CartController::class, 'remove'])->name('remove.from.cart');
-    Route::get('/empty_cart', [CartController::class, 'empty_cart'])->name('empty.cart');
-    Route::get('/cart_items', [CartController::class, 'cart_items'])->name('cart_items');
-    Route::patch('/update-cart', [CartController::class, 'update'])->name('update.cart');
+         Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add.to.cart');
+         Route::get('cartDel/{id}', [CartController::class, 'cartDelete'])->name('cart.delete');
+         Route::get('remove-from-cart/{id}', [CartController::class, 'remove'])->name('remove.from.cart');
+         // Route::get('/empty_cart', [CartController::class, 'empty_cart'])->name('empty.cart');
+         Route::get('/cart_items', [CartController::class, 'cart_items'])->name('cart_items');
+         Route::patch('/update-cart', [CartController::class, 'update'])->name('update.cart');
 
-   Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+         Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+         Route::get('/address_store/{id}', [CheckoutController::class, 'address_store'])->name('address_store');
+         Route::post('/order_store', [CheckoutController::class, 'order_store'])->name('order_store');
+
+         
+         Route::get('/order_placed', [CheckoutController::class, 'order_placed'])->name('order_placed');
+         Route::get('/order_summary', [CheckoutController::class, 'order_summary'])->name('order_summary');
+
+         //order_history
+
+         Route::get('/order_history', [MyAccountController::class, 'order_history'])->name('order_history');
+
+
    });
 });
 
@@ -416,39 +381,6 @@ Route::prefix('customer')->name('customer.')->group(function (){
 
 
 
-
-
-// Route::middleware(['auth', 'isUser'])->group(function () {
-//     Route::get('/my_home', function () {
-//         return view('my_home');
-//     })->name('signIn');
-
-//       Route::get('/Logout', [MyAccountController::class, 'logout'])->name('logout');
-
-//     //restaurant listing
-//     Route::get('/restaurant_list', [MyAccountController::class, 'restaurant_list']);
-//     Route::get('/search', [MyAccountController::class, 'search'])->name('search');
-//     Route::get('/restaurant_details/{restaurant}', [MyAccountController::class, 'restaurant_details'])->name('restaurant_details');
-
-
-
-//     //account details
-
-//     Route::get('/Account', [MyAccountController::class, 'account_details'])->name('account');
-//     Route::patch('/save-changes/{id}', [MyAccountController::class, 'save_changes'])->name('save-changes');
-
-//     //change-password
-//     Route::get('/change-password', [MyAccountController::class, 'change_password'])->name('change');
-//     Route::patch('/password-post', [MyAccountController::class, 'change_password_post'])->name('update');
-
-//     //address
-//     Route::get('/addresses', [AddressController::class, 'address'])->name('address');
-//     Route::post('/addresses-store', [AddressController::class, 'address_store'])->name('address.store');
-//     Route::get('AddressDel/{id}', [AddressController::class, 'AddressDelete'])->name('address.delete');
-//     Route::get('edit-address/{id}', [AddressController::class, 'edit_address'])->name('address.edit');
-
-
-// });
 
 
 

@@ -16,4 +16,9 @@ class Fooditem extends Model
     {
         return $this->hasMany(Restaurant::class);
     }
+
+     public function order()
+        {
+            return $this->belongsToMany('App\Models\OrderStore');
+        }
 }

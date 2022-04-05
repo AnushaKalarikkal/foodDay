@@ -58,7 +58,7 @@ class Restaurant extends Model
 
  public function fooditems()
         {
-            return $this->belongsToMany('App\Models\Fooditem','fooditem_restaurant');
+            return $this->belongsToMany('App\Models\Fooditem');
         }
             
 }

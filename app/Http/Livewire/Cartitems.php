@@ -5,25 +5,16 @@ use App\Models\Fooditem;
 
 use Livewire\Component;
 
-class Cart extends Component
+class Cartitems extends Component
 {
-   public $show = false;
 
-   protected $listeners = [
-       'increment'=> 'refreshComponent',
-        'decrement'=> 'refreshComponent',
-   ];
+    protected $listeners = ['some-event' => '$refresh'];
 
-   public function refreshComponent()
-   {
-       $this->show=true;
-   }
-
-    public function addToCartItem($id)
-    {
-         $fooditems=Fooditem::findOrFail($id); 
+  public function IncrementItem($id)
+  {
+        $fooditems=Fooditem::findOrFail($id); 
          $cart = session()->get('cart', []);
-
+// dd($cart);
        if(isset($cart[$id])) {
             $cart[$id]['quantity']++;
         } else {
@@ -37,31 +28,16 @@ class Cart extends Component
         }
       
         session()->put('cart', $cart);
-//session
-         $cartsession = session()->get('cartsession', []);
-
-       if(isset($cartsession[$id])) {
-            $cartsession[$id]['quantity']++;
-        } else {
-            $cartsession[$id] = [
-                 "id" => $fooditems->id,
-                "fooditem" => $fooditems->food_item,
-                "quantity" => 1,
-                "rate" => $fooditems->rate,
-                
-            ];
-        }
-      
-        session()->put('cartsession', $cart);
-          //dd($cartsession);
+        // dd($cart);
       $this->emit('increment');
       $this->emit('some-event');
-   
-    }
+  }
 
-     public function decrementCartItem( $id)
+
+   public function DecrementItem( $id)
     {
- 
+         $fooditems=Fooditem::findOrFail($id); 
+
          $cart = session()->get('cart', []);
          
           $item=$cart[$id]['quantity'];
@@ -76,7 +52,7 @@ class Cart extends Component
               unset($cart[$id]);
           }else{
             $cart[$id] = [
-                "id" => $fooditems->id,
+               "id" => $fooditems->id,
                 "fooditem" => $fooditems->food_item,
                 "quantity" => 1,
                 "rate" => $fooditems->rate,
@@ -91,10 +67,11 @@ class Cart extends Component
        $this->emit('some-event');
     }
 
+
+
     public function render()
     {
-        //dd(session('cart'));
-        
-        return view('livewire.cart');
+        // dd(session('cart'));
+        return view('livewire.cartitems');
     }
 }

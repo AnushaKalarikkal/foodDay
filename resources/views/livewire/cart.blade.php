@@ -1,9 +1,11 @@
-     @if(count((array) session('cart'))!=0)
+    <div>
+    @if(count((array) session('cart'))!=0)
                         <div class="cart-head">
                             <span>Your order</span>
                         </div>
                             @php $total = 0 @endphp
                          @if(session('cart'))
+                         
                             @foreach(session('cart') as $id => $details)
            
                             @php
@@ -24,15 +26,15 @@
                                                          
                                          <div class="input-group">
 
-                                  <input type="button" value="-" class="button-minus changeQuantity" data-field="quantity" />
-
-                                                                        
-
+                                  <input wire:click.prevent="decrementCartItem('{{$details['id']}}')" 
+                                           type="button" value="-" class="button-minus changeQuantity" data-field="quantity" />
+                              
                                  <input type="number" step="1"  value="{{ $details['quantity'] }}"
 
                                                  name="quantity" class="quantity-field qty-input" />
 
-                                    <input type="button" value="+"  class="button-plus" data-field="quantity" />
+                                    <input wire:click.prevent="addToCartItem('{{$details['id']}}')" type="button" value="+"
+                                      class="button-plus"  />
 
                                     </div>
                                                  
@@ -74,7 +76,7 @@
                                     </h4>
                                 </li>
                                 <button class="btn btn-primary mt-3 w-100"
-                                    onclick="window.location.href='{{route('checkout')}}';">Proceed to Buy</button>
+                                    onclick="window.location.href='{{route('customer.checkout')}}';">Proceed to Buy</button>
                             </ul>
                         </div>
                     </div>
@@ -97,3 +99,4 @@
                     <!-- Empty cart end  -->
                 </div>
                 @endif
+                </div>

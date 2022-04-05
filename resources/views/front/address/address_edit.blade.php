@@ -12,7 +12,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <i class="bx bx-x btn-close"></i>
                                 </button>
-                                <h5 class="mb-4">Add Delivery Address</h5>
+                                <h5 class="mb-4">Edit Delivery Address</h5>
 
 
                                 <form method="post" action="" enctype="multipart/form-data" id="edit-form">

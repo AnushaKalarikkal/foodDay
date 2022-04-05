@@ -8,6 +8,10 @@ use App\Models\Customer;
 use App\Models\Restaurant;
 use App\Models\Cuisine;
 use App\Models\Fooditem;
+use App\Models\Order;
+
+use App\Models\Address;
+
 use App\Rules\MatchOldPassword;
 
 
@@ -22,6 +26,7 @@ class MyAccountController extends Controller
     public function account_details(Customer $customer)
     {
         $customer=Auth::user();
+         //dd( $customer);
         // echo $data;
         return view('front.mydetails',['customer'=>$customer] );
     }
@@ -44,9 +49,14 @@ class MyAccountController extends Controller
     }
 //logout
 
-    public function logout()
+    public function logout(Request $request)
     {
        Auth::guard('customer')->logout();
+        $request->session()->forget('cart');
+        $request->session()->forget('store');
+        
+
+
        return redirect('/front');
     }
 
@@ -100,11 +110,42 @@ class MyAccountController extends Controller
 
     //restaurant_details
 
-    public function restaurant_details(Restaurant $restaurant )
+    public function restaurant_details($id)
     {
         $fooditems=Fooditem::all();
         $cuisines=Cuisine::all();
+        $restaurant=Restaurant::FindOrFail($id);
+ 
+        $rest = session()->get('rest', []);
+         if (isset($rest[$id])) {
+             unset($rest[$id]);
+
+         }else{
+
+             $rest[$id]= [
+             "id"=>$restaurant->id,
+            "name"=> $restaurant->name,
+            "mobile"=> $restaurant->mobile,
+            "location"=> $restaurant->location,
+
+
+         ];
+
+             session()->put('rest', $rest);
+         }
+          //dd($rest);
         return view('front.restaurant_details', ['restaurant'=>$restaurant], compact('cuisines','fooditems'));
+    }
+
+    //order History
+
+     public function order_history(Order $order )
+    {
+       $order=Order::all();
+       
+       $fooditems=Fooditem::all();
+
+        return view('front.order_history', ['order'=>$order],compact('fooditems'));
     }
 }  
 

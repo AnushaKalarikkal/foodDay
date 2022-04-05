@@ -1,7 +1,7 @@
 <x-myaccount-master>
     @section('change-password')
-     <div class="tab-pane fade show active" 
-                                >
+     <div class="tab-pane fade show active"> 
+                                
                                 <div class="my-account-content">
                                     <h4>Change Password</h4>
                                     

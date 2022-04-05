@@ -36,7 +36,7 @@ class AddressController extends Controller
         $address->house_name = $request->house_name;
         $address->area = $request->area;
         $address->city = $request->city;
-        $address->landmark = $request->location;
+        $address->landmark = $request->landmark;
         $address->pincode = $request->pincode;
         $address->home = $request->home;
         $address->note = $request->note;
@@ -45,6 +45,41 @@ class AddressController extends Controller
 
         if ($save) {
             return back()->with('success', 'new address added successfully');
+        } else {
+            return back()->with('fail', 'something went wrong');
+        }
+    }
+
+     public function address_update(Request $request, $id)
+    {
+        $request->validate([
+
+            'location'=>'required',
+
+            'house_name'=>'required',
+
+            'area'=>'required',
+
+            'city'=>'required',
+
+            'pincode'=>'required',
+
+        ]);
+
+        $address=Address::find($id);
+        $address->location = $request->location;
+        $address->house_name = $request->house_name;
+        $address->area = $request->area;
+        $address->city = $request->city;
+        $address->landmark = $request->landmark;
+        $address->pincode = $request->pincode;
+        $address->home = $request->home;
+      
+
+        $save= $address->save();
+
+        if ($save) {
+            return back()->with('success', 'address updated successfully');
         } else {
             return back()->with('fail', 'something went wrong');
         }

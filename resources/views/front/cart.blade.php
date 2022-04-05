@@ -68,23 +68,23 @@
                                 <div class="add-remove-button">
                                          <div class="input-group">
                                             <div>
-                                             <a href="{{route('remove.from.cart',$id)}}" class="number-button  plus"></a>
+                                             <a href="{{route('customer.remove.from.cart',$id)}}" class="number-button  plus"></a>
 
                                             </div>
-                                    <a href="{{route('remove.from.cart',$id)}}" class="number-button  plus">-</a>
+                                    <a href="{{route('customer.remove.from.cart',$id)}}" class="number-button  plus">-</a>
 
                                         <input type="number" step="1" max="" value="{{ $details['quantity'] }}" name="quantity"
 
                                             class="quantity-field">
 
-                                        <a href="{{route('add.to.cart',$id)}}" class="number-button  plus">+</a>
+                                        <a href="{{route('customer.add.to.cart',$id)}}" class="number-button  plus">+</a>
 
                                     </div>
                                 </div>
                             </td>
                             <td>${{$total}}</td>
                             <td>
-                                <a href="{{route('cart.delete',$id)}}" class="float-right"><i class='bx bx-trash'></i></a>
+                                <a href="{{route('customer.cart.delete',$id)}}" class="float-right"><i class='bx bx-trash'></i></a>
                             </td>
                         </tr>
                          @endforeach

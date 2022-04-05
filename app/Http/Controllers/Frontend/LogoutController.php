@@ -14,6 +14,7 @@ class LogoutController extends Controller
         Session::flush();
         
         Auth::logout();
+        $request->session()->forget('cart');
 
         return redirect('/front');
     }

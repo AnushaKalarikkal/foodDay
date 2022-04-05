@@ -13,6 +13,7 @@
   <link rel="icon" type="image/png" href="{{asset('images/favicon.png')}}">
     <link rel="stylesheet" href="{{asset('css/styles.css')}}">
     <title>FoodDay - Empty Cart</title>
+    @livewireStyles
 </head>
 
 <body>
@@ -67,6 +68,12 @@
         </div>
     </div>
 
+      @if(session('cart'))
+
+      <livewire:cartitems/>
+      
+      @else
+      
     <section class="py-60 min-window-height">
         <div class="container">
 
@@ -80,7 +87,7 @@
 
         </div>
     </section>
-
+@endif
 
     <!-- footer -->
 @include('partials.footer')
@@ -99,6 +106,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
         </script>
     <script src="{{asset('js/custom.js')}}"></script>
+    @livewireScripts
 </body>
 
 </html>

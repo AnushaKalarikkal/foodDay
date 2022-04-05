@@ -34,7 +34,7 @@ class ForgetPasswordController extends Controller
               'created_at' => Carbon::now(),
             ]);
 
-        $action_link= route('reset.password.form', ['token'=>$token,'email'=>$request->email]);
+        $action_link= route('customer.reset.password.form', ['token'=>$token,'email'=>$request->email]);
         $body= " we are received a request to reset the password for <b> account associated with ".$request->email.
              ". You can reset your password by click the link below";
 
@@ -78,7 +78,7 @@ class ForgetPasswordController extends Controller
                 'email'=>$request->email
             ])->delete();
 
-            return redirect()->route('signIn')->with('info', 'Your password has been changed! You can login with new password')->with('verifiedEmail', $request->email);
+            return redirect()->route('customer.signIn')->with('info', 'Your password has been changed! You can login with new password')->with('verifiedEmail', $request->email);
         }
     }
 }

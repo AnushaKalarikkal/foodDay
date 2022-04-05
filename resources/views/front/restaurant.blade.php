@@ -14,6 +14,7 @@
    <link rel="icon" type="image/png" href="{{asset('images/favicon.png')}}">
     <link rel="stylesheet" href="{{asset('css/styles.css')}}">
     <title>FoodDay - Restaurant listing</title>
+    @livewireStyles
 </head>
 
 <body>
@@ -43,7 +44,14 @@
                     </form>
                 </div>
             </div>
-
+           <!-- <div class="location-popup">
+                <h5 class="mb-3">Add your delivery address</h5>
+                <p class="mb-4">To find out if we can delivery at your location, please enter your address
+                </p>
+                <form action="">
+                    <button class="btn btn-light" onclick="locationPopup()">Set Location</button>
+                </form>
+            </div> -->
   
 
         </div>
@@ -173,6 +181,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
         </script>
     <script src="{{asset('js/custom.js')}}"></script>
+    @livewireScripts
 </body>
 
 </html>

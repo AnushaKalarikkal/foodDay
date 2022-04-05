@@ -2,9 +2,9 @@
     @section('address')
 
     <script type="text/javascript">
-@if (count($errors) > 0)
-    $('# address-model').modal('show');
-@endif
+// @if (count($errors) > 0)
+//     $('# address-model').modal('show');
+// @endif
 </script>
 
   <div class="tab-pane fade show active" id="v-pills-address"  role="tabpanel"
@@ -26,15 +26,16 @@
                                                     <p class="card-text">
                                                        {{$value->landmark}}
                                                     </p>
-                                                    <button type="button" class="btn-link" data-toggle="modal" id="edit-item"
-                                                        >
+                                                    <button type="button" class="btn-link" id="edit-item"
+                                                        data-toggle="modal"
+                                                        data-target="#exampleModal{{$value->id}}">
                                                         <i class='bx bx-edit'></i>Edit</button>
                                                     <button class="btn-link"><i class='bx bx-trash'></i>
                                                     
                                                     <a href="{{route('customer.address.delete', $value->id)}}">
                                                     Delete</a></button>
-                                                    <button class="btn-link"><i class='bx bx-location-plus'></i>Set as
-                                                        default</button>
+                                                    <!-- <button class="btn-link"><i class='bx bx-location-plus'></i>Set as
+                                                        default</button> -->
 
                                                     <!-- <a href="#" class=""><i class='bx bx-trash' ></i>Delete</a> -->
                                                 </div>
@@ -50,8 +51,9 @@
 
                             </div>
 
-                             <!-- Address Modal -->
-                <div class="modal fade  " id="edit-modal" tabindex="-1" role="dialog"
+                             <!-- Address EDIT Modal -->
+                              @foreach($address as $value)
+                <div class="modal fade  " id="exampleModal{{$value->id}}" tabindex="-1" role="dialog"
                     aria-labelledby="edit-modal-label" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -59,12 +61,13 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <i class="bx bx-x btn-close"></i>
                                 </button>
-                                <h5 class="mb-4">Add Delivery Address</h5>
+                                <h5 class="mb-4">Edit Delivery Address</h5>
 
 
-                                <form method="post" action="" enctype="multipart/form-data">
+                                <form method="post" action="{{route('customer.address.update',$value->id)}}" enctype="multipart/form-data">
                                     <div class="form-row">
                                         @csrf 
+                                          @method('PATCH')
                                        @if(Session::get('success'))
                                           <div class="alert alert-success"> 
                                              {{ Session::get('success') }} 
@@ -72,43 +75,43 @@
                                         @endif
 
                                         <div class="form-group col-lg-12">
-                                            <input type="text" name="location" class="form-control" id="location" placeholder="Location">
+                                            <input type="text" name="location" class="form-control" id="location" placeholder="Location" value="{{$value->location}}">
                                                @error("location")
                                                     <p style="color:red">{{$errors->first("location")}}
                                                 @enderror
                                         </div>
                                          <div class="form-group col-lg-12">
-                                            <input type="text" name="house_name" class="form-control" placeholder="House Name / Flat / Building"> 
+                                            <input type="text" name="house_name" class="form-control" placeholder="House Name / Flat / Building" value="{{$value->house_name}}"> 
                                             @error("house_name")
                                                     <p style="color:red">{{$errors->first("house_name")}}
                                                 @enderror
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <input type="text" name="area" class="form-control" placeholder="Area / Street">
+                                            <input type="text" name="area" class="form-control" placeholder="Area / Street" value="{{$value->area}}">
                                             @error("area")
                                                     <p style="color:red">{{$errors->first("area")}}
                                                 @enderror
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <input type="text" name="city" class="form-control" placeholder="City">
+                                            <input type="text" name="city" class="form-control" placeholder="City" value="{{$value->city}}">
                                             @error("city")
                                                     <p style="color:red">{{$errors->first("city")}}
                                                 @enderror
                                         </div>
                                           <div class="form-group col-lg-12">
-                                            <input type="text" name="landmark" class="form-control" placeholder="Landmark">
+                                            <input type="text" name="landmark" class="form-control" placeholder="Landmark" value="{{$value->landmark}}">
                                         </div>
                                        
                                         <div class="form-group col-lg-6">
-                                            <input type="text" name="pincode" class="form-control" placeholder="Pincode">
+                                            <input type="text" name="pincode" class="form-control" placeholder="Pincode" value="{{$value->pincode}}">
                                             @error("pincode")
                                                     <p style="color:red">{{$errors->first("pincode")}}
                                                 @enderror
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <select name="home" id="home" class="form-control">
+                                            <select name="home" id="home" class="form-control" >
 
-                                                <option value="0" disabled selected>Address Type</option>
+                                                <option value="0" disabled selected value="{{$value->home}}">{{$value->home}}</option>
 
                                                 <option value="Home">Home</option>
 
@@ -118,8 +121,8 @@
 
                                             </select>                                        </div>
                                         <div class="form-group col-lg-12">
-                                            <textarea class="form-control" name="note" id="exampleFormControlTextarea1" rows="3"
-                                                placeholder="Note for Driver"></textarea>
+                                            <textarea class="form-control" name="note" id="note" rows="3"
+                                                placeholder="Note for Driver" value="{{$value->note}}">{{$value->note}}</textarea>
                                         </div>
 
                                         <div class="form-group col-md-6 mb-md-0 d-none d-md-block">
@@ -137,52 +140,14 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
         <!-- Address Modal End -->
                          
     @endsection
 
       @section('editJs')
     @parent
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.8.2/dist/alpine.min.js"></script>
-
-     <script>
-       $(document).ready(function() {
-  /**
-   * for showing edit item popup
-   */
-
-  $(document).on('click', "#edit-item", function() {
-    $(this).addClass('edit-item-trigger-clicked'); //useful for identifying which trigger was clicked and consequently grab data from the correct row and not the wrong one.
-
-    var options = {
-      'backdrop': 'static'
-    };
-    $('#edit-modal').modal(options)
-  })
-
-  // on modal show
-  $('#edit-modal').on('show.bs.modal', function() {
-    var el = $(".edit-item-trigger-clicked"); // See how its usefull right here? 
-    var row = el.closest(".data-row");
-
-    // get the data
-    // var id = el.data('item-id');
-    var house_name = row.children(".house_name").text();
-    var location = row.children(".location").text();
-
-    // fill the data in the input fields
-    // $("#id").val(id);
-    $("#house_name").val(house_name);
-    $("#location").val(location);
-
-  })
-
-  // on modal hide
-  $('#edit-modal').on('hide.bs.modal', function() {
-    $('.edit-item-trigger-clicked').removeClass('edit-item-trigger-clicked')
-    $("#edit-form").trigger("reset");
-  })
-})
-    </script>
+   
+  
 @stop
 </x-myaccount-master>

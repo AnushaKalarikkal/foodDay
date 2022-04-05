@@ -11,7 +11,8 @@
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" type="image/png" href="{{asset('images/favicon.png')}}">
     <link rel="stylesheet" href="{{asset('css/styles.css')}}">
-    <title>FoodDay - My Account</title>
+    <title>FoodDay</title>
+    @livewireStyles
 </head>
 
 <body>
@@ -40,22 +41,13 @@
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{route('customer.restaurant_list')}}">
+                                <i class=' mr-1'></i>
+                                Restaurants</a>
+                        </li>
                         <li class="nav-item">
-                           @if(count((array) session('cart'))==0)
-                            <a class="nav-link" href="/empty_cart">
-                                <span class="cart-badge-wrap">
-                                    <span class="cart-badge">{{ count((array) session('cart')) }}</span>
-                                    <i class='bx bx-shopping-bag mr-1'></i>
-                                </span>
-                                Cart</a>
-                     @else
-                                <a class="nav-link" href="/cart_items">
-                                <span class="cart-badge-wrap">
-                                    <span class="cart-badge">{{ count((array) session('cart')) }}</span>
-                                    <i class='bx bx-shopping-bag mr-1'></i>
-                                </span>
-                                Cart</a>
-                    @endif
+                    <livewire:cart-button>
                         </li>
                     </ul>
                 </div>
@@ -81,18 +73,19 @@
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                             aria-orientation="vertical">
                            
+                              <a class="nav-link {{Request::is('customer/order_history') ? 'active' :'' ;}}"  href="{{route('customer.order_history')}}"
+                                 aria-controls="v-pills-settings" aria-selected="false"><i
+                                    class='bx bxs-cart'></i> Order History</a>
 
-                            <a class="nav-link {{Request::is('addresses') ? 'active' :'' ;}}" href="{{route('customer.address')}}"
-
+                            <a class="nav-link {{Request::is('customer/addresses') ? 'active' :'' ;}}" href="{{route('customer.address')}}"
                                 role="tab" aria-controls="v-pills-messages" aria-selected="false"><i
-
                                     class='bx bxs-home-smile'></i> Addresses</a>
 
-                           <a class="nav-link {{Request::is('Account') ? 'active' :'' ;}}" href="{{route('customer.account')}}"
+                           <a class="nav-link {{Request::is('customer/Account') ? 'active' :'' ;}}" href="{{route('customer.account')}}"
                                  aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-user-rectangle'></i> Account Details</a>
 
-                            <a class="nav-link {{Request::is('change-password') ? 'active' :'' ;}}"  href="{{route('customer.change')}}"
+                            <a class="nav-link {{Request::is('customer/change-password') ? 'active' :'' ;}}"  href="{{route('customer.change')}}"
                                  aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-wallet-alt'></i> Change Password</a>
 
@@ -105,13 +98,14 @@
                     </div>
 
                 </div>
-                
+                <div class="col-lg-9">
+                      @yield('order_history')
                         @yield('address')
                           @yield('content')
 
                            @yield('change-password')
 
-                           
+                          </div> 
                         </div>
                     </div>
 
@@ -234,8 +228,7 @@
   
     @yield('javascript')
     @yield('editJs')
-
-    
+@livewireScripts
 
     
 </body>

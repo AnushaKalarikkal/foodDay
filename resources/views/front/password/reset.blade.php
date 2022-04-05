@@ -18,7 +18,7 @@
 <body>
 
     <!-- header -->
-    <header>
+   <header>
         <div class="container-fluid">
             <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light fixed-top">
                 <a class="navbar-brand" href="home.html"><img src="assets/images/logo.png" alt=""></a>
@@ -30,20 +30,20 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/front">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                       
+
                         <li class="nav-item active">
-                            <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                       
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.html">Sign In</a>
+                            <a class="nav-link" href="{{route('customer.signIn')}}">Sign In</a>
                         </li>
 
                        
-                        <li class="nav-item">
-                            <a class="nav-link" href="/empty_cart">
+                      <li class="nav-item">
+                            <a class="nav-link" href="">
                                 <span class="cart-badge-wrap">
-                                    <!-- <span class="cart-badge"></span> -->
+                                    <span class="cart-badge">0</span>
                                     <i class='bx bx-shopping-bag mr-1'></i>
                                 </span>
                                 Cart</a>
@@ -108,7 +108,7 @@
                     </div>
                     <div class="form-group text-center mb-0">
                         <span>Don't have an account?</span>
-                        <a href="/sign_up">Sign up</a>
+                        <a href="{{route('customer.register')}}">Sign up</a>
                     </div>
 
                 </form>

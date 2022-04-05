@@ -31,35 +31,37 @@
 
     <section class="py-60">
         <div class="container">
-
+ <form method="post" action="{{route('customer.order_store')}}" enctype="multipart/form-data" >
+                        @csrf
+                       
             <div class="row cuisine-dish-wrap">
                 <div class="col-lg-8 cuisine-col">
-                    <form>
-                       
-                        <div class="form-row">
-                            <div class="form-group col-lg-6">
-                                <h6 class="checkout-title">Delivery Type</h6>
-                                <select class="form-control " name="delivery_method" id="select" onchange="myFunction()">
-                                    <option value="delivery" selected="">Delivery</option>
-                                    <option value="pickup">Pickup</option>
-                                </select>
-                            </div>
-                        </div>
-                          <h6 class="checkout-title">Payment</h6>
 
-                    <div class="form-group col-lg-12">
-                        
-                            <div class="custom-radio">
-                                <input type="radio" id="radio1" name="payment-type" checked="checked">
-                                <label for="radio1">Pay via Cash</label>
-                                <img src="{{asset('images/cash.png')}}" alt="Icon">
+                   
+                            <div class="form-row">
+                                <div class="form-group col-lg-6">
+                                    <h6 class="checkout-title">Delivery Type</h6>
+                                    <select class="form-control " name="order_type" id="select" onchange="status(this)">
+                                        <option value="delivery" selected="delivery">Delivery</option>
+                                        <option value="pickup">Pickup</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
+                            <h6 class="checkout-title">Payment</h6>
+                            <div class="form-group col-lg-12">
+                                <div class="custom-radio">
+                                    <input type="radio" id="radio1" name="payment-type" checked="checked">
+                                    <label for="radio1">Pay via Cash</label>
+                                    <img src="{{asset('images/cash.png')}}" alt="Icon">
+                                </div>
+                             </div>
 
-                    <div class="checkout-delivery-address food-item-cards-wrap" id="sub">
+         
+
+                        <div class="checkout-delivery-address food-item-cards-wrap" id="sub1">
                         <h6 class="checkout-title">Delivery Address</h6>
-                        <div class="row">
-                          @foreach($address as $value)
+                          <div class="row">
+                            @foreach($address as $value)
                             <div class="col-xl-6">
                                 <div class="card address-card">
                                     <div class="card-body deliverable">
@@ -72,37 +74,59 @@
                                            {{$value->landmark}}
                                           
                                         </p>
-                                        <button class="btn btn-primary btn-sm">Deliver here</button>
+                                      <button class="btn btn-primary btn-sm" ><a href="{{route('customer.address_store', $value->id)}}" style="color:white" >Deliver here </a></button>
+                                      
                                         <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal"
                                             data-target="#exampleModal">
                                             Edit</button>
                                         <button class="btn btn-outline-primary btn-sm">
-                                            <a href="/AddressDel/{{$value->id}}"> Delete</a></button>
+                                            <a href="customer/AddressDel/{{$value->id}}"> Delete</a></button>
                                     </div>
                                 </div>
                             </div>
-                    @endforeach
+
+                             
+                        @endforeach
                            
                         </div>
 
                         <button type="button" class="btn btn-outline-primary mb-lg-auto mb-4" data-toggle="modal"
                             data-target="#exampleModal">Add New Address</button>
 
-                    </div>
-                    <p id="demo"></p>
-                </div>
+                       </div>
+                
+                      <div class="checkout-delivery-address" id="sub2">
 
-                    </form>
+                        <h6 class="checkout-title">Pick up</h6>
+                         @if(session('rest'))
+                         @foreach(session('rest') as $id => $details)
+           
+                
+                       
+                        <p>This is a Pickup order. You'll need to go to
+                            <strong>{{ $details['name'] }}</strong> to
+                            pick up this order.
+                            Pick up at <strong>{{ $details['name'] }} {{ $details['location'] }}</strong>.Contact
+                            <strong>{{ $details['mobile'] }}</strong> </p>
+                            @endforeach
+                            @endif
+                     
+                     </div>
+                  
+                      </div>
+
+           
 
                               
                                <div class="col-lg-4 cart-col">
                     <div class="cart d-none d-md-block">
                         <div class="cart-head">
+                   
                             <span>Your order</span>
                         </div>
                             @php $total = 0 @endphp
-        @if(session('cart'))
-            @foreach(session('cart') as $id => $details)
+                          @if(session('cart'))
+                         @foreach(session('cart') as $id => $details)
            
                 @php
                  $total=0;
@@ -117,24 +141,7 @@
                                 </div>
                                 <div class="price">
                                     <h6>${{ $total }}.00</h6>
-                                    <div class="add-remove-button">
-                                      
-                                                         
-                                         <div class="input-group">
-
-                                  <input type="button" value="-" class="button-minus changeQuantity"
-
-                                                                        data-field="quantity" />
-
-                                                                    <input type="number" step="1"  value="{{ $details['quantity'] }}"
-
-                                                                        name="quantity" class="quantity-field qty-input" />
-
-                                                                      <input type="button" value="+"  class="button-plus" data-field="quantity" />
-
-                                                                </div>
-                                                 
-                                    </div>
+                                  
                                 </div>
                             </div>
 
@@ -178,25 +185,15 @@
 
                                     </p>
                                 </li>
-                                <button class="btn btn-primary mt-3 w-100"
-                                    onclick="window.location.href='{{route('checkout')}}';">Checkout</button>
+                                <button type="submit" class="btn btn-primary mt-3 w-100"
+                                 >Checkout</button>
                             </ul>
                         </div>
                     </div>
-
-                    <!-- Empty cart. Use this when the cart is empty -->
-
-                    <!-- <div class="cart">
-                        <div class="empty-cart text-center">
-                            <h4>Your cart is empty</h4>
-                            <p class="mb-0">Add items to get started.</p>
-                        </div>
-                    </div> -->
-
-                    <!-- Empty cart end  -->
+              
                 </div>
             </div>
-
+  </form>
         </div>
     </section>
 
@@ -214,7 +211,7 @@
                                 <h5 class="mb-4">Add Delivery Address</h5>
 
 
-                                <form method="post" action="{{route('address.store')}}" enctype="multipart/form-data">
+                                <form method="post" action="{{route('customer.address.store')}}" enctype="multipart/form-data">
                                     <div class="form-row">
                                         @csrf 
                                        @if(Session::get('success'))
@@ -318,14 +315,24 @@
     <script src="{{asset('js/custom.js')}}"></script>
 
 
-        <script>
-function myFunction() {
-  var x = document.getElementById("select").value;
-//   alert(x)
-  document.getElementById("demo").innerHTML = "This is a Pickup order.: " + x;
-}
-</script>
+<script type="text/javascript">
+$(document).ready(function(){
+        document.getElementById('sub2').style.display = "none";
 
+})
+function status(select){
+   if(select.value=='delivery'){
+    document.getElementById('sub1').style.display = "block";
+    document.getElementById('sub2').style.display = "none";
+
+   }else
+   {
+    document.getElementById('sub1').style.display = "none";
+    document.getElementById('sub2').style.display = "block";
+
+   }
+} 
+</script>
        
 
 </body>
