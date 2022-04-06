@@ -118,6 +118,7 @@ class Food extends Component
 
       public function render()
     {  
+     
       return view('livewire.food');
     }
 

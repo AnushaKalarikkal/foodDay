@@ -116,15 +116,16 @@ class CheckoutController extends Controller
      }
 
      
-    public function order_placed()
+    public function order_placed(Request $request)
      {
-
+          $request->session()->forget('rest');
          return view('front.orderplaced');
      }
 
      public function order_summary(Order $order, Request $request)
      {
-         $store= session()->get('store', []);
+         //dd($order);
+          //$request->session()->forget('store');
         $cartsession= session()->get('cartsession', []);
 
          // dd($cartsession);

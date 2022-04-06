@@ -68,11 +68,11 @@
                                     <div class="form-row">
                                         @csrf 
                                           @method('PATCH')
-                                       @if(Session::get('success'))
+                                       <!-- @if(Session::get('success'))
                                           <div class="alert alert-success"> 
                                              {{ Session::get('success') }} 
                                            </div>
-                                        @endif
+                                        @endif -->
 
                                         <div class="form-group col-lg-12">
                                             <input type="text" name="location" class="form-control" id="location" placeholder="Location" value="{{$value->location}}">
@@ -111,13 +111,13 @@
                                         <div class="form-group col-lg-6">
                                             <select name="home" id="home" class="form-control" >
 
-                                                <option value="0" disabled selected value="{{$value->home}}">{{$value->home}}</option>
+                                                <option value="0" disabled selected >Address Type</option>
 
-                                                <option value="Home">Home</option>
+                                                <option value="Home" {{ $value->home === 'Home' ? 'selected' : '' }}>Home</option>
 
-                                                <option value="Office">Office</option>
+                                                <option value="Office"  {{ $value->home === 'Office' ? 'selected' : '' }}>Office</option>
 
-                                                <option value="Other">Other</option>
+                                                <option value="Other"  {{ $value->home === 'Other' ? 'selected' : '' }}>Other</option>
 
                                             </select>                                        </div>
                                         <div class="form-group col-lg-12">
@@ -147,7 +147,16 @@
 
       @section('editJs')
     @parent
-   
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.8.2/dist/alpine.min.js"></script>
+
+     <script>
+        $("document").ready(function(){
+          setTimeout(function(){
+            $("div.alert").remove();
+         }, 3000 ); // 5 secs
+
+       });
+    </script>
   
 @stop
 </x-myaccount-master>

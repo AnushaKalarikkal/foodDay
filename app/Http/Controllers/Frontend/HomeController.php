@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Customer;
+use App\Models\City;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -14,9 +15,10 @@ use Illuminate\Support\Facades\Hash;
 class HomeController extends Controller
 {
     //
-     public function index()
+     public function index(City $city)
     {
-        return view('front.index');
+        $cities=City::all();
+        return view('front.index',['cities'=>$cities]);
     }
 
     public function login()

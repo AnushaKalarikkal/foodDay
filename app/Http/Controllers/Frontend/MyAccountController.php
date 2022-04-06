@@ -14,6 +14,8 @@ use App\Models\Address;
 
 use App\Rules\MatchOldPassword;
 
+Use PDF;
+
 
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -53,8 +55,9 @@ class MyAccountController extends Controller
     {
        Auth::guard('customer')->logout();
         $request->session()->forget('cart');
-        $request->session()->forget('store');
-        
+        $request->session()->forget('store');      
+          $request->session()->forget('rest');
+
 
 
        return redirect('/front');
@@ -88,7 +91,7 @@ class MyAccountController extends Controller
 
     //restaurant_listing
 
-    public function restaurant_list(Restaurant $restaurant)
+    public function restaurant_list(Restaurant $restaurant, Request $request)
     {
         $restaurant=Restaurant::all();
         $cuisines=Cuisine::all();
@@ -98,9 +101,9 @@ class MyAccountController extends Controller
 
     public function search(Request $request)
     {
-        $name=$request->name;
+        $name=$request->location;
 
-        $data=Restaurant::where('location', 'like', '%' .$name. '%')
+        $data=Restaurant::where('location','LIKE','%'.$name.'%')
         ->get();
         $cuisines=Cuisine::all();
 
@@ -110,12 +113,19 @@ class MyAccountController extends Controller
 
     //restaurant_details
 
-    public function restaurant_details($id)
+    public function restaurant_details($id, Request $request)
     {
         $fooditems=Fooditem::all();
         $cuisines=Cuisine::all();
+
         $restaurant=Restaurant::FindOrFail($id);
- 
+
+    // $data=$request->session()->put(['restaurant'=> ['restaurant'=>$id]]);
+    // $rest=$request->session()->get('restaurant');
+      // dd($request->all() , session()->get('rest') );
+         //dd($rest);
+
+
         $rest = session()->get('rest', []);
          if (isset($rest[$id])) {
              unset($rest[$id]);
@@ -147,5 +157,17 @@ class MyAccountController extends Controller
 
         return view('front.order_history', ['order'=>$order],compact('fooditems'));
     }
+
+    //pdf 
+
+    public function downloadPDF(Request $request, Order $order)
+    {
+
+      $pdf = PDF::loadView('front.order_history_pdf',
+                ['Order' => $order],compact('order'))->setOptions(['defaultFont' => 'sans-serif']);
+                 return $pdf->download('order-history.pdf');
+    }
+
+    
 }  
 

@@ -204,6 +204,8 @@ Route::prefix('customer')->name('customer.')->group(function (){
          Route::get('/order_history', [MyAccountController::class, 'order_history'])->name('order_history');
 
 
+         //pdf
+         Route::get('download_pdf/{order}', [MyAccountController::class, 'downloadPDF'])->name('download_pdf');
    });
 });
 

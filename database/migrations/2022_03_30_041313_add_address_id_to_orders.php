@@ -15,8 +15,7 @@ class AddAddressIdToOrders extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             //
-            $table->unsignedBigInteger('address_id');
-            $table->foreign('address_id')->references('id')->on('addresses')->nullable();
+            $table->bigInteger('address_id')->nullable();
         });
     }
 
@@ -29,7 +28,6 @@ class AddAddressIdToOrders extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             //
-              $table->dropColumn('address_id');
         });
     }
 }

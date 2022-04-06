@@ -27,14 +27,18 @@
     <div class="search-nav">
         <div class="container">
             
-            <h3>All restaurants delivering to  </h3>
+             @if (app('request')->has('location'))
+
+            <h3>All restaurants delivering to {{ app('request')->input('location')}}</h3>
+
+            @endif
             <p>Change location</p>
             <div class="row">
                 <div class="col-lg-8 col-xl-6">
                     <form action="{{route('customer.search')}}" method="get" enctype="multipart/form-data">
                     @csrf
                         <div class="input-group search-location-group">
-                            <input type="text" name="name" class="form-control" placeholder="Enter your delivery location"
+                            <input type="text" name="location" class="form-control" placeholder="Enter your delivery location"
                                 aria-label="delivery location" aria-describedby="button-addon2">
                             <a href="" class="btn-locate"><i class='bx bx-target-lock'></i> Locate Me</a>
                             <div class="input-group-append btn-find-food">

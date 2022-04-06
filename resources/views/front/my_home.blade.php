@@ -30,7 +30,7 @@
                 <form action="{{route('customer.search')}}" method="get" enctype="multipart/form-data">
                     @csrf
                     <div class="input-group search-location-group">
-                        <input type="text" name="name" class="form-control" placeholder="Enter your delivery location"
+                        <input type="text" name="location" class="form-control" placeholder="Enter your delivery location"
                             aria-label="delivery location" aria-describedby="button-addon2">
                         <a href="" class="btn-locate"><i class='bx bx-target-lock'></i> Locate Me</a>
                         <!-- <button class="btn-locate"><i class='bx bx-target-lock'></i> Locate Me</button> -->

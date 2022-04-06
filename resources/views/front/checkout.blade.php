@@ -98,6 +98,7 @@
                       <div class="checkout-delivery-address" id="sub2">
 
                         <h6 class="checkout-title">Pick up</h6>
+                        
                          @if(session('rest'))
                          @foreach(session('rest') as $id => $details)
            

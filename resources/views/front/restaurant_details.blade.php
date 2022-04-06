@@ -78,9 +78,46 @@
                        
                                     <div class="sub-cat" id="sub-cat2">
                                  
- 
+                                      @if($restaurant->is_open == 1)
                                   <livewire:food :restaurant="$restaurant" /> 
-       
+                                    @else
+                                    <div class="row">
+                                    @foreach($restaurant->fooditems as $food)
+
+                                    <div class="col-lg-6"   >
+                                            <div class="food-item-card unavailable " >
+                                                <div class="food-item-img" style="background-image: url('{{asset('images/img3.jpg')}}');"></div>
+                                                    <div class="food-item-body">
+                                                            <h5 class="card-title">
+                                                                {{$food->food_item}}
+                                                                
+                                                            </h5>
+                                                                <div class="pricing">
+                                                                <div class="price-wrap">
+                                                                        <div class="non-div food-type-div">
+                                                                            <i class="bx bxs-circle"></i>
+                                                                        </div>
+                                                                            <span class="price">${{$food->rate}}</span>
+                                                                            <span class="actual-price">$499.00</span>
+                                                                        </div>
+                                                                                    <div class="add-remove-button">
+                                
+                                                                                                <div class="input-group">
+                                                                                                
+                                                                                                <button class="unavailable">Unavailable</button>
+
+                                                                                                </div>
+                                                                                    
+                                                                                    </div>
+                                                                                        
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            @endforeach
+                                                        </div>
+                                                        
+                                    @endif
                   
 
                                               

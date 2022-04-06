@@ -135,54 +135,15 @@
         <div class="container">
             <h4 class="mb-4">Top cities</h4>
             <div class="row">
+                @foreach($cities as $city)
                 <div class="col-lg-3 col-md-6">
                     <ul class="delivery-ul">
-                        <li><a href="">Tokyo</a></li>
-                        <li><a href="">Singapore</a></li>
-                        <li><a href="">Berlin</a></li>
-                        <li><a href="">Seoul</a></li>
-                        <li><a href="">Toronto</a></li>
-                        <li><a href="">Paris</a></li>
-                        <li><a href="">Munich</a></li>
-                        <li><a href="">London</a></li>
+                        <li><a href="">{{$city->city}}</a></li>
+                        
                     </ul>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <ul class="delivery-ul">
-                        <li><a href="">Toronto</a></li>
-                        <li><a href="">Paris</a></li>
-                        <li><a href="">Munich</a></li>
-                        <li><a href="">London</a></li>
-                        <li><a href="">Tokyo</a></li>
-                        <li><a href="">Singapore</a></li>
-                        <li><a href="">Berlin</a></li>
-                        <li><a href="">Seoul</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <ul class="delivery-ul">
-                        <li><a href="">Tokyo</a></li>
-                        <li><a href="">Singapore</a></li>
-                        <li><a href="">Berlin</a></li>
-                        <li><a href="">Seoul</a></li>
-                        <li><a href="">Toronto</a></li>
-                        <li><a href="">Paris</a></li>
-                        <li><a href="">Munich</a></li>
-                        <li><a href="">London</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <ul class="delivery-ul">
-                        <li><a href="">Toronto</a></li>
-                        <li><a href="">Paris</a></li>
-                        <li><a href="">Munich</a></li>
-                        <li><a href="">London</a></li>
-                        <li><a href="">Tokyo</a></li>
-                        <li><a href="">Singapore</a></li>
-                        <li><a href="">Berlin</a></li>
-                        <li><a href="">Seoul</a></li>
-                    </ul>
-                </div>
+                @endforeach
+             
             </div>
         </div>
     </div>

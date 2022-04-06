@@ -74,6 +74,8 @@ class AddressController extends Controller
         $address->landmark = $request->landmark;
         $address->pincode = $request->pincode;
         $address->home = $request->home;
+        $address->note = $request->note;
+
       
 
         $save= $address->save();
@@ -91,15 +93,7 @@ class AddressController extends Controller
         $address->delete();
          return back();
     }
-//   public function edit_address($id)
-//   {
-//       $address=Address::find($id);
-//       return response()->json([
-//           'status'=>200,
-//           'address'=>$address,
-//       ]);
 
-//   }
     
 
 }
