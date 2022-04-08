@@ -44,10 +44,10 @@ class Cart extends Component
             $cartsession[$id]['quantity']++;
         } else {
             $cartsession[$id] = [
-                 "id" => $fooditems->id,
-                "fooditem" => $fooditems->food_item,
-                "quantity" => 1,
-                "rate" => $fooditems->rate,
+                 "id" => $fooditems->id ,
+                "fooditem" => $fooditems->food_item ,
+                "quantity" => 1 ,
+                "rate" => $fooditems->rate ,
                 
             ];
         }
@@ -76,10 +76,10 @@ class Cart extends Component
               unset($cart[$id]);
           }else{
             $cart[$id] = [
-                "id" => $fooditems->id,
-                "fooditem" => $fooditems->food_item,
-                "quantity" => 1,
-                "rate" => $fooditems->rate,
+                "id" => $fooditems->id ,
+                "fooditem" => $fooditems->food_item ,
+                "quantity" => 1 ,
+                "rate" => $fooditems->rate ,
                 
             ];
             

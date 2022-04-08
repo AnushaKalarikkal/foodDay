@@ -18,27 +18,33 @@
  
                         <div class="order-tracking-status-head">
                        
-                        
+                          @if(session('address'))
                             <p class="mb-0">Thanks for shopping! Your order number is #874. The restaurant will deliver your order by 10:22 PM.</p>
                             <span>For any questions, reach out to us on hello@foodday.co</span>
                             <h6 class="mt-3">Delivery Address</h6>
                             <div class="card address-card">
                                 <div class="card-body deliverable">
-                                    @if(session('store'))
-                                    @foreach(session('store') as $id => $details)
+                                    @if(session('address'))
+                                   
                                     <div class="delivery">
                                         <i class="bx bxs-check-circle"></i>
-                                        <h5 class="card-title">{{ $details['home'] }}</h5>
+                                        <h5 class="card-title">{{session('address')['home'] }}</h5>
                                     </div>
                                     <h6>{{Auth::user()->first_name}}</h6>
-                                    <p class="card-text">{{ $details['location'] }}
+                                    <p class="card-text">{{ session('address')['location'] }}
                                     </p>
                                     
-                                    @endforeach
+                                    
                                     @endif
                                 </div>
                             </div>
-                           
+                           @else
+
+                           <p>Thanks for shopping! Your order number is #889. Pickup the order from the 
+                               Malabar Cafe by 1:35 PM
+
+                                </p>
+                                @endif
                            
                         </div>
                        

@@ -98,18 +98,18 @@
                       <div class="checkout-delivery-address" id="sub2">
 
                         <h6 class="checkout-title">Pick up</h6>
-                        
-                         @if(session('rest'))
-                         @foreach(session('rest') as $id => $details)
+                       
+                         @if(session('restaurant'))
+                         
            
                 
                        
                         <p>This is a Pickup order. You'll need to go to
-                            <strong>{{ $details['name'] }}</strong> to
+                            <strong>{{session('restaurant')['name'] }}</strong> to
                             pick up this order.
-                            Pick up at <strong>{{ $details['name'] }} {{ $details['location'] }}</strong>.Contact
-                            <strong>{{ $details['mobile'] }}</strong> </p>
-                            @endforeach
+                            Pick up at <strong>{{ session('restaurant')['name'] }} {{session('restaurant')['location'] }}</strong>.Contact
+                            <strong>{{ session('restaurant')['mobile'] }}</strong> </p>
+                       
                             @endif
                      
                      </div>

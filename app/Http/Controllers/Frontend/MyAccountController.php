@@ -55,7 +55,7 @@ class MyAccountController extends Controller
     {
        Auth::guard('customer')->logout();
         $request->session()->forget('cart');
-        $request->session()->forget('store');      
+        // $request->session()->forget('address');      
           $request->session()->forget('rest');
 
 
@@ -90,6 +90,13 @@ class MyAccountController extends Controller
     }
 
     //restaurant_listing
+     public function restaurant_search(Restaurant $restaurant, Request $request)
+    {
+        $restaurant=Restaurant::all();
+        $cuisines=Cuisine::all();
+
+        return view('front.restaurant_search', ['restaurant'=>$restaurant], compact('cuisines'));
+    }
 
     public function restaurant_list(Restaurant $restaurant, Request $request)
     {
@@ -120,30 +127,35 @@ class MyAccountController extends Controller
 
         $restaurant=Restaurant::FindOrFail($id);
 
-    // $data=$request->session()->put(['restaurant'=> ['restaurant'=>$id]]);
-    // $rest=$request->session()->get('restaurant');
-      // dd($request->all() , session()->get('rest') );
+       $request->session()->put(['restaurant'=> ['id'=>$id,'name'=>$restaurant->name,'mobile'=> $restaurant->mobile,
+                 'location'=> $restaurant->location]]);
+       $rest=$request->session()->get('restaurant');
+
+
+      //dd($request->all() , session()->get('restaurant') );
          //dd($rest);
 
 
-        $rest = session()->get('rest', []);
-         if (isset($rest[$id])) {
-             unset($rest[$id]);
+        // $rest = session()->get('rest', []);
+        //  if (isset($rest[$id])) {
+        //      unset($rest[$id]);
 
-         }else{
+        //  }else{
 
-             $rest[$id]= [
-             "id"=>$restaurant->id,
-            "name"=> $restaurant->name,
-            "mobile"=> $restaurant->mobile,
-            "location"=> $restaurant->location,
+        //      $rest[$id]= [
+        //      "id"=>$restaurant->id,
+        //     "name"=> $restaurant->name,
+        //     "mobile"=> $restaurant->mobile,
+        //     "location"=> $restaurant->location,
 
 
-         ];
+        //  ];
 
-             session()->put('rest', $rest);
-         }
+        //      session()->put('rest', $rest);
+        //  }
           //dd($rest);
+
+
         return view('front.restaurant_details', ['restaurant'=>$restaurant], compact('cuisines','fooditems'));
     }
 
@@ -151,7 +163,7 @@ class MyAccountController extends Controller
 
      public function order_history(Order $order )
     {
-       $order=Order::all();
+       $order=Order::all()->sortDesc();
        
        $fooditems=Fooditem::all();
 

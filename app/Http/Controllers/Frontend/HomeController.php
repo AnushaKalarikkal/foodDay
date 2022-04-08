@@ -87,9 +87,10 @@ class HomeController extends Controller
     }
     
 
-     public function my_home()
+     public function my_home(City $city)
     {
-        return view('front.my_home');
+        $cities=City::all();
+        return view('front.my_home',['cities'=>$cities]);
     }
 
     

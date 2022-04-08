@@ -21,8 +21,8 @@ class CheckoutController extends Controller
           $cartsession = session()->get('cartsession', []);
         //   $request->session()->forget('store');
 
-          $rest = session()->get('rest', []);
-          //dd($cartsession);
+           $rest=$request->session()->get('restaurant');
+          //dd($rest);
          $restaurant=Restaurant::all();
          $address=Address::all();
          if (session('cart')) {
@@ -32,24 +32,28 @@ class CheckoutController extends Controller
          }
      }
 
-     public function address_store($id)
+     public function address_store($id, Request $request)
      {
          $address=Address::FindOrFail($id);
+
+           $request->session()->put(['address'=> ['id'=>$id,'location'=>$address->location,'home'=> $address->home]]);
+           $ad=$request->session()->get('address');
+// dd($ad);
          
-         $store= session()->get('store', []);
+        //  $store= session()->get('store', []);
 
-         if (!isset($store[$id])) {
+        //  if (!isset($store[$id])) {
 
-             $store[$id]= [
-             "id"=>$address->id,
-            "location"=> $address->location,
-            "home"=>$address->home,
+        //      $store[$id]= [
+        //      "id"=>$address->id,
+        //     "location"=> $address->location,
+        //     "home"=>$address->home,
             
-         ];
+        //  ];
 
-             session()->put('store', $store);
+        //      session()->put('store', $store);
             
-         }
+        //  }
          
          return redirect()->back();
      }
@@ -61,24 +65,28 @@ class CheckoutController extends Controller
             'order_type'=>'required',
         ]);
 
-        $store= session()->get('store', []);
+        $ad=$request->session()->get('address');
         $cart = session()->get('cart', []);
-        $rest = session()->get('rest', []);
-
+        $rest = session()->get('restaurant');
+// dd($ad);
         
-         $restaurant_id = null ;
-         foreach($rest as $restaurant)
-         {
-            $restaurant_id =  $restaurant['id'];
-         }
+         
+
+         $restaurant_id = $rest['id'];
+         $address_id=0;
+         $address_id = isset($ad['address']) ? $ad['address'] : 0;
+        //  foreach($rest as $restaurant)
+        //  {
+        //     $restaurant_id =  $restaurant['id'];
+        //  }
 
         //dd($restaurant_id);
 
-        $address_id = null ;
-        foreach($store as $storeitem){
+        // $address_id = null ;
+        // foreach($store as $storeitem){
 
-            $address_id =  $storeitem['id'];
-        }
+        //     $address_id =  $storeitem['id'];
+        // }
 
         $total=0 ;
         foreach($cart as $cartitem)

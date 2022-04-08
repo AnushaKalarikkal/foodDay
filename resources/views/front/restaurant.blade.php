@@ -63,6 +63,7 @@
 
     <section class="py-60">
         <div class="container">
+             @if (count($restaurant))
             <h4 class="mb-4">Popular Restaurants</h4>
             <div class="row rest-listing-row">
 
@@ -163,6 +164,13 @@
                @endforeach
 
             </div>
+            @else
+            <div class="my-account-content">
+    <div class="empty-status-div">
+        <h4>Sorry! We couldn't find any results. </h4>
+    </div>
+</div>
+@endif
           
         </div>
     </section>

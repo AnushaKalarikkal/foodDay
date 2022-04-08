@@ -51,7 +51,7 @@
         $("document").ready(function(){
           setTimeout(function(){
             $("div.alert").remove();
-         }, 3000 ); // 5 secs
+         }, 1000 ); // 5 secs
 
        });
     </script>

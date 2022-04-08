@@ -1,3 +1,5 @@
+
+  
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -177,6 +179,8 @@ Route::prefix('customer')->name('customer.')->group(function (){
          Route::patch('/addresses-update/{id}', [AddressController::class, 'address_update'])->name('address.update');
 
 //restaurant listing
+         Route::get('/restaurant_search', [MyAccountController::class, 'restaurant_search'])->name('restaurant_search');
+
          Route::get('/restaurant_list', [MyAccountController::class, 'restaurant_list'])->name('restaurant_list');
          Route::get('/search', [MyAccountController::class, 'search'])->name('search');
          Route::get('/restaurant_details/{id}', [MyAccountController::class, 'restaurant_details'])->name('restaurant_details');
@@ -208,8 +212,6 @@ Route::prefix('customer')->name('customer.')->group(function (){
          Route::get('download_pdf/{order}', [MyAccountController::class, 'downloadPDF'])->name('download_pdf');
    });
 });
-
-
 
 
 
