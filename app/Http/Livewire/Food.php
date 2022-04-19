@@ -15,7 +15,8 @@ class Food extends Component
     public $restaurant; 
     public $quantity; 
  
-   
+    protected $listeners = ['some-event' => '$refresh'];
+    
     public function mount($restaurant)
     {
        $this->fooditems= Fooditem::all();
@@ -53,10 +54,10 @@ class Food extends Component
             $cartsession[$id]['quantity']++;
         } else {
             $cartsession[$id] = [
-                 "id" => $fooditems->id ,
-                "fooditem" => $fooditems->food_item ,
-                "quantity" => 1 ,
-                "rate" => $fooditems->rate ,
+                 "id" => $fooditems->id,
+                "fooditem" => $fooditems->food_item,
+                "quantity" => 1,
+                "rate" => $fooditems->rate,
                 
             ];
         }
@@ -86,10 +87,10 @@ class Food extends Component
               unset($cart[$id]);
           }else{
             $cart[$id] = [
-               "id" => $fooditems->id ,
-                "fooditem" => $fooditems->food_item ,
-                "quantity" => 1 ,
-                "rate" => $fooditems->rate ,
+               "id" => $fooditems->id,
+                "fooditem" => $fooditems->food_item,
+                "quantity" => 1,
+                "rate" => $fooditems->rate,
                 
             ];
             

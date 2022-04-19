@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Address;
+use App\Models\Customer;
+use Illuminate\Support\Facades\Auth;
 
 
 class AddressController extends Controller
@@ -30,7 +32,7 @@ class AddressController extends Controller
             'pincode'=>'required',
 
         ]);
-
+        $customer=Auth::user()->id;
         $address= new Address;
         $address->location = $request->location;
         $address->house_name = $request->house_name;
@@ -40,6 +42,8 @@ class AddressController extends Controller
         $address->pincode = $request->pincode;
         $address->home = $request->home;
         $address->note = $request->note;
+        $address->customer_id = $customer ;
+
 
         $save= $address->save();
 
@@ -65,7 +69,7 @@ class AddressController extends Controller
             'pincode'=>'required',
 
         ]);
-
+        $customer=Auth::user()->id;
         $address=Address::find($id);
         $address->location = $request->location;
         $address->house_name = $request->house_name;
@@ -75,6 +79,7 @@ class AddressController extends Controller
         $address->pincode = $request->pincode;
         $address->home = $request->home;
         $address->note = $request->note;
+        $address->customer_id = $customer ;
 
       
 
@@ -94,6 +99,27 @@ class AddressController extends Controller
          return back();
     }
 
-    
+    public function address_default(Request $request, $id)
+    {
+        $address=Address::find($id);
+       
+
+         $address->default=1;
+         $address->save();
+
+         return back();
+ 
+    }
+        public function address_remove(Request $request, $id)
+    {
+        $address=Address::find($id);
+         
+
+         $address->default=0;
+         $address->save();
+
+         return back();
+ 
+    }
 
 }

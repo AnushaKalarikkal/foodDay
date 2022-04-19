@@ -37,56 +37,34 @@ class CheckoutController extends Controller
          $address=Address::FindOrFail($id);
 
            $request->session()->put(['address'=> ['id'=>$id,'location'=>$address->location,'home'=> $address->home]]);
-           $ad=$request->session()->get('address');
-// dd($ad);
+           $store=$request->session()->get('address');
+dd($store);
          
-        //  $store= session()->get('store', []);
-
-        //  if (!isset($store[$id])) {
-
-        //      $store[$id]= [
-        //      "id"=>$address->id,
-        //     "location"=> $address->location,
-        //     "home"=>$address->home,
-            
-        //  ];
-
-        //      session()->put('store', $store);
-            
-        //  }
+    
          
          return redirect()->back();
      }
 
-      public function order_store(Order $order, Request $request)
+      public function order_store(Order $order,Request $request)
      {
+        //dd($order);
         $inputs=request()->validate([
 
             'order_type'=>'required',
         ]);
 
-        $ad=$request->session()->get('address');
+        $store=session()->get('address');
         $cart = session()->get('cart', []);
         $rest = session()->get('restaurant');
-// dd($ad);
+// dd($store);
         
          
 
          $restaurant_id = $rest['id'];
+
          $address_id=0;
-         $address_id = isset($ad['address']) ? $ad['address'] : 0;
-        //  foreach($rest as $restaurant)
-        //  {
-        //     $restaurant_id =  $restaurant['id'];
-        //  }
-
-        //dd($restaurant_id);
-
-        // $address_id = null ;
-        // foreach($store as $storeitem){
-
-        //     $address_id =  $storeitem['id'];
-        // }
+         $address_id =isset($store['id']) ? $store['id'] : 0;
+      // dd($address_id);
 
         $total=0 ;
         foreach($cart as $cartitem)
@@ -116,28 +94,30 @@ class CheckoutController extends Controller
         
         }
 
-       $request->session()->forget('cart');
-       
-      //dd($request->all() , session()->get('store'),session()->get('cart'));
-        
-         return redirect('/customer/order_placed');
+         $request->session()->forget('cart');
+         //$request->session()->forget('store');
+
+
+               
+         return view('front.orderplaced',['Order' => $order],compact('order'));
      }
 
      
-    public function order_placed(Request $request)
-     {
-          $request->session()->forget('rest');
-         return view('front.orderplaced');
-     }
+    // public function order_placed(Request $request)
+    //  {
+    //       $request->session()->forget('rest');
+    //      return view('front.orderplaced');
+    //  }
 
      public function order_summary(Order $order, Request $request)
      {
-         //dd($order);
-          //$request->session()->forget('store');
+         
         $cartsession= session()->get('cartsession', []);
+        $request->session()->forget('address');
+
 
          // dd($cartsession);
-         return view('front.order_summary',['order'=>$order]);
+         return view('front.order_summary',['Order'=>$order],compact('order'));
         
 
      }

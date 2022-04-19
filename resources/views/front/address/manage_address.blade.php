@@ -18,6 +18,7 @@
 
                                     <div class="row">
                                     @foreach($address as $value)
+                                    @if(Auth::user()->id==$value->customer_id)
                                         <div class="col-md-6">
                                             <div class="card address-card">
                                                 <div class="card-body">
@@ -32,21 +33,29 @@
                                                         <i class='bx bx-edit'></i>Edit</button>
                                                     <button class="btn-link"><i class='bx bx-trash'></i>
                                                     
-                                                    <a href="{{route('customer.address.delete', $value->id)}}">
+                                                    <a href="{{route('customer.address.delete', $value->id)}}" style="color: #d43f3a ">
                                                     Delete</a></button>
-                                                    <!-- <button class="btn-link"><i class='bx bx-location-plus'></i>Set as
-                                                        default</button> -->
 
-                                                    <!-- <a href="#" class=""><i class='bx bx-trash' ></i>Delete</a> -->
+                                                     @if($value->default==0)
+                                                    <button class="btn-link" name="default"><i class='bx bx-location-plus'></i>
+                                                    <a href="{{route('customer.address.default', $value->id)}}" style="color: #d43f3a ">Set as
+                                                        default</a></button>
+                                                        @else
+                                                          <button class="btn-link" ><i class='bx bx-location-plus'></i>
+                                                    <a href="{{route('customer.address.remove', $value->id)}}" style="color: #d43f3a ">Remove
+                                                        default</a></button>
+                                                        @endif
+                                                    
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
                                         @endforeach
 
                                     </div>
 
-                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#exampleModal">Add Address</button>
+                        <button type="button" class="btn btn-outline-primary mb-lg-auto mb-4" data-toggle="modal"
+                                        data-target="#exampleModaladd">Add Address</button>
                                 </div>
 
                             </div>
@@ -156,6 +165,10 @@
          }, 3000 ); // 5 secs
 
        });
+
+    @if (count($errors) > 0)
+    $('#exampleModaladd').modal('show');
+    @endif
     </script>
   
 @stop

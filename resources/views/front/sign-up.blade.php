@@ -73,33 +73,39 @@
                     </div>
                       @endif
                     <div class="form-group ">
-                        <input type="text" name="first_name" class="form-control" placeholder="First Name">
+                        <input type="text" name="first_name" class="form-control" placeholder="First Name" value="{{ old('first_name') }}">
                         @error("first_name")
                             <p style="color:red">{{$errors->first("first_name")}}
                          @enderror
                     </div>
                     <div class="form-group ">
-                        <input type="text" name="last_name" class="form-control" placeholder="Last Name">
+                        <input type="text" name="last_name" class="form-control" placeholder="Last Name" value="{{ old('last_name') }}">
                         @error("last_name")
                             <p style="color:red">{{$errors->first("last_name")}}
                          @enderror
                     </div>
                     <div class="form-group ">
-                        <input type="email" name="email" class="form-control" placeholder="Email">
+                        <input type="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}">
                           @error("email")
                             <p style="color:red">{{$errors->first("email")}}
                          @enderror
                     </div>
                     <div class="form-group ">
-                        <input type="text" name="mobile" class="form-control" placeholder="Mobile Number">
+                        <input type="text" name="mobile" class="form-control" placeholder="Mobile Number" value="{{ old('mobile') }}">
                           @error("mobile")
                             <p style="color:red">{{$errors->first("mobile")}}
                          @enderror
                     </div>
                     <div class="form-group ">
-                        <input type="password" name="password" class="form-control" placeholder="Password">
+                        <input type="password" name="password" class="form-control" placeholder="Password" value="{{ old('password') }}">
                            @error("password")
                             <p style="color:red">{{$errors->first("password")}}
+                         @enderror
+                    </div>
+                     <div class="form-group ">
+                        <input type="password" name="c_password" class="form-control" placeholder="Confirm Password" >
+                           @error("confirm_password")
+                            <p style="color:red">{{$errors->first("confirm_password")}}
                          @enderror
                     </div>
                     <div class="form-group  text-center">
@@ -125,100 +131,7 @@
 
     <!-- footer -->
 
-    <footer>
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6">
-                        <h3>Quick links</h3>
-                        <ul>
-                            <li><a href="home.html">Home</a></li>
-                            <li><a href="restaurant-listing.html">Restaurants</a></li>
-                            <li><a href="about-us.html">About us</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h3>Quick links</h3>
-                        <ul>
-
-                            <li><a href="enrol-delivery-boy.html">Enroll Delivery Boy</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="terms-and-conditions.html">Terms and Conditions</a></li>
-                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                            <li><a href="enrol-your-restaurant.html">Enroll Your Restaurant</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6">
-                        <h3>Subscribe to newsletter</h3>
-                        <p>Join our newsletter to keep be informed about offers and news.</p>
-                        <form action="">
-                            <div class="input-group newsletter-group">
-                                <input type="text" class="form-control" placeholder="Enter your email" aria-label=""
-                                    aria-describedby="button-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button" id="find-food-btn"><i
-                                            class='bx bx-send'></i></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h3>Contact us</h3>
-                        <ul class="contact">
-                            <li><i class='bx bx-location-plus'></i><span>Down Town Building, MG Road, Toronto, Canada,
-                                    784578</span></li>
-                            <li><i class='bx bx-mail-send'></i><span>hello@cedextech.com</span></li>
-                            <li><i class='bx bx-phone'></i><span>+91-8129881750</span></li>
-                        </ul>
-                        <div class="social">
-                            <i class='bx bxl-facebook-circle'></i>
-                            <i class='bx bxl-twitter'></i>
-                            <i class='bx bxl-youtube'></i>
-                            <i class='bx bxl-instagram-alt'></i>
-                        </div>
-                    </div>
-                </div><!-- End row -->
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="container">
-
-                <div class="text-center">
-                    <p class="mb-0 copy-right">© 2021 FoodDay All Rights Reserved</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- mobile footer -->
-
-        <div class="mobile-footer">
-            <div class="row">
-                <div class="col-4 item">
-                    <a href="home.html">
-                        <i class='bx bx-search'></i>
-                        <span>Search</span>
-                    </a>
-                </div>
-                <div class="col-4 item">
-                    <a href="cart.html">
-                        <i class='bx bx-cart'><span class="badge badge-light">22</span></i>
-                        <span>Cart</span>
-                    </a>
-                </div>
-                <div class="col-4 item">
-                    <a href="my-account.html">
-                        <i class='bx bx-user'></i>
-                        <span>Account</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- mobile footer end -->
-
-    </footer>
+    @include('partials.footer')
 
     <!-- footer end -->
 

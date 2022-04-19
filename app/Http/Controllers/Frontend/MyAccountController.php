@@ -86,7 +86,7 @@ class MyAccountController extends Controller
          Customer::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
        
 
-        return back()->with('success', 'save changes successfully');
+        return back()->with('success', 'Saved');
     }
 
     //restaurant_listing
@@ -131,40 +131,16 @@ class MyAccountController extends Controller
                  'location'=> $restaurant->location]]);
        $rest=$request->session()->get('restaurant');
 
-
-      //dd($request->all() , session()->get('restaurant') );
-         //dd($rest);
-
-
-        // $rest = session()->get('rest', []);
-        //  if (isset($rest[$id])) {
-        //      unset($rest[$id]);
-
-        //  }else{
-
-        //      $rest[$id]= [
-        //      "id"=>$restaurant->id,
-        //     "name"=> $restaurant->name,
-        //     "mobile"=> $restaurant->mobile,
-        //     "location"=> $restaurant->location,
-
-
-        //  ];
-
-        //      session()->put('rest', $rest);
-        //  }
-          //dd($rest);
-
-
         return view('front.restaurant_details', ['restaurant'=>$restaurant], compact('cuisines','fooditems'));
     }
 
     //order History
 
-     public function order_history(Order $order )
+     public function order_history(Order $order)
     {
-       $order=Order::all()->sortDesc();
-       
+        $id=Auth::user()->id;
+       $order=Order::orderBy('created_at','DESC')->where('customer_id',auth()->user()->id)->get();
+       //dd($order);
        $fooditems=Fooditem::all();
 
         return view('front.order_history', ['order'=>$order],compact('fooditems'));

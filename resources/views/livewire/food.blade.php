@@ -23,10 +23,15 @@
  
                                                                 <div class="input-group">
                                                                    
-
+                                                                @if(($this->itemQuantity($food->id)) > 0)
                                                                     <input wire:click.prevent="decrementItem({{$food->id}})" type="button" value="-" class="button-minus changeQuantity" id="changeQuantity"
 
                                                                         data-field="quantity" />
+                                                                        @else
+                                                                          <input  type="button" disabled value="-" class="button-minus changeQuantity" id="changeQuantity"
+
+                                                                        data-field="quantity" />
+                                                                        @endif
 
                                                                     <input type="number" step="1"  min="1" value="{{ $this->itemQuantity($food->id)}}"
 

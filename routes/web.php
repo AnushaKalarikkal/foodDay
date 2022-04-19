@@ -140,10 +140,19 @@ Route::name('admin.')->middleware('auth')->prefix('admin')->group(function (){
 Route::get('/front', [HomeController::class, 'index'])->name('index');
 Route::prefix('customer')->name('customer.')->group(function (){
 
-   Route::middleware(['guest:customer','PreventBackHistory'])->group(function () {
+            Route::get('/restaurant_list', [MyAccountController::class, 'restaurant_list'])->name('restaurant_list');
+            Route::get('/restaurant_details/{id}', [MyAccountController::class, 'restaurant_details'])->name('restaurant_details');
+            Route::get('/search', [MyAccountController::class, 'search'])->name('search');
+
+//cart
+            Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+            Route::get('/cart_items', [CartController::class, 'cart_items'])->name('cart_items');
+
+
+   Route::middleware(['guest:customer'])->group(function () {
          Route::get('/sign_in', [HomeController::class, 'login'])->name('signIn');
          Route::post('/sign_in_fun', [HomeController::class, 'sign_in_fun'])->name('sign_in_fun');
-           Route::get('/sign_up', [HomeController::class, 'register'])->name('register');
+          Route::get('/sign_up', [HomeController::class, 'register'])->name('register');
           Route::post('/sign_up_store', [HomeController::class, 'store'])->name('register.store');
 
  //forget password   
@@ -158,10 +167,7 @@ Route::prefix('customer')->name('customer.')->group(function (){
    Route::middleware(['auth:customer','PreventBackHistory'])->group(function () {
          Route::get('/my_home', [HomeController::class, 'my_home'])->name('my_home');
          Route::get('/Account', [MyAccountController::class, 'account_details'])->name('account');
-//restaurant listing
-         Route::get('/restaurant_list', [MyAccountController::class, 'restaurant_list']);
-         Route::get('/search', [MyAccountController::class, 'search'])->name('search');
-         Route::get('/restaurant_details/{restaurant}', [MyAccountController::class, 'restaurant_details'])->name('restaurant_details');
+
 //account details
 
          Route::get('/Account', [MyAccountController::class, 'account_details'])->name('account');
@@ -177,31 +183,28 @@ Route::prefix('customer')->name('customer.')->group(function (){
          Route::get('edit-address/{id}', [AddressController::class, 'edit_address'])->name('address.edit');
          Route::post('/Logout', [MyAccountController::class, 'logout'])->name('logout');  
          Route::patch('/addresses-update/{id}', [AddressController::class, 'address_update'])->name('address.update');
+         Route::get('/addresses-default/{id}', [AddressController::class, 'address_default'])->name('address.default');
+         Route::get('/addresses-remove/{id}', [AddressController::class, 'address_remove'])->name('address.remove');
 
-//restaurant listing
-         Route::get('/restaurant_search', [MyAccountController::class, 'restaurant_search'])->name('restaurant_search');
 
-         Route::get('/restaurant_list', [MyAccountController::class, 'restaurant_list'])->name('restaurant_list');
-         Route::get('/search', [MyAccountController::class, 'search'])->name('search');
-         Route::get('/restaurant_details/{id}', [MyAccountController::class, 'restaurant_details'])->name('restaurant_details');
+
 
  //cart
-         Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+ 
 
-         Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add.to.cart');
+         //Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add.to.cart');
          Route::get('cartDel/{id}', [CartController::class, 'cartDelete'])->name('cart.delete');
          Route::get('remove-from-cart/{id}', [CartController::class, 'remove'])->name('remove.from.cart');
          // Route::get('/empty_cart', [CartController::class, 'empty_cart'])->name('empty.cart');
-         Route::get('/cart_items', [CartController::class, 'cart_items'])->name('cart_items');
-         Route::patch('/update-cart', [CartController::class, 'update'])->name('update.cart');
+         //Route::patch('/update-cart', [CartController::class, 'update'])->name('update.cart');
 
          Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
          Route::get('/address_store/{id}', [CheckoutController::class, 'address_store'])->name('address_store');
          Route::post('/order_store', [CheckoutController::class, 'order_store'])->name('order_store');
 
          
-         Route::get('/order_placed', [CheckoutController::class, 'order_placed'])->name('order_placed');
-         Route::get('/order_summary', [CheckoutController::class, 'order_summary'])->name('order_summary');
+         Route::get('/order_placed/{order}', [CheckoutController::class, 'order_placed'])->name('order_placed');
+         Route::get('/order_summary/{order}', [CheckoutController::class, 'order_summary'])->name('order_summary');
 
          //order_history
 
@@ -211,6 +214,8 @@ Route::prefix('customer')->name('customer.')->group(function (){
          //pdf
          Route::get('download_pdf/{order}', [MyAccountController::class, 'downloadPDF'])->name('download_pdf');
    });
+            
+
 });
 
 

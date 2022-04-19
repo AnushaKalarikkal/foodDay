@@ -9,6 +9,8 @@ class Cart extends Component
 {
    public $show = false;
 
+//  protected $listeners = ['some-event' => '$refresh'];
+
    protected $listeners = [
        'increment'=> 'refreshComponent',
         'decrement'=> 'refreshComponent',
@@ -44,17 +46,16 @@ class Cart extends Component
             $cartsession[$id]['quantity']++;
         } else {
             $cartsession[$id] = [
-                 "id" => $fooditems->id ,
-                "fooditem" => $fooditems->food_item ,
-                "quantity" => 1 ,
-                "rate" => $fooditems->rate ,
+                 "id" => $fooditems->id,
+                "fooditem" => $fooditems->food_item,
+                "quantity" => 1,
+                "rate" => $fooditems->rate,
                 
             ];
         }
       
         session()->put('cartsession', $cart);
           //dd($cartsession);
-      $this->emit('increment');
       $this->emit('some-event');
    
     }
@@ -87,7 +88,6 @@ class Cart extends Component
       
         session()->put('cart', $cart);
   
-       $this->emit('decrement');
        $this->emit('some-event');
     }
 

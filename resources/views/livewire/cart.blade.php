@@ -25,12 +25,14 @@
                                       
                                                          
                                          <div class="input-group">
-
+                               @if($details['quantity'] > 0)
                                   <input wire:click.prevent="decrementCartItem('{{$details['id']}}')" 
                                            type="button" value="-" class="button-minus changeQuantity" data-field="quantity" />
-                              
+                                @else
+                                  <input  type="button" disabled value="-" class="button-minus changeQuantity" id="changeQuantity"
+                                                                        data-field="quantity" />
+                                @endif
                                  <input type="number" step="1"  value="{{ $details['quantity'] }}"
-
                                                  name="quantity" class="quantity-field qty-input" />
 
                                     <input wire:click.prevent="addToCartItem('{{$details['id']}}')" type="button" value="+"

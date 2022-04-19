@@ -13,45 +13,14 @@
     <link rel="icon" type="image/png"8000 href="{{asset('images/favicon.png')}}">
     <link rel="stylesheet" href="{{asset('css/styles.css')}}">
     <title>FoodDay - Home</title>
+        @livewireStyles
 </head>
 
 <body>
 
     <!-- header -->
-    <header>
-        <div class="container-fluid">
-            <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light fixed-top">
-                <a class="navbar-brand" href="home.html"><img src="assets/images/logo.png" alt=""></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+          @include('partials.header')
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/front">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                      
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('customer.signIn')}}">Sign In</a>
-                        </li>
-
-                        
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('customer.cart')}}">
-                                <span class="cart-badge-wrap">
-                                    <span class="cart-badge">0</span>
-                                    <i class='bx bx-shopping-bag mr-1'></i>
-                                </span>
-                                Cart</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header>
     <!-- Header -->
 
     <!-- Banner -->
@@ -59,17 +28,18 @@
     <div class="home-banner d-flex align-items-center">
         <div class="container">
             <div class="banner-content">
-                <h2>Delivering your favorite food to your door step.</h2>
-                <form action="">
+                 <h2>Delivering your favorite food to your door step.</h2>
+                <form action="{{route('customer.search')}}" method="get" enctype="multipart/form-data">
+                    @csrf
                     <div class="input-group search-location-group">
-                        <input type="text" class="form-control" placeholder="Enter your delivery location"
+                        <input type="text" name="location" class="form-control" placeholder="Enter your delivery location"
                             aria-label="delivery location" aria-describedby="button-addon2">
                         <a href="" class="btn-locate"><i class='bx bx-target-lock'></i> Locate Me</a>
                         <!-- <button class="btn-locate"><i class='bx bx-target-lock'></i> Locate Me</button> -->
 
                         <div class="input-group-append btn-find-food">
-                            <button class="btn btn-danger" type="button"
-                                onclick="window.location.href = 'restaurant-listing.html';">Find Food</button>
+                            <button class="btn btn-danger" type="submit"
+                               >Find Food</button>
                         </div>
                     </div>
                 </form>
@@ -190,6 +160,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
         </script>
     <script src="{{asset('js/custom.js')}}"></script>
+        @livewireScripts
 </body>
 
 </html>

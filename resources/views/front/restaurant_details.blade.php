@@ -75,8 +75,8 @@
                               @endforeach
                                 </ul>
 
-                       
-                                    <div class="sub-cat" id="sub-cat2">
+                       <div class="food-item-cards-wrap">
+                                    <div class="sub-cat mt-0" id="sub-cat2">
                                  
                                       @if($restaurant->is_open == 1)
                                   <livewire:food :restaurant="$restaurant" /> 
@@ -120,7 +120,7 @@
                                     @endif
                   
 
-                                              
+                                              </div>
                                             </div>
                                         </div>
                                     </div>

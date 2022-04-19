@@ -19,10 +19,10 @@ class Cartitems extends Component
             $cart[$id]['quantity']++;
         } else {
             $cart[$id] = [
-                 "id" => $fooditems->id ,
-                "fooditem" => $fooditems->food_item ,
-                "quantity" => 1 ,
-                "rate" => $fooditems->rate ,
+                 "id" => $fooditems->id,
+                "fooditem" => $fooditems->food_item,
+                "quantity" => 1,
+                "rate" => $fooditems->rate,
                 
             ];
         }
@@ -52,10 +52,10 @@ class Cartitems extends Component
               unset($cart[$id]);
           }else{
             $cart[$id] = [
-               "id" => $fooditems->id ,
-                "fooditem" => $fooditems->food_item ,
+               "id" => $fooditems->id,
+                "fooditem" => $fooditems->food_item,
                 "quantity" => 1 ,
-                "rate" => $fooditems->rate ,
+                "rate" => $fooditems->rate,
                 
             ];
             

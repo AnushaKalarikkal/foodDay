@@ -45,6 +45,8 @@ class HomeController extends Controller
 
             'password'=>'required|min:4',
 
+            'confirm_password'=>'[same:password]',
+
         ]);
 
         $customer= new Customer;
@@ -55,8 +57,9 @@ class HomeController extends Controller
         $customer->password = Hash::make($request->password);
         $save= $customer->save();
 
-        if($save){
-            return back()->with('success','new customer added successfully');
+        $creds = $request->only('email','password');
+        if(Auth::guard('customer')->attempt($creds)){
+            return redirect('/customer/my_home');
         }else{
             return back()->with('fail','something went wrong');
 
@@ -78,16 +81,14 @@ class HomeController extends Controller
         $creds = $request->only('email','password');
     
         if( Auth::guard('customer')->attempt($creds) ){
-            return redirect()->route('customer.my_home');
+            return redirect()->intended();
         }else{
            return redirect()->route('customer.signIn')->with('fail','Incorrect credentials'); 
         }
-
-
     }
     
 
-     public function my_home(City $city)
+     public function my_home(City $cities)
     {
         $cities=City::all();
         return view('front.my_home',['cities'=>$cities]);

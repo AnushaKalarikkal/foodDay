@@ -5,6 +5,14 @@
                                 aria-labelledby="v-pills-profile-tab">
                                 <div class="my-account-content">
                                     <h4>Order History</h4>
+                                    @if ($order->isEmpty())
+
+                                    <div class="empty-orders-div ">
+                                    <i class="bx bx-shopping-bag"></i>
+                                    <p class="mb-1">Look like you haven't made any orders yet.</p>
+                                    <p class="mb-0">Click <a href="{{route('customer.my_home')}}">here</a> to continue shopping.</p>
+                                    </div>
+                                    @else
                                @foreach($order as $value)
                                  @if(Auth::user()->id==$value->customer_id)
                                     <div class="row">
@@ -53,6 +61,7 @@
                                     </div>
                                 @endif
                               @endforeach
+                              @endif
                                 </div>
                             </div>
 
@@ -114,7 +123,7 @@
                 <tr>
                 <th scope="col">Ordered Items</th>
                 <th scope="col">Price</th>
-                <!-- <th scope="col">Total</th>  -->
+                 <th scope="col">Total</th>  
                 </tr>
                 </thead>
                 <tbody>
@@ -125,7 +134,7 @@
                 <td>{{$item->quantity}}  {{ $item->food_item }}
                
                <td>${{ $item->rate }}</td>
-                <!-- <td>$40.00</td> -->
+                 <td>${{ $value->sub_total }}.00</td> 
                 </tr>
                 @endforeach
                 </tbody>

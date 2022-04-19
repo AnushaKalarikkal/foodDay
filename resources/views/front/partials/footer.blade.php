@@ -6,22 +6,21 @@
                     <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
-                            <li><a href="home.html">Home</a></li>
-                            <li><a href="restaurant-listing.html">Restaurants</a></li>
-                            <li><a href="about-us.html">About us</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
-                            <li><a href="my-account.html">My Account</a></li>
-                            <li><a href="cart.html">Cart</a></li>
+                            <li><a href="/front">Home</a></li>
+                            <li><a href="{{route('customer.restaurant_list')}}">Restaurants</a></li>
+                            <li><a href="">About us</a></li>
+                            <li><a href="">Contact us</a></li>
+                           
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
-                            <li><a href="enrol-your-restaurant.html">Enroll as Restaurant</a></li>
-                            <li><a href="enrol-delivery-boy.html">Enroll as Delivery Boy</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="terms-and-conditions.html">Terms and Conditions</a></li>
-                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <li><a href="">Enroll as Restaurant</a></li>
+                            <li><a href="">Enroll as Delivery Boy</a></li>
+                            <li><a href="">FAQ</a></li>
+                            <li><a href="">Terms and Conditions</a></li>
+                            <li><a href="">Privacy Policy</a></li>
                         </ul>
                     </div>
 

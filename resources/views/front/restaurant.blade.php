@@ -27,11 +27,11 @@
     <div class="search-nav">
         <div class="container">
             
-             @if (app('request')->has('location'))
+            
 
             <h3>All restaurants delivering to {{ app('request')->input('location')}}</h3>
 
-            @endif
+            
             <p>Change location</p>
             <div class="row">
                 <div class="col-lg-8 col-xl-6">
@@ -48,14 +48,17 @@
                     </form>
                 </div>
             </div>
-           <!-- <div class="location-popup">
+            
+            @unless(app('request')->has('location'))
+           <div class="location-popup">
                 <h5 class="mb-3">Add your delivery address</h5>
                 <p class="mb-4">To find out if we can delivery at your location, please enter your address
                 </p>
                 <form action="">
                     <button class="btn btn-light" onclick="locationPopup()">Set Location</button>
                 </form>
-            </div> -->
+            </div>
+            @endunless
   
 
         </div>
@@ -63,7 +66,7 @@
 
     <section class="py-60">
         <div class="container">
-             @if (count($restaurant))
+             @if (app('request')->has('location'))
             <h4 class="mb-4">Popular Restaurants</h4>
             <div class="row rest-listing-row">
 
@@ -86,16 +89,18 @@
                       
                         <div class="card-body">
                             <h5 class="card-title">{{$value->name}}</h5>
-
+<div class="cuisines">
                               @foreach($cuisines as $cuisine)
 
                                    @if($value->cuisines->contains($cuisine->id))
-                                        <div class="cuisines ">
-                                            <span>{{$cuisine->cuisine}}</span>
-                                        </div>
+                                        
+                                            <span>
+                                                {{$cuisine->cuisine}}
+                                            </span>
+                                    
                                     @endif
                               @endforeach
-
+</div>
                             <p class="location"><i class="bx bx-location-plus"></i> 
                                 {{$value->location}}</p>
                             <div class="details">
@@ -193,6 +198,14 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
         </script>
     <script src="{{asset('js/custom.js')}}"></script>
+    <script type="text/javascript">
+
+        function locationPopup() {
+    document.getElementById('location').focus();
+    document.getElementById('location-popup').style.display = "none";
+}
+
+    </script>
     @livewireScripts
 </body>
 
